@@ -16,7 +16,10 @@ namespace SalesDepartment.Domain.Entities
         public string NumberOfRooms { get; set; }
         public double TotalAmountOfContract { get; set; }
         public DateTime ContractEndDate { get; set; }
-
+        public int FounderId { get; set; }
+        public Founder Founder { get; set; }
+        public string PhoneNumberOne { get; set; }
+        public string PhoneNumberTwo { get; set; }
 
 
 
