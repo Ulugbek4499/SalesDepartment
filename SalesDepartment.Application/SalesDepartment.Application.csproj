@@ -13,12 +13,12 @@
   <ItemGroup>
     <Folder Include="Common\Mappings\" />
     <Folder Include="Common\BackgroundServices\" />
-    <Folder Include="UseCases\Contracts\Commands\NewFolder1\" />
-    <Folder Include="UseCases\Contracts\Commands\NewFolder2\" />
-    <Folder Include="UseCases\Contracts\Commands\NewFolder\" />
-    <Folder Include="UseCases\Contracts\Queries\NewFolder1\" />
-    <Folder Include="UseCases\Contracts\Queries\NewFolder2\" />
-    <Folder Include="UseCases\Contracts\Queries\NewFolder\" />
+    <Folder Include="UseCases\Contracts\Commands\DeleteContract\" />
+    <Folder Include="UseCases\Contracts\Commands\UpdateContract\" />
+    <Folder Include="UseCases\Contracts\Commands\CreateContract\" />
+    <Folder Include="UseCases\Contracts\Queries\GetContractById\" />
+    <Folder Include="UseCases\Contracts\Queries\GetAllContractsPaginated\" />
+    <Folder Include="UseCases\Contracts\Queries\GetAllContracts\" />
     <Folder Include="UseCases\Contracts\Response\" />
     <Folder Include="UseCases\Customers\Commands\NewFolder1\" />
     <Folder Include="UseCases\Customers\Commands\NewFolder2\" />
