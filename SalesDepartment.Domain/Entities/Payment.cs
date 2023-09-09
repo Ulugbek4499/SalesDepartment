@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SalesDepartment.Domain.Commons;
 
 namespace SalesDepartment.Domain.Entities
 {
-    public class Payment
+    public class Payment:BaseAuditableEntity
     {
-        public int PaymentNumber { get; set; }
+        public string PaymentNumber { get; set; }
         public DateTime PaymentDate { get; set; }
         public string PassportNumber { get; set; }
         public string ContractNumber { get; set; }
