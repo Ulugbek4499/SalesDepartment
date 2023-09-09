@@ -10,5 +10,7 @@ namespace SalesDepartment.Domain.Entities
         public int ApartmentNumber { get; set; }
         public int NumberOfRooms { get; set; }
         public double Area { get; set; }
+
+        public virtual Contract Contract { get; set; }
     }
 }

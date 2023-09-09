@@ -17,5 +17,7 @@ namespace SalesDepartment.Domain.Entities
         public string Address { get; set; }
         public string PhoneNumberOne { get; set; }
         public string PhoneNumberTwo { get; set; }
+
+        public virtual ICollection<Contract> Contracts { get; set; }
     }
 }
