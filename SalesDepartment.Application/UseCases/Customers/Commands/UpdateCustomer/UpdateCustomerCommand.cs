@@ -7,6 +7,7 @@ using AutoMapper;
 using MediatR;
 using SalesDepartment.Application.Common.Exceptions;
 using SalesDepartment.Application.Common.Interfaces;
+using SalesDepartment.Domain.Entities;
 
 namespace SalesDepartment.Application.UseCases.Customers.Commands.UpdateCustomer
 {
@@ -41,6 +42,8 @@ namespace SalesDepartment.Application.UseCases.Customers.Commands.UpdateCustomer
 
             if (customer is null)
                 throw new NotFoundException(nameof(customer), request.Id);
+
+            await _context.SaveChangesAsync(cancellationToken);
         }
     }
 }

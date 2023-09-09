@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SalesDepartment.Application.UseCases.PaymentTypes.Response
+namespace SalesDepartment.Infrastructure.Persistence.Configurations
 {
-    public class PaymentTypeResponse
+    internal class PaymentConfiguration
     {
     }
 }

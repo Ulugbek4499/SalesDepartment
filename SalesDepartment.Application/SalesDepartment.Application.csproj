@@ -13,48 +13,6 @@
   <ItemGroup>
     <Folder Include="Common\Mappings\" />
     <Folder Include="Common\BackgroundServices\" />
-    <Folder Include="UseCases\Contracts\Commands\DeleteContract\" />
-    <Folder Include="UseCases\Contracts\Commands\UpdateContract\" />
-    <Folder Include="UseCases\Contracts\Commands\CreateContract\" />
-    <Folder Include="UseCases\Contracts\Queries\GetContractById\" />
-    <Folder Include="UseCases\Contracts\Queries\GetAllContractsPaginated\" />
-    <Folder Include="UseCases\Contracts\Queries\GetAllContracts\" />
-    <Folder Include="UseCases\Contracts\Response\" />
-    <Folder Include="UseCases\Customers\Commands\NewFolder1\" />
-    <Folder Include="UseCases\Customers\Commands\NewFolder2\" />
-    <Folder Include="UseCases\Customers\Commands\NewFolder\" />
-    <Folder Include="UseCases\Customers\Queries\NewFolder1\" />
-    <Folder Include="UseCases\Customers\Queries\NewFolder2\" />
-    <Folder Include="UseCases\Customers\Queries\NewFolder\" />
-    <Folder Include="UseCases\Customers\Response\" />
-    <Folder Include="UseCases\Founders\Commands\NewFolder1\" />
-    <Folder Include="UseCases\Founders\Commands\NewFolder2\" />
-    <Folder Include="UseCases\Founders\Commands\NewFolder\" />
-    <Folder Include="UseCases\Founders\Queries\NewFolder1\" />
-    <Folder Include="UseCases\Founders\Queries\NewFolder2\" />
-    <Folder Include="UseCases\Founders\Queries\NewFolder\" />
-    <Folder Include="UseCases\Founders\Response\" />
-    <Folder Include="UseCases\Homes\Commands\NewFolder1\" />
-    <Folder Include="UseCases\Homes\Commands\NewFolder2\" />
-    <Folder Include="UseCases\Homes\Commands\NewFolder\" />
-    <Folder Include="UseCases\Homes\Queries\NewFolder1\" />
-    <Folder Include="UseCases\Homes\Queries\NewFolder2\" />
-    <Folder Include="UseCases\Homes\Queries\NewFolder\" />
-    <Folder Include="UseCases\Homes\Response\" />
-    <Folder Include="UseCases\Payments\Commands\NewFolder1\" />
-    <Folder Include="UseCases\Payments\Commands\NewFolder2\" />
-    <Folder Include="UseCases\Payments\Commands\NewFolder\" />
-    <Folder Include="UseCases\Payments\Queries\NewFolder1\" />
-    <Folder Include="UseCases\Payments\Queries\NewFolder2\" />
-    <Folder Include="UseCases\Payments\Queries\NewFolder\" />
-    <Folder Include="UseCases\Payments\Response\" />
-    <Folder Include="UseCases\PaymentTypes\Commands\NewFolder1\" />
-    <Folder Include="UseCases\PaymentTypes\Commands\NewFolder2\" />
-    <Folder Include="UseCases\PaymentTypes\Commands\NewFolder\" />
-    <Folder Include="UseCases\PaymentTypes\Queries\NewFolder1\" />
-    <Folder Include="UseCases\PaymentTypes\Queries\NewFolder2\" />
-    <Folder Include="UseCases\PaymentTypes\Queries\NewFolder\" />
-    <Folder Include="UseCases\PaymentTypes\Response\" />
   </ItemGroup>
 
   <ItemGroup>
