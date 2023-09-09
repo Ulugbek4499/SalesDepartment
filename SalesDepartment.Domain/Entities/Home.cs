@@ -8,6 +8,7 @@ namespace SalesDepartment.Domain.Entities
         public string Entrance { get; set; }
         public string Floor { get; set; }
         public string ApartmentNumber { get; set; }
+        public int NumberOfRooms { get; set; }
         public double Area { get; set; }
     }
 }
