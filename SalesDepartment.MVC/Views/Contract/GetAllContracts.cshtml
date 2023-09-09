@@ -2,7 +2,7 @@
     Layout = "_Layout";
 }
 
-@model SalesDepartmentApplication.UseCases.Contracts.Response.ContractResponse[]
+@model SalesDepartment.Application.UseCases.Contracts.Response.ContractResponse[]
 
 <h3 class="text-center">All Contracts</h3>
 <div class="row">
@@ -36,17 +36,13 @@
                         <thead>
                             <tr>
                                 <th style="width: 25%;">Actions</th>
-                                <th style="width: 15vh;" onclick="sortTable(0)"><span style="display: flex; align-items: center;">Payroll_Number <i id="sortIcon0" class="fas fa-sort"></i></span></th>
-                                <th style="width: 25%;" onclick="sortTable(1)"><span style="display: flex; align-items: center;">Forenames <i id="sortIcon1" class="fas fa-sort"></i></span></th>
-                                <th style="width: 25%;" onclick="sortTable(2)"><span style="display: flex; align-items: center;">Surname <i id="sortIcon2" class="fas fa-sort"></i></span></th>
-                                <th style="width: 25%;" onclick="sortTable(3)"><span style="display: flex; align-items: center;">DateOfBirth <i id="sortIcon3" class="fas fa-sort"></i></span></th>
-                                <th style="width: 25%;">Telephone</th>
-                                <th style="width: 25%;">Mobile</th>
-                                <th style="width: 25%;">Address</th>
-                                <th style="width: 25%;">Address_2</th>
-                                <th style="width: 25%;">Postcode</th>
-                                <th style="width: 25%;">EMail_Home</th>
-                                <th style="width: 25%;" onclick="sortTable(10)"><span style="display: flex; align-items: center;">StartDate <i id="sortIcon4" class="fas fa-sort"></i></span></th>
+                                <th style="width: 15vh;" onclick="sortTable(0)"><span style="display: flex; align-items: center;">ContractNumber <i id="sortIcon0" class="fas fa-sort"></i></span></th>
+                                <th style="width: 25%;" onclick="sortTable(1)"><span style="display: flex; align-items: center;">ContractStartDate <i id="sortIcon1" class="fas fa-sort"></i></span></th>
+                                <th style="width: 25%;" onclick="sortTable(2)"><span style="display: flex; align-items: center;">TotalAmountOfContract <i id="sortIcon2" class="fas fa-sort"></i></span></th>
+                                <th style="width: 25%;" onclick="sortTable(3)"><span style="display: flex; align-items: center;">ContractEndDate <i id="sortIcon3" class="fas fa-sort"></i></span></th>
+                                <th style="width: 15vh;" onclick="sortTable(0)"><span style="display: flex; align-items: center;">HomeId <i id="sortIcon0" class="fas fa-sort"></i></span></th>
+                                <th style="width: 25%;" onclick="sortTable(1)"><span style="display: flex; align-items: center;">CustomerId <i id="sortIcon1" class="fas fa-sort"></i></span></th>
+                                <th style="width: 25%;" onclick="sortTable(2)"><span style="display: flex; align-items: center;">FounderId <i id="sortIcon2" class="fas fa-sort"></i></span></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -59,17 +55,13 @@
                                             <a href="@Url.Action("DeleteContract", new { id = Contract.Id })" class="btn btn-danger"><i class="fas fa-trash-can"></i></a>
                                         </div>
                                     </td>
-                                    <td>@Contract.Payroll_Number</td>
-                                    <td>@Contract.Forenames</td>
-                                    <td>@Contract.Surname</td>
-                                    <td>@Contract.DateOfBirth</td>
-                                    <td>@Contract.Telephone</td>
-                                    <td>@Contract.Mobile</td>
-                                    <td>@Contract.Address</td>
-                                    <td>@Contract.Address_2</td>
-                                    <td>@Contract.Postcode</td>
-                                    <td>@Contract.EMail_Home</td>
-                                    <td>@Contract.StartDate</td>
+                                    <td>@Contract.ContractNumber</td>
+                                    <td>@Contract.ContractStartDate</td>
+                                    <td>@Contract.TotalAmountOfContract</td>
+                                    <td>@Contract.ContractEndDate</td>
+                                    <td>@Contract.HomeId</td>
+                                    <td>@Contract.CustomerId</td>
+                                    <td>@Contract.FounderId</td>
                                 </tr>
                             }
                         </tbody>
