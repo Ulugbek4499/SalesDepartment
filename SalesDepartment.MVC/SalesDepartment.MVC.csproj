@@ -10,4 +10,12 @@
     <ProjectReference Include="..\SalesDepartment.Infrastructure\SalesDepartment.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Views\Customer\" />
+    <Folder Include="Views\Founder\" />
+    <Folder Include="Views\HomeBuilding\" />
+    <Folder Include="Views\PaymentType\" />
+    <Folder Include="Views\Payment\" />
+  </ItemGroup>
+
 </Project>
