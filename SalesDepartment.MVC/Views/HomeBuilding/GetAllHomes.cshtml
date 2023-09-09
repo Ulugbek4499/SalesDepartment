@@ -36,17 +36,12 @@
                         <thead>
                             <tr>
                                 <th style="width: 25%;">Actions</th>
-                                <th style="width: 15vh;" onclick="sortTable(0)"><span style="display: flex; align-items: center;">Payroll_Number <i id="sortIcon0" class="fas fa-sort"></i></span></th>
-                                <th style="width: 25%;" onclick="sortTable(1)"><span style="display: flex; align-items: center;">Forenames <i id="sortIcon1" class="fas fa-sort"></i></span></th>
-                                <th style="width: 25%;" onclick="sortTable(2)"><span style="display: flex; align-items: center;">Surname <i id="sortIcon2" class="fas fa-sort"></i></span></th>
-                                <th style="width: 25%;" onclick="sortTable(3)"><span style="display: flex; align-items: center;">DateOfBirth <i id="sortIcon3" class="fas fa-sort"></i></span></th>
-                                <th style="width: 25%;">Telephone</th>
-                                <th style="width: 25%;">Mobile</th>
-                                <th style="width: 25%;">Address</th>
-                                <th style="width: 25%;">Address_2</th>
-                                <th style="width: 25%;">Postcode</th>
-                                <th style="width: 25%;">EMail_Home</th>
-                                <th style="width: 25%;" onclick="sortTable(10)"><span style="display: flex; align-items: center;">StartDate <i id="sortIcon4" class="fas fa-sort"></i></span></th>
+                                <th style="width: 15vh;" onclick="sortTable(0)"><span style="display: flex; align-items: center;">Block <i id="sortIcon0" class="fas fa-sort"></i></span></th>
+                                <th style="width: 25%;" onclick="sortTable(1)"><span style="display: flex; align-items: center;">Entrance <i id="sortIcon1" class="fas fa-sort"></i></span></th>
+                                <th style="width: 25%;" onclick="sortTable(2)"><span style="display: flex; align-items: center;">Floor <i id="sortIcon2" class="fas fa-sort"></i></span></th>
+                                <th style="width: 25%;" onclick="sortTable(3)"><span style="display: flex; align-items: center;">ApartmentNumber <i id="sortIcon3" class="fas fa-sort"></i></span></th>
+                                <th style="width: 25%;" onclick="sortTable(4)"><span style="display: flex; align-items: center;">NumberOfRooms <i id="sortIcon3" class="fas fa-sort"></i></span></th>
+                                <th style="width: 25%;" onclick="sortTable(5)"><span style="display: flex; align-items: center;">Area <i id="sortIcon3" class="fas fa-sort"></i></span></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -59,17 +54,12 @@
                                             <a href="@Url.Action("DeleteHome", new { id = Home.Id })" class="btn btn-danger"><i class="fas fa-trash-can"></i></a>
                                         </div>
                                     </td>
-                                    <td>@Home.Payroll_Number</td>
-                                    <td>@Home.Forenames</td>
-                                    <td>@Home.Surname</td>
-                                    <td>@Home.DateOfBirth</td>
-                                    <td>@Home.Telephone</td>
-                                    <td>@Home.Mobile</td>
-                                    <td>@Home.Address</td>
-                                    <td>@Home.Address_2</td>
-                                    <td>@Home.Postcode</td>
-                                    <td>@Home.EMail_Home</td>
-                                    <td>@Home.StartDate</td>
+                                    <td>@Home.Block</td>
+                                    <td>@Home.Entrance</td>
+                                    <td>@Home.Floor</td>
+                                    <td>@Home.ApartmentNumber</td>
+                                    <td>@Home.NumberOfRooms</td>
+                                    <td>@Home.Area</td>
                                 </tr>
                             }
                         </tbody>

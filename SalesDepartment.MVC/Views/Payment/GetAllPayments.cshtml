@@ -35,18 +35,11 @@
                     <table id="PaymentsTable" class="table">
                         <thead>
                             <tr>
-                                <th style="width: 25%;">Actions</th>
-                                <th style="width: 15vh;" onclick="sortTable(0)"><span style="display: flex; align-items: center;">Payroll_Number <i id="sortIcon0" class="fas fa-sort"></i></span></th>
-                                <th style="width: 25%;" onclick="sortTable(1)"><span style="display: flex; align-items: center;">Forenames <i id="sortIcon1" class="fas fa-sort"></i></span></th>
-                                <th style="width: 25%;" onclick="sortTable(2)"><span style="display: flex; align-items: center;">Surname <i id="sortIcon2" class="fas fa-sort"></i></span></th>
-                                <th style="width: 25%;" onclick="sortTable(3)"><span style="display: flex; align-items: center;">DateOfBirth <i id="sortIcon3" class="fas fa-sort"></i></span></th>
-                                <th style="width: 25%;">Telephone</th>
-                                <th style="width: 25%;">Mobile</th>
-                                <th style="width: 25%;">Address</th>
-                                <th style="width: 25%;">Address_2</th>
-                                <th style="width: 25%;">Postcode</th>
-                                <th style="width: 25%;">EMail_Home</th>
-                                <th style="width: 25%;" onclick="sortTable(10)"><span style="display: flex; align-items: center;">StartDate <i id="sortIcon4" class="fas fa-sort"></i></span></th>
+                                <th style="width: 15vh;" onclick="sortTable(0)"><span style="display: flex; align-items: center;">PaymentNumber <i id="sortIcon0" class="fas fa-sort"></i></span></th>
+                                <th style="width: 25%;" onclick="sortTable(1)"><span style="display: flex; align-items: center;">PaymentDate <i id="sortIcon1" class="fas fa-sort"></i></span></th>
+                                <th style="width: 25%;" onclick="sortTable(2)"><span style="display: flex; align-items: center;">Amount <i id="sortIcon2" class="fas fa-sort"></i></span></th>
+                                <th style="width: 25%;" onclick="sortTable(3)"><span style="display: flex; align-items: center;">ContractId <i id="sortIcon3" class="fas fa-sort"></i></span></th>
+                                <th style="width: 25%;" onclick="sortTable(3)"><span style="display: flex; align-items: center;">PaymentTypeId <i id="sortIcon3" class="fas fa-sort"></i></span></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -59,17 +52,11 @@
                                             <a href="@Url.Action("DeletePayment", new { id = Payment.Id })" class="btn btn-danger"><i class="fas fa-trash-can"></i></a>
                                         </div>
                                     </td>
-                                    <td>@Payment.Payroll_Number</td>
-                                    <td>@Payment.Forenames</td>
-                                    <td>@Payment.Surname</td>
-                                    <td>@Payment.DateOfBirth</td>
-                                    <td>@Payment.Telephone</td>
-                                    <td>@Payment.Mobile</td>
-                                    <td>@Payment.Address</td>
-                                    <td>@Payment.Address_2</td>
-                                    <td>@Payment.Postcode</td>
-                                    <td>@Payment.EMail_Home</td>
-                                    <td>@Payment.StartDate</td>
+                                    <td>@Payment.PaymentNumber</td>
+                                    <td>@Payment.PaymentDate</td>
+                                    <td>@Payment.Amount</td>
+                                    <td>@Payment.ContractId</td>
+                                    <td>@Payment.PaymentTypeId</td>
                                 </tr>
                             }
                         </tbody>
