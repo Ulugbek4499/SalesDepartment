@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SalesDepartment.Application.UseCases.Founders.Response
 {
-    internal class FounderReponse
+    public class FounderResponse
     {
     }
 }
