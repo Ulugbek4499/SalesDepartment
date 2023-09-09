@@ -1,17 +1,17 @@
-﻿@using Employee.Integration.Application.UseCases.Employees.Commands.UpdateEmployee;
-@using Employee.Integration.Application.UseCases.Employees.Response;
-@using Employee.Integration.Domain.Entities;
-@model EmployeeResponse
+﻿@using SalesDepartment.Application.UseCases.Customers.Commands.UpdateCustomer;
+@using SalesDepartment.Application.UseCases.Customers.Response;
+@using SalesDepartment.Domain.Entities;
+@model CustomerResponse
 
 @{
-    ViewData["Title"] = "UpdateEmployee";
+    ViewData["Title"] = "UpdateCustomer";
     Layout = "_Layout";
 }
 
-<h3 class="text-center">Edit Employee</h3>
+<h3 class="text-center">Edit Customer</h3>
 <hr />
 
-<form asp-controller="Employee" asp-action="UpdateEmployee" enctype="multipart/form-data" method="post">
+<form asp-controller="Customer" asp-action="UpdateCustomer" enctype="multipart/form-data" method="post">
     <input type="hidden" asp-for="Id" />
 
     <div class="container mt-5">
@@ -38,7 +38,7 @@
                     </div>
 
                     <div class="form-group mt-3">
-                        <label asp-for="DateOfBirth">Employee DateOfBirth:</label>
+                        <label asp-for="DateOfBirth">Customer DateOfBirth:</label>
                         <input asp-for="DateOfBirth" type="date" class="form-control" required value="@Model.DateOfBirth.ToString("yyyy-MM-dd")" />
                         <span asp-validation-for="DateOfBirth" class="text-danger"></span>
                     </div>
@@ -80,7 +80,7 @@
                     </div>
 
                     <div class="form-group mt-3">
-                        <label asp-for="StartDate">Employee StartDate:</label>
+                        <label asp-for="StartDate">Customer StartDate:</label>
                         <input asp-for="StartDate" type="date" class="form-control" required value="@Model.StartDate.ToString("yyyy-MM-dd")" />
                         <span asp-validation-for="StartDate" class="text-danger"></span>
                     </div>
@@ -92,7 +92,6 @@
             </div>
         </div>
     </div>
-
 </form>
 
 @section Scripts {

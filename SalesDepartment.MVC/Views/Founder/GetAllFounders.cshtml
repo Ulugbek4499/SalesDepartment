@@ -2,12 +2,13 @@
     Layout = "_Layout";
 }
 
-@model Employee.Integration.Application.UseCases.Employees.Response.EmployeeResponse[]
-<h3 class="text-center">All Employees</h3>
+@model SalesDepartmentApplication.UseCases.Contracts.Response.ContractResponse[]
+
+<h3 class="text-center">All Contracts</h3>
 <div class="row">
     <div class="col">
         <div class="input-group mb-1 mt-3" style="display:flex; justify-content:space-between; gap:170px">
-            <a href="@Url.Action("CreateEmployee")" class="btn btn-success mr-2">Create Employee</a>
+            <a href="@Url.Action("CreateContract")" class="btn btn-success mr-2">Create Contract</a>
             <div style="display:flex; gap:5px">
                 <input id="searchInput" type="text" class="form-control" placeholder="Search" style="max-width: 200px;">
                 <div class="input-group-append">
@@ -26,12 +27,12 @@
                 @{
                     if (Model.Length == 0)
                     {
-                        <h2>There are no Employees yet...</h2>
+                        <h2>There are no Contracts yet...</h2>
                     }
                 }
 
                 <div class="table-container" style="overflow-y: scroll; height: 58vh; width:100% ">
-                    <table id="EmployeesTable" class="table">
+                    <table id="ContractsTable" class="table">
                         <thead>
                             <tr>
                                 <th style="width: 25%;">Actions</th>
@@ -49,26 +50,26 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach (var Employee in Model)
+                            @foreach (var Contract in Model)
                             {
                                 <tr>
                                     <td class="action-links">
                                         <div style="display:flex; gap:5px">
-                                            <a href="@Url.Action("UpdateEmployee", new { id = Employee.Id })" class="btn btn-secondary"><i class="fas fa-pen-to-square"></i></a>
-                                            <a href="@Url.Action("DeleteEmployee", new { id = Employee.Id })" class="btn btn-danger"><i class="fas fa-trash-can"></i></a>
+                                            <a href="@Url.Action("UpdateContract", new { id = Contract.Id })" class="btn btn-secondary"><i class="fas fa-pen-to-square"></i></a>
+                                            <a href="@Url.Action("DeleteContract", new { id = Contract.Id })" class="btn btn-danger"><i class="fas fa-trash-can"></i></a>
                                         </div>
                                     </td>
-                                    <td>@Employee.Payroll_Number</td>
-                                    <td>@Employee.Forenames</td>
-                                    <td>@Employee.Surname</td>
-                                    <td>@Employee.DateOfBirth</td>
-                                    <td>@Employee.Telephone</td>
-                                    <td>@Employee.Mobile</td>
-                                    <td>@Employee.Address</td>
-                                    <td>@Employee.Address_2</td>
-                                    <td>@Employee.Postcode</td>
-                                    <td>@Employee.EMail_Home</td>
-                                    <td>@Employee.StartDate</td>
+                                    <td>@Contract.Payroll_Number</td>
+                                    <td>@Contract.Forenames</td>
+                                    <td>@Contract.Surname</td>
+                                    <td>@Contract.DateOfBirth</td>
+                                    <td>@Contract.Telephone</td>
+                                    <td>@Contract.Mobile</td>
+                                    <td>@Contract.Address</td>
+                                    <td>@Contract.Address_2</td>
+                                    <td>@Contract.Postcode</td>
+                                    <td>@Contract.EMail_Home</td>
+                                    <td>@Contract.StartDate</td>
                                 </tr>
                             }
                         </tbody>
@@ -82,7 +83,7 @@
 <script>
     document.getElementById('searchButton').addEventListener('click', function () {
         var input = document.getElementById('searchInput').value.toLowerCase();
-        var rows = document.getElementById('EmployeesTable').getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+        var rows = document.getElementById('ContractsTable').getElementsByTagName('tbody')[0].getElementsByTagName('tr');
 
         for (var i = 0; i < rows.length; i++) {
             var cells = rows[i].getElementsByTagName('td');
@@ -106,7 +107,7 @@
 
     function sortTable(columnIndex) {
         var table, rows, switching, i, x, y, shouldSwitch;
-        table = document.getElementById("EmployeesTable");
+        table = document.getElementById("ContractsTable");
         switching = true;
 
         // Hide all sort icons

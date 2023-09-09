@@ -1,0 +1,100 @@
+﻿@using SalesDepartment.Application.UseCases.Homes.Commands.UpdateHome;
+@using SalesDepartment.Application.UseCases.Homes.Response;
+@using SalesDepartment.Domain.Entities;
+@model HomeResponse
+
+@{
+    ViewData["Title"] = "UpdateHome";
+    Layout = "_Layout";
+}
+
+<h3 class="text-center">Edit Home</h3>
+<hr />
+
+<form asp-controller="Home" asp-action="UpdateHome" enctype="multipart/form-data" method="post">
+    <input type="hidden" asp-for="Id" />
+
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-6" style="overflow-y:scroll; width:50%; height:70vh">
+                <div class="custom-input">
+
+                    <div class="form-group mt-3">
+                        <label asp-for="Payroll_Number">Payroll_Number:</label>
+                        <input asp-for="Payroll_Number" class="form-control" required value="@Model.Payroll_Number" />
+                        <span asp-validation-for="Payroll_Number" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group mt-3">
+                        <label asp-for="Forenames" class="form-label">Forenames</label>
+                        <input asp-for="Forenames" type="text" class="form-control" value="@Model.Forenames">
+                        <span asp-validation-for="Forenames" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group mt-3">
+                        <label asp-for="Surname">Surname:</label>
+                        <input asp-for="Surname" class="form-control" required value="@Model.Surname" />
+                        <span asp-validation-for="Surname" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group mt-3">
+                        <label asp-for="DateOfBirth">Home DateOfBirth:</label>
+                        <input asp-for="DateOfBirth" type="date" class="form-control" required value="@Model.DateOfBirth.ToString("yyyy-MM-dd")" />
+                        <span asp-validation-for="DateOfBirth" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group mt-3">
+                        <label asp-for="Telephone">Telephone:</label>
+                        <input asp-for="Telephone" class="form-control" required value="@Model.Telephone" />
+                        <span asp-validation-for="Telephone" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group mt-3">
+                        <label asp-for="Mobile" class="form-label">Mobile</label>
+                        <input asp-for="Mobile" type="text" class="form-control" value="@Model.Mobile">
+                        <span asp-validation-for="Mobile" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group mt-3">
+                        <label asp-for="Address">Address:</label>
+                        <input asp-for="Address" class="form-control" required value="@Model.Address" />
+                        <span asp-validation-for="Address" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group mt-3">
+                        <label asp-for="Address_2">Address_2:</label>
+                        <input asp-for="Address_2" class="form-control" required value="@Model.Address_2" />
+                        <span asp-validation-for="Address_2" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group mt-3">
+                        <label asp-for="Postcode" class="form-label">Postcode</label>
+                        <input asp-for="Postcode" type="text" class="form-control" value="@Model.Postcode">
+                        <span asp-validation-for="Postcode" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group mt-3">
+                        <label asp-for="EMail_Home">EMail_Home:</label>
+                        <input asp-for="EMail_Home" class="form-control" required value="@Model.EMail_Home" />
+                        <span asp-validation-for="EMail_Home" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group mt-3">
+                        <label asp-for="StartDate">Home StartDate:</label>
+                        <input asp-for="StartDate" type="date" class="form-control" required value="@Model.StartDate.ToString("yyyy-MM-dd")" />
+                        <span asp-validation-for="StartDate" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group button-group mt-3">
+                        <button type="submit" class="btn btn-success">Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
