@@ -30,16 +30,16 @@ namespace SalesDepartment.Application.UseCases.Contracts.Queries.GetAllContracts
         {
             var search = request.SearchTerm?.Trim();
             var Contracts = _context.Contracts.AsQueryable();
-/*
-            if (!string.IsNullOrEmpty(search))
-            {
-                Contracts = Contracts.Where(s => s.Name.ToLower().Contains(search.ToLower())
-                                            || s.Description.ToLower().Contains(search.ToLower()));
-            }
-            if (Contracts is null || Contracts.Count() <= 0)
-            {
-                throw new NotFoundException(nameof(Contract), search);
-            }*/
+            /*
+                        if (!string.IsNullOrEmpty(search))
+                        {
+                            Contracts = Contracts.Where(s => s.Name.ToLower().Contains(search.ToLower())
+                                                        || s.Description.ToLower().Contains(search.ToLower()));
+                        }
+                        if (Contracts is null || Contracts.Count() <= 0)
+                        {
+                            throw new NotFoundException(nameof(Contract), search);
+                        }*/
 
             var paginatedContracts = await PaginatedList<Contract>.CreateAsync(
                 Contracts, request.PageNumber, request.PageSize);

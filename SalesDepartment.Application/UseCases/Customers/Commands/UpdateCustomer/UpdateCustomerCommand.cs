@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using MediatR;
 using SalesDepartment.Application.Common.Exceptions;
 using SalesDepartment.Application.Common.Interfaces;
@@ -11,7 +6,7 @@ using SalesDepartment.Domain.Entities;
 
 namespace SalesDepartment.Application.UseCases.Customers.Commands.UpdateCustomer
 {
-    public class UpdateCustomerCommand:IRequest
+    public class UpdateCustomerCommand : IRequest
     {
         public int Id { get; set; }
         public string FirstName { get; set; }

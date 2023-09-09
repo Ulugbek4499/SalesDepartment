@@ -5,7 +5,7 @@ using SalesDepartment.Domain.Entities;
 
 namespace SalesDepartment.Application.UseCases.Contracts.Commands.CreateContract
 {
-    public class CreateContractCommand:IRequest<int>
+    public class CreateContractCommand : IRequest<int>
     {
         public string ContractNumber { get; set; }
         public DateTime ContractStartDate { get; set; }

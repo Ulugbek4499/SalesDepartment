@@ -2,7 +2,7 @@
 
 namespace SalesDepartment.Domain.Entities
 {
-    public class Contract:BaseAuditableEntity
+    public class Contract : BaseAuditableEntity
     {
         public string ContractNumber { get; set; }
         public DateTime ContractStartDate { get; set; }

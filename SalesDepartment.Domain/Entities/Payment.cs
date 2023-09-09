@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using SalesDepartment.Domain.Commons;
+﻿using SalesDepartment.Domain.Commons;
 
 namespace SalesDepartment.Domain.Entities
 {
-    public class Payment:BaseAuditableEntity
+    public class Payment : BaseAuditableEntity
     {
         public string PaymentNumber { get; set; }
         public DateTime PaymentDate { get; set; }

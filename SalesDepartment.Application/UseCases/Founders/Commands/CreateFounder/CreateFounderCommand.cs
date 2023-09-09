@@ -1,17 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using MediatR;
 using SalesDepartment.Application.Common.Interfaces;
-using SalesDepartment.Application.UseCases.Founders.Commands.CreateFounder;
 using SalesDepartment.Domain.Entities;
 
 namespace SalesDepartment.Application.UseCases.Founders.Commands.CreateFounder
 {
-    public class CreateFounderCommand:IRequest<int>
+    public class CreateFounderCommand : IRequest<int>
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }

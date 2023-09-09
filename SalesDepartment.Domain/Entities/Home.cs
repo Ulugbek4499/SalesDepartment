@@ -2,7 +2,7 @@
 
 namespace SalesDepartment.Domain.Entities
 {
-    public class Home:BaseAuditableEntity
+    public class Home : BaseAuditableEntity
     {
         public string Block { get; set; }
         public int Entrance { get; set; }
