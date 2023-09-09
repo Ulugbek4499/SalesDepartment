@@ -20,69 +20,27 @@
                 <div class="custom-input">
 
                     <div class="form-group mt-3">
-                        <label asp-for="Payroll_Number">Payroll_Number:</label>
-                        <input asp-for="Payroll_Number" class="form-control" required value="@Model.Payroll_Number" />
-                        <span asp-validation-for="Payroll_Number" class="text-danger"></span>
+                        <label asp-for="FirstName">FirstName:</label>
+                        <input asp-for="FirstName" class="form-control" required value="@Model.FirstName" />
+                        <span asp-validation-for="FirstName" class="text-danger"></span>
                     </div>
 
                     <div class="form-group mt-3">
-                        <label asp-for="Forenames" class="form-label">Forenames</label>
-                        <input asp-for="Forenames" type="text" class="form-control" value="@Model.Forenames">
-                        <span asp-validation-for="Forenames" class="text-danger"></span>
+                        <label asp-for="LastName" class="form-label">LastName</label>
+                        <input asp-for="LastName" type="text" class="form-control" value="@Model.LastName">
+                        <span asp-validation-for="LastName" class="text-danger"></span>
                     </div>
 
                     <div class="form-group mt-3">
-                        <label asp-for="Surname">Surname:</label>
-                        <input asp-for="Surname" class="form-control" required value="@Model.Surname" />
-                        <span asp-validation-for="Surname" class="text-danger"></span>
+                        <label asp-for="MiddleName">MiddleName:</label>
+                        <input asp-for="MiddleName" class="form-control" required value="@Model.MiddleName" />
+                        <span asp-validation-for="MiddleName" class="text-danger"></span>
                     </div>
 
                     <div class="form-group mt-3">
-                        <label asp-for="DateOfBirth">Founder DateOfBirth:</label>
-                        <input asp-for="DateOfBirth" type="date" class="form-control" required value="@Model.DateOfBirth.ToString("yyyy-MM-dd")" />
-                        <span asp-validation-for="DateOfBirth" class="text-danger"></span>
-                    </div>
-
-                    <div class="form-group mt-3">
-                        <label asp-for="Telephone">Telephone:</label>
-                        <input asp-for="Telephone" class="form-control" required value="@Model.Telephone" />
-                        <span asp-validation-for="Telephone" class="text-danger"></span>
-                    </div>
-
-                    <div class="form-group mt-3">
-                        <label asp-for="Mobile" class="form-label">Mobile</label>
-                        <input asp-for="Mobile" type="text" class="form-control" value="@Model.Mobile">
-                        <span asp-validation-for="Mobile" class="text-danger"></span>
-                    </div>
-
-                    <div class="form-group mt-3">
-                        <label asp-for="Address">Address:</label>
-                        <input asp-for="Address" class="form-control" required value="@Model.Address" />
-                        <span asp-validation-for="Address" class="text-danger"></span>
-                    </div>
-
-                    <div class="form-group mt-3">
-                        <label asp-for="Address_2">Address_2:</label>
-                        <input asp-for="Address_2" class="form-control" required value="@Model.Address_2" />
-                        <span asp-validation-for="Address_2" class="text-danger"></span>
-                    </div>
-
-                    <div class="form-group mt-3">
-                        <label asp-for="Postcode" class="form-label">Postcode</label>
-                        <input asp-for="Postcode" type="text" class="form-control" value="@Model.Postcode">
-                        <span asp-validation-for="Postcode" class="text-danger"></span>
-                    </div>
-
-                    <div class="form-group mt-3">
-                        <label asp-for="EMail_Home">EMail_Home:</label>
-                        <input asp-for="EMail_Home" class="form-control" required value="@Model.EMail_Home" />
-                        <span asp-validation-for="EMail_Home" class="text-danger"></span>
-                    </div>
-
-                    <div class="form-group mt-3">
-                        <label asp-for="StartDate">Founder StartDate:</label>
-                        <input asp-for="StartDate" type="date" class="form-control" required value="@Model.StartDate.ToString("yyyy-MM-dd")" />
-                        <span asp-validation-for="StartDate" class="text-danger"></span>
+                        <label asp-for="PhoneNumber">PhoneNumber:</label>
+                        <input asp-for="PhoneNumber" class="form-control" required value="@Model.PhoneNumber" />
+                        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
                     </div>
 
                     <div class="form-group button-group mt-3">
