@@ -5,9 +5,9 @@ namespace SalesDepartment.Domain.Entities
     public class Home:BaseAuditableEntity
     {
         public string Block { get; set; }
-        public string Entrance { get; set; }
-        public string Floor { get; set; }
-        public string ApartmentNumber { get; set; }
+        public int Entrance { get; set; }
+        public int Floor { get; set; }
+        public int ApartmentNumber { get; set; }
         public int NumberOfRooms { get; set; }
         public double Area { get; set; }
     }

@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SalesDepartment.Domain.Commons;
 
 namespace SalesDepartment.Domain.Entities
 {
-    public class Customer
+    public class Customer:BaseAuditableEntity
     {
-        public string Email { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string MiddleName { get; set; }
