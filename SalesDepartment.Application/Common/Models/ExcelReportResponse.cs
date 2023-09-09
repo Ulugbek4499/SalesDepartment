@@ -6,7 +6,5 @@ using System.Threading.Tasks;
 
 namespace SalesDepartment.Application.Common.Models
 {
-    internal class ExcelReportResponse
-    {
-    }
+    public record ExcelReportResponse(byte[] FileContents, string Option, string FileName);
 }
