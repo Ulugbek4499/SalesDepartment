@@ -1,17 +1,17 @@
-﻿@using SalesDepartment.Application.UseCases.Contracts.Commands.UpdateContract;
-@using SalesDepartment.Application.UseCases.Contracts.Response;
+﻿@using SalesDepartment.Application.UseCases.Founders.Commands.UpdateFounder;
+@using SalesDepartment.Application.UseCases.Founders.Response;
 @using SalesDepartment.Domain.Entities;
-@model ContractResponse
+@model FounderResponse
 
 @{
-    ViewData["Title"] = "UpdateContract";
+    ViewData["Title"] = "UpdateFounder";
     Layout = "_Layout";
 }
 
-<h3 class="text-center">Edit Contract</h3>
+<h3 class="text-center">Edit Founder</h3>
 <hr />
 
-<form asp-controller="Contract" asp-action="UpdateContract" enctype="multipart/form-data" method="post">
+<form asp-controller="Founder" asp-action="UpdateFounder" enctype="multipart/form-data" method="post">
     <input type="hidden" asp-for="Id" />
 
     <div class="container mt-5">
@@ -38,7 +38,7 @@
                     </div>
 
                     <div class="form-group mt-3">
-                        <label asp-for="DateOfBirth">Contract DateOfBirth:</label>
+                        <label asp-for="DateOfBirth">Founder DateOfBirth:</label>
                         <input asp-for="DateOfBirth" type="date" class="form-control" required value="@Model.DateOfBirth.ToString("yyyy-MM-dd")" />
                         <span asp-validation-for="DateOfBirth" class="text-danger"></span>
                     </div>
@@ -80,7 +80,7 @@
                     </div>
 
                     <div class="form-group mt-3">
-                        <label asp-for="StartDate">Contract StartDate:</label>
+                        <label asp-for="StartDate">Founder StartDate:</label>
                         <input asp-for="StartDate" type="date" class="form-control" required value="@Model.StartDate.ToString("yyyy-MM-dd")" />
                         <span asp-validation-for="StartDate" class="text-danger"></span>
                     </div>

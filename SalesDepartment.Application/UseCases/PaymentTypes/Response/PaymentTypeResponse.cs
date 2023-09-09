@@ -2,5 +2,6 @@
 {
     public class PaymentTypeResponse
     {
+        public string Name { get; set; }
     }
 }

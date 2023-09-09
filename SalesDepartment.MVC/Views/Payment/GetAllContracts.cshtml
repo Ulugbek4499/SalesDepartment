@@ -1,4 +1,160 @@
-﻿@page
-@model SalesDepartment.MVC.Views.Contract.GetAllContractsModel
-@{
+﻿@{
+    Layout = "_Layout";
 }
+
+@model SalesDepartmentApplication.UseCases.Payments.Response.PaymentResponse[]
+
+<h3 class="text-center">All Payments</h3>
+<div class="row">
+    <div class="col">
+        <div class="input-group mb-1 mt-3" style="display:flex; justify-content:space-between; gap:170px">
+            <a href="@Url.Action("CreatePayment")" class="btn btn-success mr-2">Create Payment</a>
+            <div style="display:flex; gap:5px">
+                <input id="searchInput" type="text" class="form-control" placeholder="Search" style="max-width: 200px;">
+                <div class="input-group-append">
+                    <button id="searchButton" class="btn btn-primary" type="button">Search</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<hr />
+
+<div class="container" style="height: 55vh;">
+    <div class="row" style="display:flex; justify-content:center;">
+        <div class="col-lg-6" style="width:100%">
+            <div class="custom-cards">
+                @{
+                    if (Model.Length == 0)
+                    {
+                        <h2>There are no Payments yet...</h2>
+                    }
+                }
+
+                <div class="table-container" style="overflow-y: scroll; height: 58vh; width:100% ">
+                    <table id="PaymentsTable" class="table">
+                        <thead>
+                            <tr>
+                                <th style="width: 25%;">Actions</th>
+                                <th style="width: 15vh;" onclick="sortTable(0)"><span style="display: flex; align-items: center;">Payroll_Number <i id="sortIcon0" class="fas fa-sort"></i></span></th>
+                                <th style="width: 25%;" onclick="sortTable(1)"><span style="display: flex; align-items: center;">Forenames <i id="sortIcon1" class="fas fa-sort"></i></span></th>
+                                <th style="width: 25%;" onclick="sortTable(2)"><span style="display: flex; align-items: center;">Surname <i id="sortIcon2" class="fas fa-sort"></i></span></th>
+                                <th style="width: 25%;" onclick="sortTable(3)"><span style="display: flex; align-items: center;">DateOfBirth <i id="sortIcon3" class="fas fa-sort"></i></span></th>
+                                <th style="width: 25%;">Telephone</th>
+                                <th style="width: 25%;">Mobile</th>
+                                <th style="width: 25%;">Address</th>
+                                <th style="width: 25%;">Address_2</th>
+                                <th style="width: 25%;">Postcode</th>
+                                <th style="width: 25%;">EMail_Home</th>
+                                <th style="width: 25%;" onclick="sortTable(10)"><span style="display: flex; align-items: center;">StartDate <i id="sortIcon4" class="fas fa-sort"></i></span></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var Payment in Model)
+                            {
+                                <tr>
+                                    <td class="action-links">
+                                        <div style="display:flex; gap:5px">
+                                            <a href="@Url.Action("UpdatePayment", new { id = Payment.Id })" class="btn btn-secondary"><i class="fas fa-pen-to-square"></i></a>
+                                            <a href="@Url.Action("DeletePayment", new { id = Payment.Id })" class="btn btn-danger"><i class="fas fa-trash-can"></i></a>
+                                        </div>
+                                    </td>
+                                    <td>@Payment.Payroll_Number</td>
+                                    <td>@Payment.Forenames</td>
+                                    <td>@Payment.Surname</td>
+                                    <td>@Payment.DateOfBirth</td>
+                                    <td>@Payment.Telephone</td>
+                                    <td>@Payment.Mobile</td>
+                                    <td>@Payment.Address</td>
+                                    <td>@Payment.Address_2</td>
+                                    <td>@Payment.Postcode</td>
+                                    <td>@Payment.EMail_Home</td>
+                                    <td>@Payment.StartDate</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.getElementById('searchButton').addEventListener('click', function () {
+        var input = document.getElementById('searchInput').value.toLowerCase();
+        var rows = document.getElementById('PaymentsTable').getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+
+        for (var i = 0; i < rows.length; i++) {
+            var cells = rows[i].getElementsByTagName('td');
+            var match = false;
+
+            for (var j = 0; j < cells.length; j++) {
+                var cellText = cells[j].innerText.toLowerCase();
+                if (cellText.includes(input)) {
+                    match = true;
+                    break;
+                }
+            }
+
+            rows[i].style.display = match ? '' : 'none';
+        }
+    });
+</script>
+
+<script>
+    var ascendingOrder = true; // Initially, set the sorting order to ascending
+
+    function sortTable(columnIndex) {
+        var table, rows, switching, i, x, y, shouldSwitch;
+        table = document.getElementById("PaymentsTable");
+        switching = true;
+
+        // Hide all sort icons
+        var sortIcons = document.getElementsByClassName("fas fa-sort");
+        for (i = 0; i < sortIcons.length; i++) {
+            sortIcons[i].classList.remove("fa-sort-up");
+            sortIcons[i].classList.remove("fa-sort-down");
+        }
+
+        while (switching) {
+            switching = false;
+            rows = table.getElementsByTagName("tr");
+
+            for (i = 1; i < (rows.length - 1); i++) {
+                shouldSwitch = false;
+
+                x = rows[i].getElementsByTagName("td")[columnIndex];
+                y = rows[i + 1].getElementsByTagName("td")[columnIndex];
+
+                if (ascendingOrder) {
+                    if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                        shouldSwitch = true;
+                        break;
+                    }
+                } else {
+                    if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+                        shouldSwitch = true;
+                        break;
+                    }
+                }
+            }
+
+            if (shouldSwitch) {
+                rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                switching = true;
+            }
+        }
+
+        // Toggle sorting order and update the sort icon
+        ascendingOrder = !ascendingOrder;
+        var sortIcon = document.getElementById("sortIcon" + columnIndex);
+        if (ascendingOrder) {
+            sortIcon.classList.remove("fa-sort-down");
+            sortIcon.classList.add("fa-sort-up");
+        } else {
+            sortIcon.classList.remove("fa-sort-up");
+            sortIcon.classList.add("fa-sort-down");
+        }
+    }
+</script>

@@ -1,16 +1,16 @@
-﻿@using SalesDepartment.Application.UseCases.Contracts.Commands.CreateContract;
+﻿@using SalesDepartment.Application.UseCases.Payments.Commands.CreatePayment;
 @using SalesDepartment.Domain.Entities;
 
 @{
-    ViewData["Title"] = "CreateContract";
+    ViewData["Title"] = "CreatePayment";
     Layout = "_Layout";
 }
 
-@model CreateContractCommand
+@model CreatePaymentCommand
 
-<h3 class="text-center">Add new Contract</h3>
+<h3 class="text-center">Add new Payment</h3>
 <hr />
-<form asp-controller="Contract" asp-action="CreateContract" enctype="multipart/form-data" method="post">
+<form asp-controller="Payment" asp-action="CreatePayment" enctype="multipart/form-data" method="post">
     <div class="container mt-4">
         <div class="row">
             <div class="col-lg-6 offset-lg-3" style="overflow-y:scroll; width:50%; height:70vh">
@@ -34,7 +34,7 @@
                 </div>
 
                 <div class="form-group mt-3">
-                    <label asp-for="DateOfBirth">Contract DateOfBirth:</label>
+                    <label asp-for="DateOfBirth">Payment DateOfBirth:</label>
                     <input asp-for="DateOfBirth" type="date" class="form-control" required />
                     <span asp-validation-for="DateOfBirth" class="text-danger"></span>
                 </div>
@@ -77,7 +77,7 @@
                 </div>
 
                 <div class="form-group mt-3">
-                    <label asp-for="StartDate">Contract StartDate:</label>
+                    <label asp-for="StartDate">Payment StartDate:</label>
                     <input asp-for="StartDate" type="date" class="form-control" required />
                     <span asp-validation-for="StartDate" class="text-danger"></span>
                 </div>

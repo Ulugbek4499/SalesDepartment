@@ -2,7 +2,21 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="text-center" style="display:flex; flex-direction:column; justify-content:center; align-items:center;">
+    <h1 class="display-4" style="padding-top: 10px; font-weight:700">Welcome To Employee Info Portal!</h1>
+
+    <div class="d-flex align-items-center justify-content-center" id="main">
+        <img src="/photo2.jpg" height="400px" />
+    </div>
+
+    <div class="button-container">
+        <a asp-controller="Employee" asp-action="GetAllEmployees" class="btn btn-primary">Personal Info of Employees</a>
+    </div>
 </div>
+
+<style>
+    .button-container {
+        margin-top: 20px;
+    }
+</style>
+

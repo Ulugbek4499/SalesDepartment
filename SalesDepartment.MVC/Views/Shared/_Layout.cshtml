@@ -1,49 +1,214 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - SalesDepartment.MVC</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+    <link rel="stylesheet" href="~/css/site.css">
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/SalesDepartment.MVC.styles.css" asp-append-version="true" />
+    <title>@ViewData["Title"] - Employee.Integration.MVC</title>
+    <style>
+        /* Custom styles */
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .icon-link {
+            color: white;
+        }
+
+        .sidebar .nav-link i {
+            font-size: 2rem; /* Increase the font size to make the sidebar icons bigger */
+        }
+
+        .custom-sidebar {
+            width: 200px;
+        }
+
+        .sidebar .nav-link {
+            color: white;
+        }
+
+            .sidebar .nav-link:hover {
+                color: yellow;
+            }
+
+        /* Navigation button styles */
+        .navbar-nav .nav-item {
+            margin-bottom: 5px;
+        }
+
+        .navbar-nav .nav-link {
+            color: white;
+            padding: 8px 16px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+            .navbar-nav .nav-link:hover {
+                background-color: #0056b3;
+            }
+
+        /* Logout and user manager button styles */
+        .navbar-nav .logout-form {
+            display: inline-block;
+            margin: 0;
+        }
+
+        .navbar-nav .logout-button {
+            background-color: transparent;
+            border: none;
+            padding: 0;
+            cursor: pointer;
+        }
+
+        .navbar-nav .user-manager-link {
+            font-size: 14px;
+            color: #fff;
+            text-decoration: none;
+            padding: 0 10px;
+            line-height: 38px;
+            transition: color 0.3s;
+        }
+
+            .navbar-nav .user-manager-link:hover {
+                color: yellow;
+            }
+
+        /* Footer icon styles */
+        footer .icon-link i {
+            font-size: 3rem; /* Increase the font size to make the footer icons bigger */
+        }
+    </style>
+
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">SalesDepartment.MVC</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
+    <div class="container-fluid" style="position: fixed">
+        <div class="row">
+            <aside class="bg-dark text-light col-2 sidebar" style="height: 100vh; width: 200px">
+                <ul class="nav flex-column" style="padding-top: 25px">
+                    <li class="nav-item mb-3">
+                        <a asp-controller="Home" asp-action="Index" class="nav-link">
+                            <div class="icon-wrapper">
+                                <i class="fas fa-home"></i>
+                            </div>
+                            <div class="name-wrapper">
+                                Home
+                            </div>
+                        </a>
+                    </li>
+                    <li class="nav-item mb-3">
+                        <a asp-controller="Employee" asp-action="GetAllEmployees" class="nav-link">
+                            <div class="icon-wrapper">
+                                <i class="fa-solid fa-users"></i>
+                            </div>
+                            <div class="name-wrapper">
+                                Employees
+                            </div>
+                        </a>
+                    </li>
+                    <li class="nav-item mb-3">
+                        <a asp-controller="Employee" asp-action="CreateEmployeeFromCsv" class="nav-link">
+                            <div class="icon-wrapper">
+                                <i class="fa-solid fa-file-csv"></i>
+                                <i class="fa-solid fa-arrow-right-long"></i>
+                                <i class="fa-solid fa-upload"></i>
+                            </div>
+                            <div class="name-wrapper">
+                                Create From Csv
+                            </div>
+                        </a>
+                    </li>
+                    <li class="nav-item mb-3">
+                        <a asp-controller="Employee" asp-action="GetAllEmployeesCsv" class="nav-link">
+                            <div class="icon-wrapper">
+                                <i class="fa-solid fa-download"></i>
+                                <i class="fa-solid fa-arrow-right-long"></i>
+                                <i class="fa-solid fa-file-csv"></i>
+                            </div>
+                            <div class="name-wrapper">
+                                Get In Csv
+                            </div>
+                        </a>
+                    </li>
+                    <li class="nav-item mb-3">
+                        <a asp-controller="Employee" asp-action="CreateEmployeeFromExcel" class="nav-link">
+                            <div class="icon-wrapper">
+                                <i class="fa-solid fa-file-excel"></i>
+                                <i class="fa-solid fa-arrow-right-long"></i>
+                                <i class="fa-solid fa-upload"></i>
+                            </div>
+                            <div class="name-wrapper">
+                                Create From Excel
+                            </div>
+                        </a>
+                    </li>
+                    <li class="nav-item mb-3">
+                        <a asp-controller="Employee" asp-action="GetAllEmployeesExcel" class="nav-link">
+                            <div class="icon-wrapper">
+                                <i class="fa-solid fa-download"></i>
+                                <i class="fa-solid fa-arrow-right-long"></i>
+                                <i class="fa-solid fa-file-excel"></i>
+                            </div>
+                            <div class="name-wrapper">
+                                Get In Excel
+                            </div>
+                        </a>
+                    </li>
+                    <li class="nav-item mb-3">
+                        <a asp-controller="Employee" asp-action="GetAllEmployeesPDF" class="nav-link">
+                            <div class="icon-wrapper">
+                                <i class="fa-solid fa-download"></i>
+                                <i class="fa-solid fa-arrow-right-long"></i>
+                                <i class="fa-solid fa-file-pdf"></i>
+                            </div>
+                            <div class="name-wrapper">
+                                Get In PDF
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </aside>
+
+            <main class="col-10">
+                <div class="container mt-3 pt-4">
+                    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+                    @RenderBody()
                 </div>
-            </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
+            </main>
+        </div>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2023 - SalesDepartment.MVC - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+
+    <footer class="w-100 bg-dark mt-0" style="position: fixed; bottom: 0; width: 100%; height: 10%">
+        <div class="container-fluid h-100">
+            <div class="row align-items-center h-100">
+                <div class="col-12 d-flex justify-content-center">
+                    <div class="social-links">
+                        <a href="https://www.linkedin.com/in/ulugbek-toshtemirov-912b04262/" class="icon-link">
+                            <i class="fab fa-linkedin fa-2x"></i>
+                        </a>
+                        <a href="https://github.com/Ulugbek4499" class="icon-link">
+                            <i class="fab fa-github fa-2x"></i>
+                        </a>
+                        <a href="https://t.me/Ulugbek_Toshtemirov" class="icon-link">
+                            <i class="fab fa-telegram fa-2x"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
         </div>
     </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
