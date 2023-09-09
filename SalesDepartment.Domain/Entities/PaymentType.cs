@@ -7,8 +7,8 @@ using SalesDepartment.Domain.Commons;
 
 namespace SalesDepartment.Domain.Entities
 {
-    public class PaymentType:BaseAuditableEntity
+    public class PaymentType : BaseAuditableEntity
     {
-        public double Name { get; set; }
+        public string Name { get; set; }
     }
 }

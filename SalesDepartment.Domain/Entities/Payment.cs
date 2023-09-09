@@ -15,19 +15,10 @@ namespace SalesDepartment.Domain.Entities
         public double Amount { get; set; }
         public string AmountsInWords { get; set; }
 
-        public int CustomerId { get; set; }
-        public Customer Customer { get; set; }
-
         public int ContractId { get; set; }
-        public Contract Contract { get; set; }
+        public virtual Contract Contract { get; set; }
 
         public int PaymentTypeId { get; set; }
-        public PaymentType PaymentType { get; set; }
+        public virtual PaymentType PaymentType { get; set; }
     }
 }
-
-/*
-        public string PassportNumber { get; set; }
-        public string ContractNumber { get; set; }
-        public string FullName { get; set; }
-*/

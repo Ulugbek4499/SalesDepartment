@@ -11,12 +11,14 @@ namespace SalesDepartment.Domain.Entities
         public DateTime ContractEndDate { get; set; }
 
         public int HomeId { get; set; }
-        public Home Home { get; set; }
+        public virtual Home Home { get; set; }
 
         public int CustomerId { get; set; }
-        public Customer Customer { get; set; }
+        public virtual Customer Customer { get; set; }
 
         public int FounderId { get; set; }
-        public Founder Founder { get; set; }
+        public virtual Founder Founder { get; set; }
+
+        public virtual ICollection<Payment> Payments { get; set; }
     }
 }
