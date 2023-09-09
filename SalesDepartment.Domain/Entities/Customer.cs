@@ -7,7 +7,7 @@ using SalesDepartment.Domain.Commons;
 
 namespace SalesDepartment.Domain.Entities
 {
-    public class Customer:BaseAuditableEntity
+    public class Customer : BaseAuditableEntity
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }

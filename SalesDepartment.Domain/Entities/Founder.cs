@@ -2,7 +2,7 @@
 
 namespace SalesDepartment.Domain.Entities
 {
-    public class Founder:BaseAuditableEntity
+    public class Founder : BaseAuditableEntity
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
