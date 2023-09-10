@@ -4,6 +4,8 @@ using SalesDepartment.Application.UseCases.Payments.Commands.DeletePayment;
 using SalesDepartment.Application.UseCases.Payments.Commands.UpdatePayment;
 using SalesDepartment.Application.UseCases.Payments.Queries.GetAllPayments;
 using SalesDepartment.Application.UseCases.Payments.Queries.GetPaymentById;
+using SalesDepartment.Application.UseCases.PaymentTypes.Queries.GetAllPaymentTypes;
+using SalesDepartment.Application.UseCases.PaymentTypes.Response;
 
 namespace SalesDepartment.MVC.Controllers
 {
@@ -12,6 +14,8 @@ namespace SalesDepartment.MVC.Controllers
         [HttpGet("[action]")]
         public async ValueTask<IActionResult> CreatePayment()
         {
+            PaymentTypeResponse[] paymentTypes = await Mediator.Send(new GetAllPaymentTypesQuery());
+            ViewData["PaymentTypes"]=paymentTypes;
             return View();
         }
 

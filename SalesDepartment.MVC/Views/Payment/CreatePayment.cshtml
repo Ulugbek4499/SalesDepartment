@@ -1,9 +1,12 @@
 ﻿@using SalesDepartment.Application.UseCases.Payments.Commands.CreatePayment;
 @using SalesDepartment.Domain.Entities;
+@using SalesDepartment.Application.UseCases.PaymentTypes.Response;
 
 @{
     ViewData["Title"] = "CreatePayment";
     Layout = "_Layout";
+
+    PaymentTypeResponse[] PaymentTypes = ViewData["PaymentTypes"] as PaymentTypeResponse[];
 }
 
 @model CreatePaymentCommand
@@ -46,9 +49,14 @@
                 </div>
 
                 <div class="form-group mt-3">
-                    <label asp-for="PaymentTypeId" class="form-label">PaymentTypeId:</label>
-                    <input asp-for="PaymentTypeId" type="text" class="form-control" placeholder="Enter PaymentTypeId">
-                    <span asp-validation-for="PaymentTypeId" class="text-danger"></span>
+                    <label for="PaymentTypeId">PaymentTypeId:</label>
+                    <select class="form-control" id="PaymentTypeId" name="PaymentTypeId" required>
+                        <option value="">Choose Payment Type</option>
+                        @foreach (var paymentType in PaymentTypes)
+                        {
+                            <option value="@paymentType.Id">@paymentType.Name</option>
+                        }
+                    </select>
                 </div>
 
                 <div class="form-group button-group mt-3">
