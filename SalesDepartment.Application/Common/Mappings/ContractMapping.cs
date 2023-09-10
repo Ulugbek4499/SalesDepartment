@@ -1,12 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO.Packaging;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
+using SalesDepartment.Application.UseCases.Contracts.Commands.CreateContract;
+using SalesDepartment.Application.UseCases.Contracts.Commands.DeleteContract;
+using SalesDepartment.Application.UseCases.Contracts.Commands.UpdateContract;
+using SalesDepartment.Application.UseCases.Contracts.Response;
+using SalesDepartment.Domain.Entities;
 
 namespace SalesDepartment.Application.Common.Mappings
 {
-    internal class ContractMapping
+    public class ContractMapping : Profile
     {
+        public ContractMapping()
+        {
+            CreateMap<CreateContractCommand, Contract>().ReverseMap();
+            CreateMap<DeleteContractCommand, Contract>().ReverseMap();
+            CreateMap<UpdateContractCommand, Contract>().ReverseMap();
+            CreateMap<ContractResponse, Contract>().ReverseMap();
+        }
     }
 }

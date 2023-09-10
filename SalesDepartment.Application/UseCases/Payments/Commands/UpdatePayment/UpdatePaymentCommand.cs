@@ -31,7 +31,7 @@ namespace SalesDepartment.Application.UseCases.Payments.Commands.UpdatePayment
         public async Task Handle(UpdatePaymentCommand request, CancellationToken cancellationToken)
         {
             Payment? Payment = await _context.Payments.FindAsync(request.Id);
-            _mapper.Map(Payment, request);
+            _mapper.Map(request, Payment);
 
             if (Payment is null)
                 throw new NotFoundException(nameof(Payment), request.Id);

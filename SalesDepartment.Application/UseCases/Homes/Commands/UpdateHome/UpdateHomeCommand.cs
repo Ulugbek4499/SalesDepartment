@@ -31,7 +31,7 @@ namespace SalesDepartment.Application.UseCases.Homes.Commands.UpdateHome
         public async Task Handle(UpdateHomeCommand request, CancellationToken cancellationToken)
         {
             Home? Home = await _context.Homes.FindAsync(request.Id);
-            _mapper.Map(Home, request);
+            _mapper.Map(request, Home);
 
             if (Home is null)
                 throw new NotFoundException(nameof(Home), request.Id);
@@ -40,3 +40,4 @@ namespace SalesDepartment.Application.UseCases.Homes.Commands.UpdateHome
         }
     }
 }
+

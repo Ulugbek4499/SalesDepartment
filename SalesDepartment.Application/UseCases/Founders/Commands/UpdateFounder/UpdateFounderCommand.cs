@@ -29,7 +29,7 @@ namespace SalesDepartment.Application.UseCases.Founders.Commands.UpdateFounder
         public async Task Handle(UpdateFounderCommand request, CancellationToken cancellationToken)
         {
             Founder? Founder = await _context.Founders.FindAsync(request.Id);
-            _mapper.Map(Founder, request);
+            _mapper.Map(request, Founder);
 
             if (Founder is null)
                 throw new NotFoundException(nameof(Founder), request.Id);

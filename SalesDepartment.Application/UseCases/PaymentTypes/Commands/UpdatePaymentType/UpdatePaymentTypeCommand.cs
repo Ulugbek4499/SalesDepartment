@@ -26,7 +26,7 @@ namespace SalesDepartment.Application.UseCases.PaymentTypes.Commands.UpdatePayme
         public async Task Handle(UpdatePaymentTypeCommand request, CancellationToken cancellationToken)
         {
             PaymentType? PaymentType = await _context.PaymentTypes.FindAsync(request.Id);
-            _mapper.Map(PaymentType, request);
+            _mapper.Map(request, PaymentType);
 
             if (PaymentType is null)
                 throw new NotFoundException(nameof(PaymentType), request.Id);

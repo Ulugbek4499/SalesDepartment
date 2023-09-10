@@ -96,29 +96,27 @@
                     <li class="nav-item mb-3">
                         <a asp-controller="Home" asp-action="Index" class="nav-link">
                             <div class="icon-wrapper">
-                                <i class="fas fa-home"></i>
+                                <i class="fa-solid fa-bars"></i>
                             </div>
                             <div class="name-wrapper">
-                                Home
+                                Main Menu
                             </div>
                         </a>
                     </li>
                     <li class="nav-item mb-3">
                         <a asp-controller="HomeBuilding" asp-action="GetAllHomes" class="nav-link">
                             <div class="icon-wrapper">
-                                <i class="fa-solid fa-users"></i>
+                                <i class="fa-solid fa-building"></i>
                             </div>
                             <div class="name-wrapper">
-                                Home Apartments
+                                Apartments
                             </div>
                         </a>
                     </li>
                     <li class="nav-item mb-3">
                         <a asp-controller="Customer" asp-action="GetAllCustomers" class="nav-link">
                             <div class="icon-wrapper">
-                                <i class="fa-solid fa-file-csv"></i>
-                                <i class="fa-solid fa-arrow-right-long"></i>
-                                <i class="fa-solid fa-upload"></i>
+                                <i class="fa-solid fa-address-card"></i>
                             </div>
                             <div class="name-wrapper">
                                 Customers
@@ -126,23 +124,9 @@
                         </a>
                     </li>
                     <li class="nav-item mb-3">
-                        <a asp-controller="Founder" asp-action="GetAllFounders" class="nav-link">
-                            <div class="icon-wrapper">
-                                <i class="fa-solid fa-download"></i>
-                                <i class="fa-solid fa-arrow-right-long"></i>
-                                <i class="fa-solid fa-file-csv"></i>
-                            </div>
-                            <div class="name-wrapper">
-                                Founders
-                            </div>
-                        </a>
-                    </li>
-                    <li class="nav-item mb-3">
                         <a asp-controller="Contract" asp-action="GetAllContracts" class="nav-link">
                             <div class="icon-wrapper">
-                                <i class="fa-solid fa-file-excel"></i>
-                                <i class="fa-solid fa-arrow-right-long"></i>
-                                <i class="fa-solid fa-upload"></i>
+                                <i class="fa-solid fa-file-signature"></i>
                             </div>
                             <div class="name-wrapper">
                                 Contracts
@@ -152,9 +136,7 @@
                     <li class="nav-item mb-3">
                         <a asp-controller="Payment" asp-action="GetAllPayments" class="nav-link">
                             <div class="icon-wrapper">
-                                <i class="fa-solid fa-download"></i>
-                                <i class="fa-solid fa-arrow-right-long"></i>
-                                <i class="fa-solid fa-file-excel"></i>
+                                <i class="fa-solid fa-money-bill-wave"></i>
                             </div>
                             <div class="name-wrapper">
                                 Payments
@@ -162,11 +144,19 @@
                         </a>
                     </li>
                     <li class="nav-item mb-3">
+                        <a asp-controller="Founder" asp-action="GetAllFounders" class="nav-link">
+                            <div class="icon-wrapper">
+                                <i class="fa-solid fa-user-group"></i>
+                            </div>
+                            <div class="name-wrapper">
+                                Founders
+                            </div>
+                        </a>
+                    </li>
+                    <li class="nav-item mb-3">
                         <a asp-controller="PaymentType" asp-action="GetAllPaymentTypes" class="nav-link">
                             <div class="icon-wrapper">
-                                <i class="fa-solid fa-download"></i>
-                                <i class="fa-solid fa-arrow-right-long"></i>
-                                <i class="fa-solid fa-file-pdf"></i>
+                                <i class="fa-solid fa-file-invoice-dollar"></i>
                             </div>
                             <div class="name-wrapper">
                                 PaymentTypes

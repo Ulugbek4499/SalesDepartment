@@ -32,7 +32,7 @@ namespace SalesDepartment.Application.UseCases.Contracts.Commands.UpdateContract
         public async Task Handle(UpdateContractCommand request, CancellationToken cancellationToken)
         {
             Contract? contract = await _context.Contracts.FindAsync(request.Id);
-            _mapper.Map(contract, request);
+            _mapper.Map(request, contract);
 
             if (contract is null)
                 throw new NotFoundException(nameof(contract), request.Id);

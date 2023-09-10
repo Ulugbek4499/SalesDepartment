@@ -33,7 +33,7 @@ namespace SalesDepartment.Application.UseCases.Customers.Commands.UpdateCustomer
         public async Task Handle(UpdateCustomerCommand request, CancellationToken cancellationToken)
         {
             Customer? customer = await _context.Customers.FindAsync(request.Id);
-            _mapper.Map(customer, request);
+            _mapper.Map(request, customer);
 
             if (customer is null)
                 throw new NotFoundException(nameof(customer), request.Id);
