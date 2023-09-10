@@ -1,14 +1,15 @@
 ﻿using AutoMapper;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using SalesDepartment.Application.Common.Interfaces;
 using SalesDepartment.Application.UseCases.Contracts.Response;
 using SalesDepartment.Domain.Entities;
 
 namespace SalesDepartment.Application.UseCases.Contracts.Queries.GetAllContracts
 {
-    public record GetAllContractsQuery : IRequest<IEnumerable<ContractResponse>>;
+    public record GetAllContractsQuery : IRequest<ContractResponse[]>;
 
-    public class GetAllContractsQueryHandler : IRequestHandler<GetAllContractsQuery, IEnumerable<ContractResponse>>
+    public class GetAllContractsQueryHandler : IRequestHandler<GetAllContractsQuery, ContractResponse[]>
     {
         private readonly IMapper _mapper;
         private readonly IApplicationDbContext _context;
@@ -19,11 +20,11 @@ namespace SalesDepartment.Application.UseCases.Contracts.Queries.GetAllContracts
             _context = context;
         }
 
-        public Task<IEnumerable<ContractResponse>> Handle(GetAllContractsQuery request, CancellationToken cancellationToken)
+        public async Task<ContractResponse[]> Handle(GetAllContractsQuery request, CancellationToken cancellationToken)
         {
-            IEnumerable<Contract> Contracts = _context.Contracts;
+            var Employees = await _context.Contracts.ToArrayAsync();
 
-            return Task.FromResult(_mapper.Map<IEnumerable<ContractResponse>>(Contracts));
+            return _mapper.Map<ContractResponse[]>(Employees);
         }
     }
 }

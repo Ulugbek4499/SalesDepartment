@@ -1,3 +1,6 @@
+using SalesDepartment.Application;
+using SalesDepartment.Infrastructure;
+
 namespace SalesDepartment.MVC
 {
     public class Program
@@ -8,6 +11,8 @@ namespace SalesDepartment.MVC
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+            builder.Services.AddApplication();
+            builder.Services.AddInfrastructure(builder.Configuration);
 
             var app = builder.Build();
 
@@ -21,9 +26,7 @@ namespace SalesDepartment.MVC
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
             app.UseRouting();
-
             app.UseAuthorization();
 
             app.MapControllerRoute(

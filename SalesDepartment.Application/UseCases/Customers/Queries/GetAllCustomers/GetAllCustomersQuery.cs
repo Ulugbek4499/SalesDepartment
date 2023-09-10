@@ -1,14 +1,14 @@
 ﻿using AutoMapper;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using SalesDepartment.Application.Common.Interfaces;
 using SalesDepartment.Application.UseCases.Customers.Response;
-using SalesDepartment.Domain.Entities;
 
 namespace SalesDepartment.Application.UseCases.Customers.Queries.GetAllCustomers
 {
-    public record GetAllCustomersQuery : IRequest<IEnumerable<CustomerResponse>>;
+    public record GetAllCustomersQuery : IRequest<CustomerResponse[]>;
 
-    public class GetAllCustomersQueryHandler : IRequestHandler<GetAllCustomersQuery, IEnumerable<CustomerResponse>>
+    public class GetAllCustomersQueryHandler : IRequestHandler<GetAllCustomersQuery, CustomerResponse[]>
     {
         private readonly IMapper _mapper;
         private readonly IApplicationDbContext _context;
@@ -19,11 +19,11 @@ namespace SalesDepartment.Application.UseCases.Customers.Queries.GetAllCustomers
             _context = context;
         }
 
-        public Task<IEnumerable<CustomerResponse>> Handle(GetAllCustomersQuery request, CancellationToken cancellationToken)
+        public async Task<CustomerResponse[]> Handle(GetAllCustomersQuery request, CancellationToken cancellationToken)
         {
-            IEnumerable<Customer> Customers = _context.Customers;
+            var Customers = await _context.Customers.ToArrayAsync();
 
-            return Task.FromResult(_mapper.Map<IEnumerable<CustomerResponse>>(Customers));
+            return _mapper.Map<CustomerResponse[]>(Customers);
         }
     }
 }

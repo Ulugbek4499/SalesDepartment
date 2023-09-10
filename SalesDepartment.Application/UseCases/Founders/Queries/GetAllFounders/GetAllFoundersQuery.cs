@@ -1,14 +1,14 @@
 ﻿using AutoMapper;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using SalesDepartment.Application.Common.Interfaces;
 using SalesDepartment.Application.UseCases.Founders.Response;
-using SalesDepartment.Domain.Entities;
 
 namespace SalesDepartment.Application.UseCases.Founders.Queries.GetAllFounders
 {
-    public record GetAllFoundersQuery : IRequest<IEnumerable<FounderResponse>>;
+    public record GetAllFoundersQuery : IRequest<FounderResponse[]>;
 
-    public class GetAllFoundersQueryHandler : IRequestHandler<GetAllFoundersQuery, IEnumerable<FounderResponse>>
+    public class GetAllFoundersQueryHandler : IRequestHandler<GetAllFoundersQuery, FounderResponse[]>
     {
         private readonly IMapper _mapper;
         private readonly IApplicationDbContext _context;
@@ -19,11 +19,11 @@ namespace SalesDepartment.Application.UseCases.Founders.Queries.GetAllFounders
             _context = context;
         }
 
-        public Task<IEnumerable<FounderResponse>> Handle(GetAllFoundersQuery request, CancellationToken cancellationToken)
+        public async Task<FounderResponse[]> Handle(GetAllFoundersQuery request, CancellationToken cancellationToken)
         {
-            IEnumerable<Founder> Founders = _context.Founders;
+            var Founders = await _context.Founders.ToArrayAsync();
 
-            return Task.FromResult(_mapper.Map<IEnumerable<FounderResponse>>(Founders));
+            return _mapper.Map<FounderResponse[]>(Founders);
         }
     }
 }

@@ -1,14 +1,15 @@
 ﻿using AutoMapper;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using SalesDepartment.Application.Common.Interfaces;
 using SalesDepartment.Application.UseCases.Homes.Response;
 using SalesDepartment.Domain.Entities;
 
 namespace SalesDepartment.Application.UseCases.Homes.Queries.GetAllHomes
 {
-    public record GetAllHomesQuery : IRequest<IEnumerable<HomeResponse>>;
+    public record GetAllHomesQuery : IRequest<HomeResponse[]>;
 
-    public class GetAllHomesQueryHandler : IRequestHandler<GetAllHomesQuery, IEnumerable<HomeResponse>>
+    public class GetAllHomesQueryHandler : IRequestHandler<GetAllHomesQuery, HomeResponse[]>
     {
         private readonly IMapper _mapper;
         private readonly IApplicationDbContext _context;
@@ -19,11 +20,11 @@ namespace SalesDepartment.Application.UseCases.Homes.Queries.GetAllHomes
             _context = context;
         }
 
-        public Task<IEnumerable<HomeResponse>> Handle(GetAllHomesQuery request, CancellationToken cancellationToken)
+        public async Task<HomeResponse[]> Handle(GetAllHomesQuery request, CancellationToken cancellationToken)
         {
-            IEnumerable<Home> Homes = _context.Homes;
+            var Homes = await _context.Homes.ToArrayAsync();
 
-            return Task.FromResult(_mapper.Map<IEnumerable<HomeResponse>>(Homes));
+            return _mapper.Map<HomeResponse[]>(Homes);
         }
     }
 }

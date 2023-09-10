@@ -6,9 +6,9 @@ using SalesDepartment.Domain.Entities;
 
 namespace SalesDepartment.Application.UseCases.PaymentTypes.Queries.GetAllPaymentTypes
 {
-    public record GetAllPaymentTypesQuery : IRequest<IEnumerable<PaymentTypeResponse>>;
+    public record GetAllPaymentTypesQuery : IRequest<PaymentTypeResponse[]>;
 
-    public class GetAllPaymentTypesQueryHandler : IRequestHandler<GetAllPaymentTypesQuery, IEnumerable<PaymentTypeResponse>>
+    public class GetAllPaymentTypesQueryHandler : IRequestHandler<GetAllPaymentTypesQuery, PaymentTypeResponse[]>
     {
         private readonly IMapper _mapper;
         private readonly IApplicationDbContext _context;
@@ -19,11 +19,11 @@ namespace SalesDepartment.Application.UseCases.PaymentTypes.Queries.GetAllPaymen
             _context = context;
         }
 
-        public Task<IEnumerable<PaymentTypeResponse>> Handle(GetAllPaymentTypesQuery request, CancellationToken cancellationToken)
+        public async Task<PaymentTypeResponse[]> Handle(GetAllPaymentTypesQuery request, CancellationToken cancellationToken)
         {
-            IEnumerable<PaymentType> PaymentTypes = _context.PaymentTypes;
+            var PaymentTypes = await _context.PaymentTypes.ToArrayAsync();
 
-            return Task.FromResult(_mapper.Map<IEnumerable<PaymentTypeResponse>>(PaymentTypes));
+            return _mapper.Map<PaymentTypeResponse[]>(PaymentTypes);
         }
     }
 }

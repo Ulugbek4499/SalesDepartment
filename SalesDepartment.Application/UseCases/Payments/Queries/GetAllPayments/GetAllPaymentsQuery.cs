@@ -6,9 +6,9 @@ using SalesDepartment.Domain.Entities;
 
 namespace SalesDepartment.Application.UseCases.Payments.Queries.GetAllPayments
 {
-    public record GetAllPaymentsQuery : IRequest<IEnumerable<PaymentResponse>>;
+    public record GetAllPaymentsQuery : IRequest<PaymentResponse[]>;
 
-    public class GetAllPaymentsQueryHandler : IRequestHandler<GetAllPaymentsQuery, IEnumerable<PaymentResponse>>
+    public class GetAllPaymentsQueryHandler : IRequestHandler<GetAllPaymentsQuery, PaymentResponse[]>
     {
         private readonly IMapper _mapper;
         private readonly IApplicationDbContext _context;
@@ -19,11 +19,11 @@ namespace SalesDepartment.Application.UseCases.Payments.Queries.GetAllPayments
             _context = context;
         }
 
-        public Task<IEnumerable<PaymentResponse>> Handle(GetAllPaymentsQuery request, CancellationToken cancellationToken)
+        public async Task<PaymentResponse[]> Handle(GetAllPaymentsQuery request, CancellationToken cancellationToken)
         {
-            IEnumerable<Payment> Payments = _context.Payments;
+            var Payments = await _context.Payments.ToArrayAsync();
 
-            return Task.FromResult(_mapper.Map<IEnumerable<PaymentResponse>>(Payments));
+            return _mapper.Map<PaymentResponse[]>(Payments);
         }
     }
 }
