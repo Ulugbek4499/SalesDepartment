@@ -1,4 +1,6 @@
-﻿namespace SalesDepartment.Application.UseCases.Customers.Response
+﻿using SalesDepartment.Domain.Entities;
+
+namespace SalesDepartment.Application.UseCases.Customers.Response
 {
     public class CustomerResponse
     {
@@ -13,5 +15,6 @@
         public string PhoneNumberTwo { get; set; }
         public DateTime CreatedDate { get; set; }
         public DateTime ModifyDate { get; set; }
+        public ICollection<Contract> Contracts { get; set; }
     }
 }

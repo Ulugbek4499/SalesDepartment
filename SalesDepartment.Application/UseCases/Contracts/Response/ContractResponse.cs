@@ -20,5 +20,7 @@ namespace SalesDepartment.Application.UseCases.Contracts.Response
         public Founder Founder { get; set; }
         public DateTime CreatedDate { get; set; }
         public DateTime ModifyDate { get; set; }
+
+        public ICollection<Payment> Payments { get; set; }
     }
 }

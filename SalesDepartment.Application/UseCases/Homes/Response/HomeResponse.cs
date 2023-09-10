@@ -1,4 +1,6 @@
-﻿namespace SalesDepartment.Application.UseCases.Homes.Response
+﻿using SalesDepartment.Domain.Entities;
+
+namespace SalesDepartment.Application.UseCases.Homes.Response
 {
     public class HomeResponse
     {
@@ -12,6 +14,7 @@
         public DateTime CreatedDate { get; set; }
         public DateTime ModifyDate { get; set; }
 
-        public int ContractId { get; set; }
+        public int? ContractId { get; set; }
+        public Contract? Contract { get; set; }
     }
 }

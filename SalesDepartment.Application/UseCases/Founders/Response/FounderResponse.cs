@@ -1,4 +1,6 @@
-﻿namespace SalesDepartment.Application.UseCases.Founders.Response
+﻿using SalesDepartment.Domain.Entities;
+
+namespace SalesDepartment.Application.UseCases.Founders.Response
 {
     public class FounderResponse
     {
@@ -9,5 +11,6 @@
         public string PhoneNumber { get; set; }
         public DateTime CreatedDate { get; set; }
         public DateTime ModifyDate { get; set; }
+        public ICollection<Contract> Contracts { get; set; }
     }
 }
