@@ -1,9 +1,17 @@
 ﻿@using SalesDepartment.Application.UseCases.Contracts.Commands.CreateContract;
 @using SalesDepartment.Domain.Entities;
+@using SalesDepartment.Application.UseCases.Customers.Response;
+@using SalesDepartment.Application.UseCases.Founders.Response;
+@using SalesDepartment.Application.UseCases.Homes.Response;
 
 @{
     ViewData["Title"] = "CreateContract";
     Layout = "_Layout";
+
+
+    CustomerResponse[] Customers = ViewData["Customers"] as CustomerResponse[];
+    HomeResponse[] Homes = ViewData["Homes"] as HomeResponse[];
+    FounderResponse[] Founders = ViewData["Founders"] as FounderResponse[];
 }
 
 @model CreateContractCommand
@@ -40,21 +48,36 @@
                 </div>
 
                 <div class="form-group mt-3">
-                    <label asp-for="HomeId" class="form-label">HomeId:</label>
-                    <input asp-for="HomeId" type="text" class="form-control" placeholder="Enter HomeId">
-                    <span asp-validation-for="HomeId" class="text-danger"></span>
+                    <label for="HomeId">HomeId:</label>
+                    <select class="form-control" id="HomeId" name="HomeId" required>
+                        <option value="">Choose Home</option>
+                        @foreach (var home in Homes)
+                        {
+                            <option value="@home.Id">@home.ApartmentNumber</option>
+                        }
+                    </select>
                 </div>
 
                 <div class="form-group mt-3">
-                    <label asp-for="CustomerId" class="form-label">CustomerId:</label>
-                    <input asp-for="CustomerId" type="text" class="form-control" placeholder="Enter CustomerId">
-                    <span asp-validation-for="CustomerId" class="text-danger"></span>
+                    <label for="CustomerId">CustomerId:</label>
+                    <select class="form-control" id="CustomerId" name="CustomerId" required>
+                        <option value="">Choose Customer</option>
+                        @foreach (var customer in Customers)
+                        {
+                            <option value="@customer.Id">@customer.FirstName</option>
+                        }
+                    </select>
                 </div>
 
                 <div class="form-group mt-3">
-                    <label asp-for="FounderId" class="form-label">FounderId:</label>
-                    <input asp-for="FounderId" type="text" class="form-control" placeholder="Enter FounderId">
-                    <span asp-validation-for="FounderId" class="text-danger"></span>
+                    <label for="FounderId">FounderId:</label>
+                    <select class="form-control" id="FounderId" name="FounderId" required>
+                        <option value="">Choose Founder</option>
+                        @foreach (var founder in Founders)
+                        {
+                            <option value="@founder.Id">@founder.FirstName</option>
+                        }
+                    </select>
                 </div>
 
                 <div class="form-group button-group mt-3">

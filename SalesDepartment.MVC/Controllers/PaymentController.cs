@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SalesDepartment.Application.UseCases.Contracts.Queries.GetAllContracts;
+using SalesDepartment.Application.UseCases.Contracts.Response;
 using SalesDepartment.Application.UseCases.Payments.Commands.CreatePayment;
 using SalesDepartment.Application.UseCases.Payments.Commands.DeletePayment;
 using SalesDepartment.Application.UseCases.Payments.Commands.UpdatePayment;
@@ -16,6 +18,10 @@ namespace SalesDepartment.MVC.Controllers
         {
             PaymentTypeResponse[] paymentTypes = await Mediator.Send(new GetAllPaymentTypesQuery());
             ViewData["PaymentTypes"]=paymentTypes;
+
+            ContractResponse[] contracts = await Mediator.Send(new GetAllContractsQuery());
+            ViewData["Contracts"]=contracts;
+
             return View();
         }
 

@@ -4,6 +4,14 @@ using SalesDepartment.Application.UseCases.Contracts.Commands.DeleteContract;
 using SalesDepartment.Application.UseCases.Contracts.Commands.UpdateContract;
 using SalesDepartment.Application.UseCases.Contracts.Queries.GetAllContracts;
 using SalesDepartment.Application.UseCases.Contracts.Queries.GetContractById;
+using SalesDepartment.Application.UseCases.Customers.Queries.GetAllCustomers;
+using SalesDepartment.Application.UseCases.Customers.Response;
+using SalesDepartment.Application.UseCases.Founders.Queries.GetAllFounders;
+using SalesDepartment.Application.UseCases.Founders.Response;
+using SalesDepartment.Application.UseCases.Homes.Queries.GetAllHomes;
+using SalesDepartment.Application.UseCases.Homes.Response;
+using SalesDepartment.Application.UseCases.PaymentTypes.Queries.GetAllPaymentTypes;
+using SalesDepartment.Application.UseCases.PaymentTypes.Response;
 
 namespace SalesDepartment.MVC.Controllers
 {
@@ -12,6 +20,15 @@ namespace SalesDepartment.MVC.Controllers
         [HttpGet("[action]")]
         public async ValueTask<IActionResult> CreateContract()
         {
+            FounderResponse[] founders = await Mediator.Send(new GetAllFoundersQuery());
+            ViewData["Founders"]= founders;
+
+            CustomerResponse[] customers = await Mediator.Send(new GetAllCustomersQuery());
+            ViewData["Customers"] = customers;
+
+            HomeResponse[] homes = await Mediator.Send(new GetAllHomesQuery());
+            ViewData["Homes"]= homes;
+
             return View();
         }
 

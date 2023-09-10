@@ -1,12 +1,14 @@
 ﻿@using SalesDepartment.Application.UseCases.Payments.Commands.CreatePayment;
 @using SalesDepartment.Domain.Entities;
 @using SalesDepartment.Application.UseCases.PaymentTypes.Response;
+@using SalesDepartment.Application.UseCases.Contracts.Response;
 
 @{
     ViewData["Title"] = "CreatePayment";
     Layout = "_Layout";
 
     PaymentTypeResponse[] PaymentTypes = ViewData["PaymentTypes"] as PaymentTypeResponse[];
+    ContractResponse[] Contracts = ViewData["Contracts"] as ContractResponse[];
 }
 
 @model CreatePaymentCommand
@@ -43,9 +45,14 @@
                 </div>
 
                 <div class="form-group mt-3">
-                    <label asp-for="ContractId" class="form-label">ContractId:</label>
-                    <input asp-for="ContractId" type="text" class="form-control" placeholder="Enter ContractId">
-                    <span asp-validation-for="ContractId" class="text-danger"></span>
+                    <label for="ContractId">ContractId:</label>
+                    <select class="form-control" id="ContractId" name="ContractId" required>
+                        <option value="">Choose Contract Number</option>
+                        @foreach (var contract in Contracts)
+                        {
+                            <option value="@contract.Id">@contract.ContractNumber</option>
+                        }
+                    </select>
                 </div>
 
                 <div class="form-group mt-3">
