@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <Folder Include="Common\BackgroundServices\" />
+    <Folder Include="UseCases\Founders\Queries\GetAllContractsOfFounder\" />
   </ItemGroup>
 
   <ItemGroup>
