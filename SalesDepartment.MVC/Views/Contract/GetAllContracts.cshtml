@@ -51,6 +51,7 @@
                                 <tr>
                                     <td class="action-links">
                                         <div style="display:flex; gap:5px">
+                                            <a href="@Url.Action("ViewContract", "Contract", new { id = Contract.Id })" class="btn btn-secondary">Details</a>
                                             <a href="@Url.Action("UpdateContract", new { id = Contract.Id })" class="btn btn-secondary"><i class="fas fa-pen-to-square"></i></a>
                                             <a href="@Url.Action("DeleteContract", new { id = Contract.Id })" class="btn btn-danger"><i class="fas fa-trash-can"></i></a>
                                         </div>
