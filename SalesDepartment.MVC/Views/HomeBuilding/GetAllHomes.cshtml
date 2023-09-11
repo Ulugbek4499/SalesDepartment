@@ -42,6 +42,7 @@
                                 <th style="width: 25%;" onclick="sortTable(3)"><span style="display: flex; align-items: center;">ApartmentNumber <i id="sortIcon3" class="fas fa-sort"></i></span></th>
                                 <th style="width: 25%;" onclick="sortTable(4)"><span style="display: flex; align-items: center;">NumberOfRooms <i id="sortIcon3" class="fas fa-sort"></i></span></th>
                                 <th style="width: 25%;" onclick="sortTable(5)"><span style="display: flex; align-items: center;">Area <i id="sortIcon3" class="fas fa-sort"></i></span></th>
+                                <th style="width: 25%;">Contract</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -60,6 +61,14 @@
                                     <td>@Home.ApartmentNumber</td>
                                     <td>@Home.NumberOfRooms</td>
                                     <td>@Home.Area</td>
+                                    <td>
+                                        @if (!string.IsNullOrEmpty(Home.ContractId.ToString()))
+                                        {
+                                            <div style="display: flex; gap: 5px;">
+                                                <a href="@Url.Action("ViewContract", "Contract", new { id = Home.ContractId })" class="btn btn-secondary">Contract</a>
+                                            </div>
+                                        }
+                                    </td>
                                 </tr>
                             }
                         </tbody>
