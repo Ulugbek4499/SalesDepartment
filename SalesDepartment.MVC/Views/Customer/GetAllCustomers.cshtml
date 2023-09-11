@@ -52,6 +52,7 @@
                                 <tr>
                                     <td class="action-links">
                                         <div style="display:flex; gap:5px">
+                                            <a href="@Url.Action("ViewCustomer", new { id = Customer.Id })" class="btn btn-secondary">Details</a>
                                             <a href="@Url.Action("UpdateCustomer", new { id = Customer.Id })" class="btn btn-secondary"><i class="fas fa-pen-to-square"></i></a>
                                             <a href="@Url.Action("DeleteCustomer", new { id = Customer.Id })" class="btn btn-danger"><i class="fas fa-trash-can"></i></a>
                                         </div>
