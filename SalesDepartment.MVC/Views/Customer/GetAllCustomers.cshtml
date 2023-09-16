@@ -8,16 +8,74 @@
 <div class="row">
     <div class="col">
         <div class="input-group mb-1 mt-3" style="display:flex; justify-content:space-between; gap:170px">
-            <a href="@Url.Action("CreateCustomer")" class="btn btn-success mr-2">Create Customer</a>
+            <a href="@Url.Action("CreateCustomer")" class="btn btn-success mr-2">
+                <i class="fa-solid fa-plus"></i> Customer
+            </a>
             <div style="display:flex; gap:5px">
-                <input id="searchInput" type="text" class="form-control" placeholder="Search" style="max-width: 200px;">
+                <input id="simpleSearchInput" type="text" class="form-control" placeholder="Search" style="max-width: 200px;">
+                <button id="simpleSearchButton" class="btn btn-primary" type="button">
+                    <i class="fa-solid fa-magnifying-glass"></i> Search
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        <div class="input-group mb-1 mt-3" style="display:flex; justify-content:space-between; gap:170px">
+
+            <div>
+                <button id="extendedSearchButton" class="btn btn-info">
+                    <i class="fa-solid fa-filter"></i> Filter
+                </button>
+
+                <button id="refreshButton" class="btn btn-warning"><i class="fa-solid fa-arrows-rotate"></i> Refresh</button>
+            </div>
+            <div style="display:flex; gap:5px">
+                <select id="sortColumn" class="form-control">
+                    <option value="FirstName">FirstName</option>
+                    <option value="LastName">LastName</option>
+                    <option value="MiddleName">MiddleName</option>
+                    <option value="Passport">Passport</option>
+                    <option value="PassportIssuedBy">PassportIssuedBy</option>
+                    <option value="Address">Address</option>
+                    <option value="PhoneNumberOne">PhoneNumberOne</option>
+                    <option value="PhoneNumberTwo">PhoneNumberTwo</option>
+                </select>
+                <select id="sortOrder" class="form-control">
+                    <option value="asc">Ascending</option>
+                    <option value="desc">Descending</option>
+                </select>
+                <button id="sortButton" class="btn btn-info"><i class="fa-solid fa-arrow-up-a-z"></i> </button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div id="extendedSearchContainer" style="display: none;">
+    <div class="row">
+        <div class="col">
+            <div class="input-group mb-1 mt-3" style="display:flex; justify-content:space-between; gap:5px;">
+                <!-- Add input fields for each column you want to search -->
+                <input id="searchFirstName" type="text" class="form-control" placeholder="Search FirstName">
+                <input id="searchLastName" type="text" class="form-control" placeholder="Search LastName">
+                <input id="searchMiddleName" type="text" class="form-control" placeholder="Search MiddleName">
+                <input id="searchPassport" type="text" class="form-control" placeholder="Search Passport">
+                <input id="searchPassportIssuedBy" type="text" class="form-control" placeholder="Search PassportIssuedBy">
+                <input id="searchAddress" type="text" class="form-control" placeholder="Search Address">
+                <input id="searchPhoneNumberOne" type="text" class="form-control" placeholder="Search PhoneNumberOne">
+                <input id="searchPhoneNumberTwo" type="text" class="form-control" placeholder="Search PhoneNumberTwo">
                 <div class="input-group-append">
-                    <button id="searchButton" class="btn btn-primary" type="button">Search</button>
+                    <button id="searchButton" class="btn btn-primary" type="button">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
 <hr />
 
 <div class="container" style="height: 55vh;">
@@ -36,14 +94,14 @@
                         <thead>
                             <tr>
                                 <th style="width: 25%;">Actions</th>
-                                <th style="width: 15vh;" onclick="sortTable(0)"><span style="display: flex; align-items: center;">FirstName <i id="sortIcon0" class="fas fa-sort"></i></span></th>
-                                <th style="width: 25%;" onclick="sortTable(1)"><span style="display: flex; align-items: center;">LastName <i id="sortIcon1" class="fas fa-sort"></i></span></th>
-                                <th style="width: 25%;" onclick="sortTable(2)"><span style="display: flex; align-items: center;">MiddleName <i id="sortIcon2" class="fas fa-sort"></i></span></th>
-                                <th style="width: 25%;" onclick="sortTable(3)"><span style="display: flex; align-items: center;">Passport <i id="sortIcon3" class="fas fa-sort"></i></span></th>
-                                <th style="width: 25%;" onclick="sortTable(1)"><span style="display: flex; align-items: center;">PassportIssuedBy <i id="sortIcon1" class="fas fa-sort"></i></span></th>
-                                <th style="width: 25%;" onclick="sortTable(2)"><span style="display: flex; align-items: center;">Address <i id="sortIcon2" class="fas fa-sort"></i></span></th>
-                                <th style="width: 25%;" onclick="sortTable(3)"><span style="display: flex; align-items: center;">PhoneNumberOne <i id="sortIcon3" class="fas fa-sort"></i></span></th>
-                                <th style="width: 25%;" onclick="sortTable(3)"><span style="display: flex; align-items: center;">PhoneNumberTwo <i id="sortIcon3" class="fas fa-sort"></i></span></th>
+                                <th data-column="FirstName" style="width: 25%;">FirstName</th>
+                                <th data-column="LastName" style="width: 25%;">LastName</th>
+                                <th data-column="MiddleName" style="width: 25%;">MiddleName</th>
+                                <th data-column="Passport" style="width: 25%;">Passport</th>
+                                <th data-column="PassportIssuedBy" style="width: 25%;">PassportIssuedBy</th>
+                                <th data-column="Address" style="width: 25%;">Address</th>
+                                <th data-column="PhoneNumberOne" style="width: 25%;">PhoneNumberOne</th>
+                                <th data-column="PhoneNumberTwo" style="width: 25%;">PhoneNumberTwo</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -57,14 +115,14 @@
                                             <a href="@Url.Action("DeleteCustomer", new { id = Customer.Id })" class="btn btn-danger"><i class="fas fa-trash-can"></i></a>
                                         </div>
                                     </td>
-                                    <td>@Customer.FirstName</td>
-                                    <td>@Customer.LastName</td>
-                                    <td>@Customer.MiddleName</td>
-                                    <td>@Customer.Passport</td>
-                                    <td>@Customer.PassportIssuedBy</td>
-                                    <td>@Customer.Address</td>
-                                    <td>@Customer.PhoneNumberOne</td>
-                                    <td>@Customer.PhoneNumberTwo</td>
+                                    <td data-column="FirstName">@Customer.FirstName</td>
+                                    <td data-column="LastName">@Customer.LastName</td>
+                                    <td data-column="MiddleName">@Customer.MiddleName</td>
+                                    <td data-column="Passport">@Customer.Passport</td>
+                                    <td data-column="PassportIssuedBy">@Customer.PassportIssuedBy</td>
+                                    <td data-column="Address">@Customer.Address</td>
+                                    <td data-column="PhoneNumberOne">@Customer.PhoneNumberOne</td>
+                                    <td data-column="PhoneNumberTwo">@Customer.PhoneNumberTwo</td>
                                 </tr>
                             }
                         </tbody>
@@ -76,8 +134,8 @@
 </div>
 
 <script>
-    document.getElementById('searchButton').addEventListener('click', function () {
-        var input = document.getElementById('searchInput').value.toLowerCase();
+    document.getElementById('simpleSearchButton').addEventListener('click', function () {
+        var input = document.getElementById('simpleSearchInput').value.toLowerCase();
         var rows = document.getElementById('CustomersTable').getElementsByTagName('tbody')[0].getElementsByTagName('tr');
 
         for (var i = 0; i < rows.length; i++) {
@@ -95,61 +153,112 @@
             rows[i].style.display = match ? '' : 'none';
         }
     });
+
+    document.getElementById('sortButton').addEventListener('click', function () {
+        var column = document.getElementById('sortColumn').value;
+        var sortOrder = document.getElementById('sortOrder').value;
+        var rows = Array.from(document.getElementById('CustomersTable').getElementsByTagName('tbody')[0].getElementsByTagName('tr'));
+
+        rows.sort(function (a, b) {
+            var cellA = a.querySelector('td[data-column="' + column + '"]').textContent.toLowerCase();
+            var cellB = b.querySelector('td[data-column="' + column + '"]').textContent.toLowerCase();
+
+            if (sortOrder === 'asc') {
+                return cellA.localeCompare(cellB);
+            } else {
+                return cellB.localeCompare(cellA);
+            }
+        });
+
+        var tbody = document.getElementById('CustomersTable').getElementsByTagName('tbody')[0];
+        for (var i = 0; i < rows.length; i++) {
+            tbody.appendChild(rows[i]);
+        }
+    });
 </script>
 
 <script>
-    var ascendingOrder = true; // Initially, set the sorting order to ascending
+    document.getElementById('searchButton').addEventListener('click', function () {
+        var searchFirstName = document.getElementById('searchFirstName').value.toLowerCase();
+        var searchLastName = document.getElementById('searchLastName').value.toLowerCase();
+        var searchMiddleName = document.getElementById('searchMiddleName').value.toLowerCase();
+        var searchPassport = document.getElementById('searchPassport').value.toLowerCase();
+        var searchPassportIssuedBy = document.getElementById('searchPassportIssuedBy').value.toLowerCase();
+        var searchAddress = document.getElementById('searchAddress').value.toLowerCase();
+        var searchPhoneNumberOne = document.getElementById('searchPhoneNumberOne').value.toLowerCase();
+        var searchPhoneNumberTwo = document.getElementById('searchPhoneNumberTwo').value.toLowerCase();
 
-    function sortTable(columnIndex) {
-        var table, rows, switching, i, x, y, shouldSwitch;
-        table = document.getElementById("CustomersTable");
-        switching = true;
+        var rows = document.getElementById('CustomersTable').getElementsByTagName('tbody')[0].getElementsByTagName('tr');
 
-        // Hide all sort icons
-        var sortIcons = document.getElementsByClassName("fas fa-sort");
-        for (i = 0; i < sortIcons.length; i++) {
-            sortIcons[i].classList.remove("fa-sort-up");
-            sortIcons[i].classList.remove("fa-sort-down");
-        }
+        for (var i = 0; i < rows.length; i++) {
+            var cells = rows[i].getElementsByTagName('td');
+            var match = true; // Assume it's a match initially
 
-        while (switching) {
-            switching = false;
-            rows = table.getElementsByTagName("tr");
-
-            for (i = 1; i < (rows.length - 1); i++) {
-                shouldSwitch = false;
-
-                x = rows[i].getElementsByTagName("td")[columnIndex];
-                y = rows[i + 1].getElementsByTagName("td")[columnIndex];
-
-                if (ascendingOrder) {
-                    if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
-                        shouldSwitch = true;
-                        break;
-                    }
-                } else {
-                    if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
-                        shouldSwitch = true;
-                        break;
-                    }
-                }
+            if (searchFirstName && !cells[1].innerText.toLowerCase().includes(searchFirstName)) {
+                match = false;
+            }
+            if (searchLastName && !cells[2].innerText.toLowerCase().includes(searchLastName)) {
+                match = false;
+            }
+            if (searchMiddleName && !cells[3].innerText.toLowerCase().includes(searchMiddleName)) {
+                match = false;
+            }
+            if (searchPassport && !cells[4].innerText.toLowerCase().includes(searchPassport)) {
+                match = false;
+            }
+            if (searchPassportIssuedBy && !cells[5].innerText.toLowerCase().includes(searchPassportIssuedBy)) {
+                match = false;
+            }
+            if (searchAddress && !cells[6].innerText.toLowerCase().includes(searchAddress)) {
+                match = false;
+            }
+            if (searchPhoneNumberOne && !cells[7].innerText.toLowerCase().includes(searchPhoneNumberOne)) {
+                match = false;
+            }
+            if (searchPhoneNumberTwo && !cells[8].innerText.toLowerCase().includes(searchPhoneNumberTwo)) {
+                match = false;
             }
 
-            if (shouldSwitch) {
-                rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
-                switching = true;
-            }
+            rows[i].style.display = match ? '' : 'none';
         }
-
-        // Toggle sorting order and update the sort icon
-        ascendingOrder = !ascendingOrder;
-        var sortIcon = document.getElementById("sortIcon" + columnIndex);
-        if (ascendingOrder) {
-            sortIcon.classList.remove("fa-sort-down");
-            sortIcon.classList.add("fa-sort-up");
-        } else {
-            sortIcon.classList.remove("fa-sort-up");
-            sortIcon.classList.add("fa-sort-down");
-        }
-    }
+    });
 </script>
+
+<script>
+    document.getElementById('refreshButton').addEventListener('click', function () {
+        // Clear the search input field
+        document.getElementById('searchInput').value = '';
+
+        // Reset the sorting to default values
+        document.getElementById('sortColumn').value = 'Block';
+        document.getElementById('sortOrder').value = 'asc';
+
+        // Reset the extended search fields
+        document.getElementById('searchFirstName').value = '';
+        document.getElementById('searchLastName').value = '';
+        document.getElementById('searchMiddleName').value = '';
+        document.getElementById('searchPassport').value = '';
+        document.getElementById('searchPassportIssuedBy').value = '';
+        document.getElementById('searchAddress').value = '';
+        document.getElementById('searchPhoneNumberOne').value = '';
+        document.getElementById('searchPhoneNumberTwo').value = '';
+
+        // Show all rows in the table
+        var rows = document.getElementById('CustomersTable').getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+        for (var i = 0; i < rows.length; i++) {
+            rows[i].style.display = '';
+        }
+    });
+</script>
+
+<script>
+    document.getElementById('extendedSearchButton').addEventListener('click', function () {
+        var extendedSearchContainer = document.getElementById('extendedSearchContainer');
+        if (extendedSearchContainer.style.display === 'none' || extendedSearchContainer.style.display === '') {
+            extendedSearchContainer.style.display = 'block';
+        } else {
+            extendedSearchContainer.style.display = 'none';
+        }
+    });
+</script>
+
