@@ -11,7 +11,7 @@ namespace SalesDepartment.Domain.Entities
         public DateTime ContractEndDate { get; set; }
 
         public int NumberOfMonths { get; set; }
-        public PaymentDay PaymentDay { get; set; }
+        public int PaymentDay { get; set; }
 
         public int HomeId { get; set; }
         public virtual Home Home { get; set; }

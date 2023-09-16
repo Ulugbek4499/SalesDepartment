@@ -1,4 +1,5 @@
-﻿@{
+﻿<!--Searching by Columns-->
+@*@{
     Layout = "_Layout";
 }
 
@@ -10,7 +11,18 @@
         <div class="input-group mb-1 mt-3" style="display:flex; justify-content:space-between; gap:170px">
             <a href="@Url.Action("CreateHome")" class="btn btn-success mr-2">Create Home</a>
             <div style="display:flex; gap:5px">
-                <input id="searchInput" type="text" class="form-control" placeholder="Search" style="max-width: 200px;">
+                <!-- Add input fields for each column you want to search -->
+                <input id="searchBlock" type="text" class="form-control" placeholder="Search Block" style="max-width: 200px;">
+                <input id="searchEntrance" type="text" class="form-control" placeholder="Search Entrance" style="max-width: 200px;">
+                <input id="searchFloor" type="text" class="form-control" placeholder="Search Floor" style="max-width: 200px;">
+                <input id="searchApartmentNumber" type="text" class="form-control" placeholder="Search ApartmentNumber" style="max-width: 200px;">
+                <input id="searchNumberOfRooms" type="text" class="form-control" placeholder="Search NumberOfRooms" style="max-width: 200px;">
+                <input id="searchArea" type="text" class="form-control" placeholder="Search Area" style="max-width: 200px;">
+                <select id="searchContract" class="form-control">
+                    <option value="">Show All</option>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                </select>
                 <div class="input-group-append">
                     <button id="searchButton" class="btn btn-primary" type="button">Search</button>
                 </div>
@@ -36,12 +48,12 @@
                         <thead>
                             <tr>
                                 <th style="width: 25%;">Actions</th>
-                                <th style="width: 15vh;" onclick="sortTable(0)"><span style="display: flex; align-items: center;">Block <i id="sortIcon0" class="fas fa-sort"></i></span></th>
-                                <th style="width: 25%;" onclick="sortTable(1)"><span style="display: flex; align-items: center;">Entrance <i id="sortIcon1" class="fas fa-sort"></i></span></th>
-                                <th style="width: 25%;" onclick="sortTable(2)"><span style="display: flex; align-items: center;">Floor <i id="sortIcon2" class="fas fa-sort"></i></span></th>
-                                <th style="width: 25%;" onclick="sortTable(3)"><span style="display: flex; align-items: center;">ApartmentNumber <i id="sortIcon3" class="fas fa-sort"></i></span></th>
-                                <th style="width: 25%;" onclick="sortTable(4)"><span style="display: flex; align-items: center;">NumberOfRooms <i id="sortIcon3" class="fas fa-sort"></i></span></th>
-                                <th style="width: 25%;" onclick="sortTable(5)"><span style="display: flex; align-items: center;">Area <i id="sortIcon3" class="fas fa-sort"></i></span></th>
+                                <th style="width: 25%;">Block</th>
+                                <th style="width: 25%;">Entrance</th>
+                                <th style="width: 25%;">Floor</th>
+                                <th style="width: 25%;">ApartmentNumber</th>
+                                <th style="width: 25%;">NumberOfRooms</th>
+                                <th style="width: 25%;">Area</th>
                                 <th style="width: 25%;">Contract</th>
                             </tr>
                         </thead>
@@ -81,6 +93,179 @@
 
 <script>
     document.getElementById('searchButton').addEventListener('click', function () {
+        var searchBlock = document.getElementById('searchBlock').value.toLowerCase();
+        var searchEntrance = document.getElementById('searchEntrance').value.toLowerCase();
+        var searchFloor = document.getElementById('searchFloor').value.toLowerCase();
+        var searchApartmentNumber = document.getElementById('searchApartmentNumber').value.toLowerCase();
+        var searchNumberOfRooms = document.getElementById('searchNumberOfRooms').value.toLowerCase();
+        var searchArea = document.getElementById('searchArea').value.toLowerCase();
+        var searchContract = document.getElementById('searchContract').value.toLowerCase();
+
+        var rows = document.getElementById('HomesTable').getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+
+        for (var i = 0; i < rows.length; i++) {
+            var cells = rows[i].getElementsByTagName('td');
+            var match = true; // Assume it's a match initially
+
+            if (searchBlock && !cells[1].innerText.toLowerCase().includes(searchBlock)) {
+                match = false;
+            }
+            if (searchEntrance && !cells[2].innerText.toLowerCase().includes(searchEntrance)) {
+                match = false;
+            }
+            if (searchFloor && !cells[3].innerText.toLowerCase().includes(searchFloor)) {
+                match = false;
+            }
+            if (searchApartmentNumber && !cells[4].innerText.toLowerCase().includes(searchApartmentNumber)) {
+                match = false;
+            }
+            if (searchNumberOfRooms && !cells[5].innerText.toLowerCase().includes(searchNumberOfRooms)) {
+                match = false;
+            }
+            if (searchArea && !cells[6].innerText.toLowerCase().includes(searchArea)) {
+                match = false;
+            }
+            if (searchContract && searchContract !== 'Show All') {
+                var contractCellText = cells[7].innerText.toLowerCase();
+                var contractFilter = searchContract.toLowerCase();
+
+                // Check if the home has a contract or not based on the filter
+                if ((contractFilter === 'yes' && contractCellText === '') ||
+                    (contractFilter === 'no' && contractCellText !== '')) {
+                    match = false;
+                }
+            }
+
+            rows[i].style.display = match ? '' : 'none';
+        }
+    });
+</script>*@
+
+
+@{
+    Layout = "_Layout";
+}
+
+@model SalesDepartment.Application.UseCases.Homes.Response.HomeResponse[]
+
+<h3 class="text-center">All Homes</h3>
+<div class="row">
+    <div class="col">
+        <div class="input-group mb-1 mt-3" style="display:flex; justify-content:space-between; gap:20px;">
+            <a href="@Url.Action("CreateHome")" class="btn btn-success mr-2">Create Home</a>
+            <div style="display:flex; gap:5px;">
+                <!-- Add input fields for each column you want to search -->
+                <input id="searchBlock" type="text" class="form-control" placeholder="Search Block">
+                <input id="searchEntrance" type="text" class="form-control" placeholder="Search Entrance">
+                <input id="searchFloor" type="text" class="form-control" placeholder="Search Floor">
+                <input id="searchApartmentNumber" type="text" class="form-control" placeholder="Search ApartmentNumber">
+                <input id="searchNumberOfRooms" type="text" class="form-control" placeholder="Search NumberOfRooms">
+                <input id="searchArea" type="text" class="form-control" placeholder="Search Area">
+                <select id="searchContract" class="form-control">
+                    <option value="">Show All</option>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                </select>
+                <div class="input-group-append">
+                    <button id="searchButton" class="btn btn-primary" type="button">Search</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col">
+        <div class="input-group mb-1 mt-3" style="display:flex; justify-content:space-between; gap:170px">
+            <div style="display:flex; gap:5px">
+                <input id="searchInput" type="text" class="form-control" placeholder="Search" style="max-width: 200px;">
+                <div class="input-group-append">
+                    <button id="searchButtonSimple" class="btn btn-primary" type="button">Search</button>
+                </div>
+            </div>
+            <!-- Add Sorting Buttons and Dropdown -->
+            <div style="display:flex; gap:5px">
+                <button id="sortButton" class="btn btn-info">Sort</button>
+                <select id="sortColumn" class="form-control">
+                    <option value="Block">Block</option>
+                    <option value="Entrance">Entrance</option>
+                    <option value="Floor">Floor</option>
+                    <option value="ApartmentNumber">ApartmentNumber</option>
+                    <option value="NumberOfRooms">NumberOfRooms</option>
+                    <option value="Area">Area</option>
+                    <option value="ContractId">Contract</option>
+                </select>
+                <select id="sortOrder" class="form-control">
+                    <option value="asc">Ascending</option>
+                    <option value="desc">Descending</option>
+                </select>
+            </div>
+        </div>
+    </div>
+</div>
+<hr />
+
+<div class="container" style="height: 55vh;">
+    <div class="row" style="display:flex; justify-content:center;">
+        <div class="col-lg-6" style="width:100%">
+            <div class="custom-cards">
+                @{
+                    if (Model.Length == 0)
+                    {
+                        <h2>There are no Homes yet...</h2>
+                    }
+                }
+
+                <div class="table-container" style="overflow-y: scroll; height: 58vh; width:100% ">
+                    <table id="HomesTable" class="table">
+                        <thead>
+                            <tr>
+                                <th style="width: 25%;">Actions</th>
+                                <th data-column="Block" style="width: 25%;">Block</th>
+                                <th data-column="Entrance" style="width: 25%;">Entrance</th>
+                                <th data-column="Floor" style="width: 25%;">Floor</th>
+                                <th data-column="ApartmentNumber" style="width: 25%;">ApartmentNumber</th>
+                                <th data-column="NumberOfRooms" style="width: 25%;">NumberOfRooms</th>
+                                <th data-column="Area" style="width: 25%;">Area</th>
+                                <th data-column="ContractId" style="width: 25%;">Contract</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var Home in Model)
+                            {
+                                <tr>
+                                    <td class="action-links">
+                                        <div style="display:flex; gap:5px">
+                                            <a href="@Url.Action("UpdateHome", new { id = Home.Id })" class="btn btn-secondary"><i class="fas fa-pen-to-square"></i></a>
+                                            <a href="@Url.Action("DeleteHome", new { id = Home.Id })" class="btn btn-danger"><i class="fas fa-trash-can"></i></a>
+                                        </div>
+                                    </td>
+                                    <td data-column="Block">@Home.Block</td>
+                                    <td data-column="Entrance">@Home.Entrance</td>
+                                    <td data-column="Floor">@Home.Floor</td>
+                                    <td data-column="ApartmentNumber">@Home.ApartmentNumber</td>
+                                    <td data-column="NumberOfRooms">@Home.NumberOfRooms</td>
+                                    <td data-column="Area">@Home.Area</td>
+                                    <td data-column="ContractId">
+                                        @if (!string.IsNullOrEmpty(Home.ContractId.ToString()))
+                                        {
+                                            <div style="display: flex; gap: 5px;">
+                                                <a href="@Url.Action("ViewContract", "Contract", new { id = Home.ContractId })" class="btn btn-secondary">Contract</a>
+                                            </div>
+                                        }
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.getElementById('searchButtonSimple').addEventListener('click', function () {
         var input = document.getElementById('searchInput').value.toLowerCase();
         var rows = document.getElementById('HomesTable').getElementsByTagName('tbody')[0].getElementsByTagName('tr');
 
@@ -99,61 +284,76 @@
             rows[i].style.display = match ? '' : 'none';
         }
     });
+
+    document.getElementById('sortButton').addEventListener('click', function () {
+        var column = document.getElementById('sortColumn').value;
+        var sortOrder = document.getElementById('sortOrder').value;
+        var rows = Array.from(document.getElementById('HomesTable').getElementsByTagName('tbody')[0].getElementsByTagName('tr'));
+
+        rows.sort(function (a, b) {
+            var cellA = a.querySelector('td[data-column="' + column + '"]').textContent.toLowerCase();
+            var cellB = b.querySelector('td[data-column="' + column + '"]').textContent.toLowerCase();
+
+            if (sortOrder === 'asc') {
+                return cellA.localeCompare(cellB);
+            } else {
+                return cellB.localeCompare(cellA);
+            }
+        });
+
+        var tbody = document.getElementById('HomesTable').getElementsByTagName('tbody')[0];
+        for (var i = 0; i < rows.length; i++) {
+            tbody.appendChild(rows[i]);
+        }
+    });
 </script>
 
 <script>
-    var ascendingOrder = true; // Initially, set the sorting order to ascending
+    document.getElementById('searchButton').addEventListener('click', function () {
+        var searchBlock = document.getElementById('searchBlock').value.toLowerCase();
+        var searchEntrance = document.getElementById('searchEntrance').value.toLowerCase();
+        var searchFloor = document.getElementById('searchFloor').value.toLowerCase();
+        var searchApartmentNumber = document.getElementById('searchApartmentNumber').value.toLowerCase();
+        var searchNumberOfRooms = document.getElementById('searchNumberOfRooms').value.toLowerCase();
+        var searchArea = document.getElementById('searchArea').value.toLowerCase();
+        var searchContract = document.getElementById('searchContract').value.toLowerCase();
 
-    function sortTable(columnIndex) {
-        var table, rows, switching, i, x, y, shouldSwitch;
-        table = document.getElementById("HomesTable");
-        switching = true;
+        var rows = document.getElementById('HomesTable').getElementsByTagName('tbody')[0].getElementsByTagName('tr');
 
-        // Hide all sort icons
-        var sortIcons = document.getElementsByClassName("fas fa-sort");
-        for (i = 0; i < sortIcons.length; i++) {
-            sortIcons[i].classList.remove("fa-sort-up");
-            sortIcons[i].classList.remove("fa-sort-down");
-        }
+        for (var i = 0; i < rows.length; i++) {
+            var cells = rows[i].getElementsByTagName('td');
+            var match = true; // Assume it's a match initially
 
-        while (switching) {
-            switching = false;
-            rows = table.getElementsByTagName("tr");
+            if (searchBlock && !cells[1].innerText.toLowerCase().includes(searchBlock)) {
+                match = false;
+            }
+            if (searchEntrance && !cells[2].innerText.toLowerCase().includes(searchEntrance)) {
+                match = false;
+            }
+            if (searchFloor && !cells[3].innerText.toLowerCase().includes(searchFloor)) {
+                match = false;
+            }
+            if (searchApartmentNumber && !cells[4].innerText.toLowerCase().includes(searchApartmentNumber)) {
+                match = false;
+            }
+            if (searchNumberOfRooms && !cells[5].innerText.toLowerCase().includes(searchNumberOfRooms)) {
+                match = false;
+            }
+            if (searchArea && !cells[6].innerText.toLowerCase().includes(searchArea)) {
+                match = false;
+            }
+            if (searchContract && searchContract !== 'Show All') {
+                var contractCellText = cells[7].innerText.toLowerCase();
+                var contractFilter = searchContract.toLowerCase();
 
-            for (i = 1; i < (rows.length - 1); i++) {
-                shouldSwitch = false;
-
-                x = rows[i].getElementsByTagName("td")[columnIndex];
-                y = rows[i + 1].getElementsByTagName("td")[columnIndex];
-
-                if (ascendingOrder) {
-                    if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
-                        shouldSwitch = true;
-                        break;
-                    }
-                } else {
-                    if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
-                        shouldSwitch = true;
-                        break;
-                    }
+                // Check if the home has a contract or not based on the filter
+                if ((contractFilter === 'yes' && contractCellText === '') ||
+                    (contractFilter === 'no' && contractCellText !== '')) {
+                    match = false;
                 }
             }
 
-            if (shouldSwitch) {
-                rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
-                switching = true;
-            }
+            rows[i].style.display = match ? '' : 'none';
         }
-
-        // Toggle sorting order and update the sort icon
-        ascendingOrder = !ascendingOrder;
-        var sortIcon = document.getElementById("sortIcon" + columnIndex);
-        if (ascendingOrder) {
-            sortIcon.classList.remove("fa-sort-down");
-            sortIcon.classList.add("fa-sort-up");
-        } else {
-            sortIcon.classList.remove("fa-sort-up");
-            sortIcon.classList.add("fa-sort-down");
-        }
-    }
+    });
 </script>
