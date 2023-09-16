@@ -48,6 +48,18 @@
                 </div>
 
                 <div class="form-group mt-3">
+                    <label asp-for="NumberOfMonths" class="form-label">NumberOfMonths:</label>
+                    <input asp-for="NumberOfMonths" type="text" class="form-control" placeholder="Enter NumberOfMonths">
+                    <span asp-validation-for="NumberOfMonths" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mt-3">
+                    <label asp-for="PaymentDay" class="form-label">PaymentDay:</label>
+                    <input asp-for="PaymentDay" type="text" class="form-control" placeholder="Enter PaymentDay">
+                    <span asp-validation-for="PaymentDay" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mt-3">
                     <label for="HomeId">HomeId:</label>
                     <select class="form-control" id="HomeId" name="HomeId" required>
                         <option value="">Choose Home</option>

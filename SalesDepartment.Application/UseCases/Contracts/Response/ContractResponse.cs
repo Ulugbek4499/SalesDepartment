@@ -12,6 +12,8 @@ namespace SalesDepartment.Application.UseCases.Contracts.Response
         public DateTime ContractStartDate { get; set; }
         public double TotalAmountOfContract { get; set; }
         public DateTime ContractEndDate { get; set; }
+        public int NumberOfMonths { get; set; }
+        public int PaymentDay { get; set; }
         public int HomeId { get; set; }
         public Home Home { get; set; }
         public int CustomerId { get; set; }

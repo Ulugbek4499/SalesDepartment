@@ -10,6 +10,9 @@ namespace SalesDepartment.Domain.Entities
         public double TotalAmountOfContract { get; set; }
         public DateTime ContractEndDate { get; set; }
 
+        public int NumberOfMonths { get; set; }
+        public PaymentDay PaymentDay { get; set; }
+
         public int HomeId { get; set; }
         public virtual Home Home { get; set; }
 

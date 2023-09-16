@@ -13,6 +13,8 @@ namespace SalesDepartment.Application.UseCases.Contracts.Commands.UpdateContract
         public DateTime ContractStartDate { get; set; }
         public double TotalAmountOfContract { get; set; }
         public DateTime ContractEndDate { get; set; }
+        public int NumberOfMonths { get; set; }
+        public int PaymentDay { get; set; }
         public int HomeId { get; set; }
         public int CustomerId { get; set; }
         public int FounderId { get; set; }
