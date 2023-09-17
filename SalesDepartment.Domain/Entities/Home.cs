@@ -9,7 +9,7 @@ namespace SalesDepartment.Domain.Entities
         public int Floor { get; set; }
         public int ApartmentNumber { get; set; }
         public int NumberOfRooms { get; set; }
-        public double Area { get; set; }
+        public decimal Area { get; set; }
 
         public virtual Contract? Contract { get; set; }
     }

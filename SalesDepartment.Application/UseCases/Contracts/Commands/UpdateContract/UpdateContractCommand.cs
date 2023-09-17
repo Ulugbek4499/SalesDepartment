@@ -11,7 +11,7 @@ namespace SalesDepartment.Application.UseCases.Contracts.Commands.UpdateContract
         public int Id { get; set; }
         public string ContractNumber { get; set; }
         public DateTime ContractStartDate { get; set; }
-        public double TotalAmountOfContract { get; set; }
+        public decimal TotalAmountOfContract { get; set; }
         public DateTime ContractEndDate { get; set; }
         public int NumberOfMonths { get; set; }
         public int PaymentDay { get; set; }

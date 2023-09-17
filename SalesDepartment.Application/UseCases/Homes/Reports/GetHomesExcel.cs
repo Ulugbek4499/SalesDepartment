@@ -64,7 +64,7 @@ namespace SalesDepartment.Application.UseCases.Homes.Reports
             excelDataTable.Columns.Add("Floor", typeof(int));
             excelDataTable.Columns.Add("ApartmentNumber", typeof(int));
             excelDataTable.Columns.Add("NumberOfRooms", typeof(int));
-            excelDataTable.Columns.Add("Area", typeof(double));
+            excelDataTable.Columns.Add("Area", typeof(decimal));
             excelDataTable.Columns.Add("ContractNumber", typeof(string));
 
             var HomesList = _mapper.Map<List<HomeResponse>>(AllHomes);

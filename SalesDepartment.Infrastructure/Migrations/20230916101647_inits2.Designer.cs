@@ -74,8 +74,8 @@ namespace SalesDepartment.Infrastructure.Migrations
                     b.Property<int>("PaymentDay")
                         .HasColumnType("integer");
 
-                    b.Property<double>("TotalAmountOfContract")
-                        .HasColumnType("double precision");
+                    b.Property<decimal>("TotalAmountOfContract")
+                        .HasColumnType("decimal precision");
 
                     b.HasKey("Id");
 
@@ -201,8 +201,8 @@ namespace SalesDepartment.Infrastructure.Migrations
                         .HasMaxLength(200)
                         .HasColumnType("integer");
 
-                    b.Property<double>("Area")
-                        .HasColumnType("double precision");
+                    b.Property<decimal>("Area")
+                        .HasColumnType("decimal precision");
 
                     b.Property<string>("Block")
                         .IsRequired()
@@ -242,8 +242,8 @@ namespace SalesDepartment.Infrastructure.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<double>("Amount")
-                        .HasColumnType("double precision");
+                    b.Property<decimal>("Amount")
+                        .HasColumnType("decimal precision");
 
                     b.Property<string>("AmountsInWords")
                         .IsRequired()

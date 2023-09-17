@@ -67,7 +67,7 @@ namespace SalesDepartment.Application.UseCases.Contracts.Reports
 
             excelDataTable.Columns.Add("ContractNumber", typeof(string));
             excelDataTable.Columns.Add("ContractStartDate", typeof(DateTime));
-            excelDataTable.Columns.Add("TotalAmountOfContract", typeof(double));
+            excelDataTable.Columns.Add("TotalAmountOfContract", typeof(decimal));
             excelDataTable.Columns.Add("ContractEndDate", typeof(DateTime));
             excelDataTable.Columns.Add("NumberOfMonths", typeof(int));
             excelDataTable.Columns.Add("PaymentDay", typeof(int));

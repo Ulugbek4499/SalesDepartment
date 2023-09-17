@@ -12,7 +12,7 @@ namespace SalesDepartment.Application.UseCases.Payments.FilterSortSearch
     {
         public string? PaymentNumber { get; set; }
         public DateTime? PaymentDate { get; set; }
-        public double? Amount { get; set; }
+        public decimal? Amount { get; set; }
         public int? ContractId { get; set; }
         public int? PaymentTypeId { get; set; }
     }

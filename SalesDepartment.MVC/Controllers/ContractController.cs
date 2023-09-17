@@ -101,7 +101,7 @@ namespace SalesDepartment.MVC.Controllers
             var templatePath = @"D:\PDP\SalesDepartment\SalesDepartment.MVC\wwwroot\docs\ДОГОВОР.docx";
             
             string TotalAmountInWords = ConvertToWords(decimal.Parse(contract.TotalAmountOfContract.ToString()));
-            double SumOfOneMeterSquare = contract.TotalAmountOfContract / contract.Home.Area;
+            decimal SumOfOneMeterSquare = contract.TotalAmountOfContract / contract.Home.Area;
             string SumOfOneMeterSquareInWords= ConvertToWords(decimal.Parse(SumOfOneMeterSquare.ToString()));
 
             var doc = DocX.Load(templatePath);

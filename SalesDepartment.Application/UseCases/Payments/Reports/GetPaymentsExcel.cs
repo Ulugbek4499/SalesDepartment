@@ -59,7 +59,7 @@ namespace SalesDepartment.Application.UseCases.Payments.Reports
 
             excelDataTable.Columns.Add("PaymentNumber", typeof(string));
             excelDataTable.Columns.Add("PaymentDate", typeof(DateTime));
-            excelDataTable.Columns.Add("Amount", typeof(double));
+            excelDataTable.Columns.Add("Amount", typeof(decimal));
             excelDataTable.Columns.Add("Contract Number", typeof(string));
             excelDataTable.Columns.Add("Payment Type", typeof(string));
 

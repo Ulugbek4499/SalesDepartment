@@ -13,7 +13,7 @@ namespace SalesDepartment.Application.UseCases.Homes.FilterSortSearch
         public int? Floor { get; set; }
         public int? ApartmentNumber { get; set; }
         public int? NumberOfRooms { get; set; }
-        public double? Area { get; set; }
+        public decimal? Area { get; set; }
     }
 
     public class FilterHomeQueryHandler : IRequestHandler<FilterHomeQuery, HomeResponse[]>

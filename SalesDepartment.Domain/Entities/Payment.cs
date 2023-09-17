@@ -7,7 +7,7 @@ namespace SalesDepartment.Domain.Entities
         public string PaymentNumber { get; set; }
         public DateTime PaymentDate { get; set; }
 
-        public double Amount { get; set; }
+        public decimal Amount { get; set; }
         public string AmountsInWords { get; set; }
 
         public int ContractId { get; set; }
