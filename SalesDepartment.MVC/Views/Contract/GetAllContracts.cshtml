@@ -113,9 +113,9 @@
                                         </div>
                                     </td>
                                     <td>@Contract.ContractNumber</td>
-                                    <td>@Contract.ContractStartDate</td>
-                                    <td>@Contract.TotalAmountOfContract</td>
-                                    <td>@Contract.ContractEndDate</td>
+                                    <td>@Contract.ContractStartDate.ToString("yyyy-MM-dd")</td>
+                                    <td class="amount-cell">@Contract.TotalAmountOfContract</td>
+                                    <td>@Contract.ContractEndDate.ToString("yyyy-MM-dd")</td>
                                     <td>@Contract.Home.ApartmentNumber</td>
                                     <td>@Contract.Customer.FirstName</td>
                                     <td>@Contract.Founder.FirstName</td>
@@ -156,8 +156,8 @@
         var rows = Array.from(document.getElementById('ContractsTable').getElementsByTagName('tbody')[0].getElementsByTagName('tr'));
 
         rows.sort(function (a, b) {
-            var cellA = a.querySelector('td[data-column="' + column + '"]').textContent.toLowerCase();
-            var cellB = b.querySelector('td[data-column="' + column + '"]').textContent.toLowerCase();
+            var cellA = a.cells[columnIndex(column)].textContent.toLowerCase();
+            var cellB = b.cells[columnIndex(column)].textContent.toLowerCase();
 
             if (sortOrder === 'asc') {
                 return cellA.localeCompare(cellB);
@@ -171,6 +171,16 @@
             tbody.appendChild(rows[i]);
         }
     });
+
+    function columnIndex(columnName) {
+        var headers = document.getElementById('ContractsTable').getElementsByTagName('thead')[0].getElementsByTagName('th');
+        for (var i = 0; i < headers.length; i++) {
+            if (headers[i].textContent.trim() === columnName) {
+                return i;
+            }
+        }
+        return -1;
+    }
 </script>
 
 <script>
@@ -250,5 +260,23 @@
         } else {
             extendedSearchContainer.style.display = 'none';
         }
+    });
+</script>
+
+<script>
+    // Function to format the amount cells
+    function formatAmountCells() {
+        var amountCells = document.querySelectorAll('.amount-cell');
+        amountCells.forEach(function (cell) {
+            var amount = parseFloat(cell.textContent);
+            if (!isNaN(amount)) {
+                cell.textContent = amount.toLocaleString(undefined, { minimumFractionDigits: 2 });
+            }
+        });
+    }
+
+    // Call the function when the document is ready
+    document.addEventListener('DOMContentLoaded', function () {
+        formatAmountCells();
     });
 </script>

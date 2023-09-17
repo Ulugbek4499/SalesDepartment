@@ -107,8 +107,8 @@
                                         </div>
                                     </td>
                                     <td>@Payment.PaymentNumber</td>
-                                    <td>@Payment.PaymentDate</td>
-                                    <td>@Payment.Amount</td>
+                                    <td>@Payment.PaymentDate.ToString("yyyy-MM-dd")</td>
+                                    <td class="amount-cell">@Payment.Amount</td>
                                     <td>@Payment.Contract.ContractNumber</td>
                                     <td>@Payment.PaymentType.Name</td>
                                 </tr>
@@ -231,5 +231,23 @@
         } else {
             extendedSearchContainer.style.display = 'none';
         }
+    });
+</script>
+
+<script>
+    // Function to format the amount cells
+    function formatAmountCells() {
+        var amountCells = document.querySelectorAll('.amount-cell');
+        amountCells.forEach(function (cell) {
+            var amount = parseFloat(cell.textContent);
+            if (!isNaN(amount)) {
+                cell.textContent = amount.toLocaleString(undefined, { minimumFractionDigits: 2 });
+            }
+        });
+    }
+
+    // Call the function when the document is ready
+    document.addEventListener('DOMContentLoaded', function () {
+        formatAmountCells();
     });
 </script>
