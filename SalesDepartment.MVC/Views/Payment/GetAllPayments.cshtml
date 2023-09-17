@@ -148,8 +148,8 @@
         var rows = Array.from(document.getElementById('PaymentsTable').getElementsByTagName('tbody')[0].getElementsByTagName('tr'));
 
         rows.sort(function (a, b) {
-            var cellA = a.querySelector('td[data-column="' + column + '"]').textContent.toLowerCase();
-            var cellB = b.querySelector('td[data-column="' + column + '"]').textContent.toLowerCase();
+            var cellA = a.querySelector('td:nth-child(' + (columnIndex(column) + 1) + ')').textContent.toLowerCase();
+            var cellB = b.querySelector('td:nth-child(' + (columnIndex(column) + 1) + ')').textContent.toLowerCase();
 
             if (sortOrder === 'asc') {
                 return cellA.localeCompare(cellB);
@@ -163,6 +163,16 @@
             tbody.appendChild(rows[i]);
         }
     });
+
+    function columnIndex(columnName) {
+        var headers = document.getElementById('PaymentsTable').getElementsByTagName('thead')[0].getElementsByTagName('th');
+        for (var i = 0; i < headers.length; i++) {
+            if (headers[i].textContent.trim() === columnName) {
+                return i;
+            }
+        }
+        return -1;
+    }
 </script>
 
 <script>
@@ -203,7 +213,7 @@
 <script>
     document.getElementById('refreshButton').addEventListener('click', function () {
         // Clear the search input field
-        document.getElementById('simpleSearchInput').value = '';
+        document.getElementById('searchInput').value = '';
 
         // Reset the sorting to default values
         document.getElementById('sortColumn').value = 'Block';
