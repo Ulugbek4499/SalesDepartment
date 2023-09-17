@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using ClosedXML.Excel;
 using MediatR;
 using Microsoft.AspNetCore.Http;
@@ -46,12 +41,12 @@ namespace SalesDepartment.Application.UseCases.Customers.Reports
                         var Customer = new Domain.Entities.Customer()
                         {
                             FirstName = sheet1.Cell(row, 1).GetString(),
-                            LastName = sheet1.Cell(row, 2).GetString(), 
+                            LastName = sheet1.Cell(row, 2).GetString(),
                             MiddleName = sheet1.Cell(row, 3).GetString(),
-                            Passport = sheet1.Cell(row, 4).GetString(), 
-                            PassportIssuedBy = sheet1.Cell(row, 5).GetString(), 
+                            Passport = sheet1.Cell(row, 4).GetString(),
+                            PassportIssuedBy = sheet1.Cell(row, 5).GetString(),
                             Address = sheet1.Cell(row, 6).GetString(),
-                            PhoneNumberOne = sheet1.Cell(row, 7).GetString(), 
+                            PhoneNumberOne = sheet1.Cell(row, 7).GetString(),
                             PhoneNumberTwo = sheet1.Cell(row, 8).GetString()
                         };
 

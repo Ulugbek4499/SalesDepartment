@@ -17,10 +17,10 @@ namespace SalesDepartment.MVC.Controllers
         public async ValueTask<IActionResult> CreatePayment()
         {
             PaymentTypeResponse[] paymentTypes = await Mediator.Send(new GetAllPaymentTypesQuery());
-            ViewData["PaymentTypes"]=paymentTypes;
+            ViewData["PaymentTypes"] = paymentTypes;
 
             ContractResponse[] contracts = await Mediator.Send(new GetAllContractsQuery());
-            ViewData["Contracts"]=contracts;
+            ViewData["Contracts"] = contracts;
 
             return View();
         }

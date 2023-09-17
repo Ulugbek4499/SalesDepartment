@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Data;
 using AutoMapper;
 using ClosedXML.Excel;
 using MediatR;
@@ -74,7 +69,7 @@ namespace SalesDepartment.Application.UseCases.Payments.Reports
             {
                 PaymentsList.ForEach(item =>
                 {
-                    excelDataTable.Rows.Add(item.PaymentNumber, item.PaymentDate, item.Amount, item.Contract.ContractNumber, 
+                    excelDataTable.Rows.Add(item.PaymentNumber, item.PaymentDate, item.Amount, item.Contract.ContractNumber,
                         item.PaymentType.Name);
                 });
             }

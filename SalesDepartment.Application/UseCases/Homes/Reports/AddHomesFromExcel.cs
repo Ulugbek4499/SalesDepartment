@@ -41,10 +41,10 @@ namespace SalesDepartment.Application.UseCases.Homes.Reports
                         var Home = new Domain.Entities.Home()
                         {
                             Block = sheet1.Cell(row, 1).GetString(),
-                            Entrance = int.Parse(sheet1.Cell(row, 2).GetString()), 
-                            Floor = int.Parse(sheet1.Cell(row, 3).GetString()),    
-                            ApartmentNumber = int.Parse(sheet1.Cell(row, 4).GetString()), 
-                            NumberOfRooms = int.Parse(sheet1.Cell(row, 5).GetString()), 
+                            Entrance = int.Parse(sheet1.Cell(row, 2).GetString()),
+                            Floor = int.Parse(sheet1.Cell(row, 3).GetString()),
+                            ApartmentNumber = int.Parse(sheet1.Cell(row, 4).GetString()),
+                            NumberOfRooms = int.Parse(sheet1.Cell(row, 5).GetString()),
                             Area = double.Parse(sheet1.Cell(row, 6).GetString())
                         };
 

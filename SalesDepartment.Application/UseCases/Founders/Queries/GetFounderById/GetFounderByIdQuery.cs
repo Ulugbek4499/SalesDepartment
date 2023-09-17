@@ -30,7 +30,7 @@ namespace SalesDepartment.Application.UseCases.Founders.Queries.GetFounderById
 
         private Founder FilterIfFounderExsists(int id)
             => _dbContext.Founders
-                .Find(id)?? throw new NotFoundException(
+                .Find(id) ?? throw new NotFoundException(
                     " There is no Founder with this Id. ");
     }
 }

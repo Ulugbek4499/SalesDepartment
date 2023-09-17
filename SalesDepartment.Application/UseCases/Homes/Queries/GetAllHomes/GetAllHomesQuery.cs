@@ -3,7 +3,6 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using SalesDepartment.Application.Common.Interfaces;
 using SalesDepartment.Application.UseCases.Homes.Response;
-using SalesDepartment.Domain.Entities;
 
 namespace SalesDepartment.Application.UseCases.Homes.Queries.GetAllHomes
 {

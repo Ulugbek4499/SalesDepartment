@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO.Packaging;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using SalesDepartment.Application.UseCases.Contracts.Commands.CreateContract;
 using SalesDepartment.Application.UseCases.Contracts.Commands.DeleteContract;
 using SalesDepartment.Application.UseCases.Contracts.Commands.UpdateContract;

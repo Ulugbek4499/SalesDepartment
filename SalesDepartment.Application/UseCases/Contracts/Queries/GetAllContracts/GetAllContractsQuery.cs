@@ -3,7 +3,6 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using SalesDepartment.Application.Common.Interfaces;
 using SalesDepartment.Application.UseCases.Contracts.Response;
-using SalesDepartment.Domain.Entities;
 
 namespace SalesDepartment.Application.UseCases.Contracts.Queries.GetAllContracts
 {

@@ -1,7 +1,4 @@
-﻿using SalesDepartment.Application.UseCases.Customers.Response;
-using SalesDepartment.Application.UseCases.Founders.Response;
-using SalesDepartment.Application.UseCases.Homes.Response;
-using SalesDepartment.Domain.Entities;
+﻿using SalesDepartment.Domain.Entities;
 
 namespace SalesDepartment.Application.UseCases.Contracts.Response
 {

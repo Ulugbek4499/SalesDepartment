@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using SalesDepartment.Application.UseCases.Payments.Commands.CreatePayment;
 using SalesDepartment.Application.UseCases.Payments.Commands.DeletePayment;
 using SalesDepartment.Application.UseCases.Payments.Commands.UpdatePayment;

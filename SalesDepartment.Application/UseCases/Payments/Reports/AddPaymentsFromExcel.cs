@@ -42,7 +42,7 @@ namespace SalesDepartment.Application.UseCases.Payments.Reports
                         {
                             PaymentNumber = sheet1.Cell(row, 1).GetString(),
                             PaymentDate = DateTime.Parse(sheet1.Cell(row, 2).GetString()),
-                            Amount = double.Parse(sheet1.Cell(row, 3).GetString()), 
+                            Amount = double.Parse(sheet1.Cell(row, 3).GetString()),
                             ContractId = int.Parse(sheet1.Cell(row, 4).GetString()),
                             PaymentTypeId = int.Parse(sheet1.Cell(row, 5).GetString())
                         };

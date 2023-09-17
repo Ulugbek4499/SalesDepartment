@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using SalesDepartment.Application.UseCases.Customers.Commands.CreateCustomer;
 using SalesDepartment.Application.UseCases.Customers.Commands.DeleteCustomer;
 using SalesDepartment.Application.UseCases.Customers.Commands.UpdateCustomer;

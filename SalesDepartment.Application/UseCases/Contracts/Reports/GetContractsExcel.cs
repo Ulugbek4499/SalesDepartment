@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Data;
 using AutoMapper;
 using ClosedXML.Excel;
 using MediatR;
@@ -87,7 +82,7 @@ namespace SalesDepartment.Application.UseCases.Contracts.Reports
                 ContractsList.ForEach(item =>
                 {
                     excelDataTable.Rows.Add(item.ContractNumber, item.ContractStartDate, item.TotalAmountOfContract, item.ContractEndDate,
-                        item.NumberOfMonths, item.PaymentDay, item.Home.Block + item.Home.Entrance.ToString() + item.Home.Floor.ToString()+ item.Home.ApartmentNumber.ToString() +item.Home.Area.ToString(), item.Customer.FirstName + item.Customer.LastName, item.Founder.FirstName+item.Founder.LastName);
+                        item.NumberOfMonths, item.PaymentDay, item.Home.Block + item.Home.Entrance.ToString() + item.Home.Floor.ToString() + item.Home.ApartmentNumber.ToString() + item.Home.Area.ToString(), item.Customer.FirstName + item.Customer.LastName, item.Founder.FirstName + item.Founder.LastName);
                 });
             }
 
