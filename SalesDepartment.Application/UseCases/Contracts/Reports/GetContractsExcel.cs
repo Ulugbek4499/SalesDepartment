@@ -73,7 +73,7 @@ namespace SalesDepartment.Application.UseCases.Contracts.Reports
             excelDataTable.Columns.Add("PaymentDay", typeof(int));
             excelDataTable.Columns.Add("Home Number", typeof(string));
             excelDataTable.Columns.Add("Customer FullName", typeof(string));
-            excelDataTable.Columns.Add("Founder Name", typeof(int));
+            excelDataTable.Columns.Add("Founder Name", typeof(string));
 
             var ContractsList = _mapper.Map<List<ContractResponse>>(AllContracts);
 
@@ -82,7 +82,7 @@ namespace SalesDepartment.Application.UseCases.Contracts.Reports
                 ContractsList.ForEach(item =>
                 {
                     excelDataTable.Rows.Add(item.ContractNumber, item.ContractStartDate, item.TotalAmountOfContract, item.ContractEndDate,
-                        item.NumberOfMonths, item.PaymentDay, item.Home.Block + item.Home.Entrance.ToString() + item.Home.Floor.ToString() + item.Home.ApartmentNumber.ToString() + item.Home.Area.ToString(), item.Customer.FirstName + item.Customer.LastName, item.Founder.FirstName + item.Founder.LastName);
+                        item.NumberOfMonths, item.PaymentDay, item.Home.Block+" " + item.Home.Entrance.ToString() + " " + item.Home.Floor.ToString() + " " + item.Home.ApartmentNumber.ToString() + " " + item.Home.Area.ToString(), item.Customer.FirstName + " " + item.Customer.LastName, item.Founder.FirstName + " " + item.Founder.LastName);
                 });
             }
 
