@@ -6,6 +6,7 @@ using SalesDepartment.Application.UseCases.Payments.Commands.DeletePayment;
 using SalesDepartment.Application.UseCases.Payments.Commands.UpdatePayment;
 using SalesDepartment.Application.UseCases.Payments.Queries.GetAllPayments;
 using SalesDepartment.Application.UseCases.Payments.Queries.GetPaymentById;
+using SalesDepartment.Application.UseCases.Payments.Reports;
 using SalesDepartment.Application.UseCases.PaymentTypes.Queries.GetAllPaymentTypes;
 using SalesDepartment.Application.UseCases.PaymentTypes.Response;
 
@@ -45,6 +46,14 @@ namespace SalesDepartment.MVC.Controllers
             var Payments = await Mediator.Send(new GetAllPaymentsQuery());
 
             return View(Payments);
+        }
+
+        [HttpGet("[action]")]
+        public async ValueTask<FileResult> GetAllPaymentsExcel(string fileName = "PaymentsExcel")
+        {
+            var result = await Mediator.Send(new GetPaymentsExcel { FileName = fileName });
+
+            return File(result.FileContents, result.Option, result.FileName);
         }
 
         [HttpGet("[action]")]

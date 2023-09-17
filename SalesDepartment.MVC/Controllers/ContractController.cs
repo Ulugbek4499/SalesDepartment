@@ -4,6 +4,7 @@ using SalesDepartment.Application.UseCases.Contracts.Commands.DeleteContract;
 using SalesDepartment.Application.UseCases.Contracts.Commands.UpdateContract;
 using SalesDepartment.Application.UseCases.Contracts.Queries.GetAllContracts;
 using SalesDepartment.Application.UseCases.Contracts.Queries.GetContractById;
+using SalesDepartment.Application.UseCases.Contracts.Reports;
 using SalesDepartment.Application.UseCases.Customers.Queries.GetAllCustomers;
 using SalesDepartment.Application.UseCases.Customers.Response;
 using SalesDepartment.Application.UseCases.Founders.Queries.GetAllFounders;
@@ -50,6 +51,14 @@ namespace SalesDepartment.MVC.Controllers
             var Contracts = await Mediator.Send(new GetAllContractsQuery());
 
             return View(Contracts);
+        }
+
+        [HttpGet("[action]")]
+        public async ValueTask<FileResult> GetAllContractsExcel(string fileName = "contractExcel")
+        {
+            var result = await Mediator.Send(new GetContractsExcel { FileName = fileName });
+
+            return File(result.FileContents, result.Option, result.FileName);
         }
 
         [HttpGet("[action]")]

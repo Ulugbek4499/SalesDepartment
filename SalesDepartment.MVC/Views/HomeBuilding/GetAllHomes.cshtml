@@ -8,14 +8,16 @@
 <div class="row">
     <div class="col">
         <div class="input-group mb-1 mt-3" style="display:flex; justify-content:space-between; gap:20px;">
-            <a href="@Url.Action("CreateHome")" class="btn btn-success mr-2">
-                <i class="fa-solid fa-plus"></i> Home
-            </a>
-           
             <div style="display:flex; gap:5px">
+                <a href="@Url.Action("CreateHome")" class="btn btn-primary mr-2">
+                    <i class="fa-solid fa-plus"></i> Home
+                </a>
+            </div>
+            <div style="display:flex; gap:5px">
+                <button id="refreshButton" class="btn btn-warning"><i class="fa-solid fa-arrows-rotate"></i> </button>
                 <input id="searchInput" type="text" class="form-control" placeholder="Search" style="max-width: 200px;">
                 <div class="input-group-append">
-                    <button id="searchButtonSimple" class="btn btn-primary" type="button">
+                    <button id="searchButtonSimple" class="btn btn-info" type="button">
                         <i class="fa-solid fa-magnifying-glass"></i>
                     </button>
                 </div>
@@ -26,13 +28,13 @@
 <div class="row">
     <div class="col">
         <div class="input-group mb-1 mt-3" style="display:flex; justify-content:space-between; gap:170px">
-
             <div>
-            <button id="toggleExtendedSearch" class="btn btn-info">
-                <i class="fa-solid fa-filter"></i> Filter
-            </button>
-
-            <button id="refreshButton" class="btn btn-warning"><i class="fa-solid fa-arrows-rotate"></i> Refresh</button>
+                <a asp-controller="HomeBuilding" asp-action="CreateHomeFromExcel" class="btn btn-success">
+                    <i class="fa-solid fa-file-excel"></i> <i class="fa-solid fa-upload"></i>CreateFromExcel
+                </a>
+                <a asp-controller="HomeBuilding" asp-action="GetAllHomesExcel" class="btn btn-success">
+                    <i class="fa-solid fa-file-excel"></i> <i class="fa-solid fa-download"></i>GetInExcel
+                </a>
             </div>
             <div style="display:flex; gap:5px">
                 <select id="sortColumn" class="form-control">
@@ -49,6 +51,7 @@
                     <option value="desc">Descending</option>
                 </select>
                 <button id="sortButton" class="btn btn-info"><i class="fa-solid fa-arrow-up-a-z"></i> </button>
+                <button id="toggleExtendedSearch" class="btn btn-info"><i class="fa-solid fa-filter"></i> </button>
             </div>
             
         </div>
@@ -72,7 +75,7 @@
                     <option value="No">No</option>
                 </select>
                 <div class="input-group-append">
-                    <button id="searchButton" class="btn btn-primary" type="button">    
+                    <button id="searchButton" class="btn btn-info" type="button">
                         <i class="fa-solid fa-magnifying-glass"></i>
                     </button>
                 </div>

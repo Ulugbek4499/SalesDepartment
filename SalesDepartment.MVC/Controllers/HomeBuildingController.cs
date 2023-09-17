@@ -4,6 +4,7 @@ using SalesDepartment.Application.UseCases.Homes.Commands.DeleteHome;
 using SalesDepartment.Application.UseCases.Homes.Commands.UpdateHome;
 using SalesDepartment.Application.UseCases.Homes.Queries.GetAllHomes;
 using SalesDepartment.Application.UseCases.Homes.Queries.GetHomeById;
+using SalesDepartment.Application.UseCases.Homes.Reports;
 
 namespace SalesDepartment.MVC.Controllers
 {
@@ -22,12 +23,21 @@ namespace SalesDepartment.MVC.Controllers
 
             return RedirectToAction("GetAllHomes");
         }
-
+     
         [HttpGet("[action]")]
         public async ValueTask<IActionResult> CreateHomeFromExcel()
         {
             return View();
         }
+
+        [HttpPost("[action]")]
+        public async ValueTask<IActionResult> CreateHomeFromExcel(IFormFile excelfile)
+        {
+            var result = await Mediator.Send(new AddHomesFromExcel(excelfile));
+
+            return RedirectToAction("GetAllHomes");
+        }
+
 
         [HttpGet("[action]")]
         public async ValueTask<IActionResult> GetAllHomes()
@@ -35,6 +45,14 @@ namespace SalesDepartment.MVC.Controllers
             var Homes = await Mediator.Send(new GetAllHomesQuery());
 
             return View(Homes);
+        }
+
+        [HttpGet("[action]")]
+        public async ValueTask<FileResult> GetAllHomesExcel(string fileName = "HomesExcel")
+        {
+            var result = await Mediator.Send(new GetHomesExcel { FileName = fileName });
+
+            return File(result.FileContents, result.Option, result.FileName);
         }
 
         [HttpGet("[action]")]
@@ -67,51 +85,14 @@ namespace SalesDepartment.MVC.Controllers
             return View("ViewHome", Home);
         }
 
-        /*       [HttpPost("[action]")]
-               public async ValueTask<IActionResult> CreateHomeFromExcel(IFormFile excelfile)
-               {
-                   var result = await Mediator.Send(new AddHomesFromExcel(excelfile));
-
-                   return RedirectToAction("GetAllHomes");
-               }*/
-        /*
-                [HttpGet("[action]")]
-                public async ValueTask<IActionResult> CreateHomeFromCSV()
-                {
-                    return View();
-                }*/
-
-        /*        [HttpPost("[action]")]
-                public async ValueTask<IActionResult> CreateHomeFromCSV(IFormFile csvfile)
-                {
-                    var result = await Mediator.Send(new AddHomesFromCsv(csvfile));
-
-                    return RedirectToAction("GetAllHomes");
-                }*/
-
-        /*
-                [HttpGet("[action]")]
-                public async ValueTask<FileResult> GetAllHomesExcel(string fileName = "HomesExcel")
-                {
-                    var result = await Mediator.Send(new GetHomesExcel { FileName = fileName });
-
-                    return File(result.FileContents, result.Option, result.FileName);
-                }*/
-
-        /*       [HttpGet("[action]")]
-               public async ValueTask<IActionResult> GetAllHomesCsv(string fileName = "HomesCsv")
-               {
-                   var result = await Mediator.Send(new GetHomesCsv { FileName = fileName });
-
-                   return File(result.FileContents, result.Option, result.FileName);
-               }*/
-
-        /*       [HttpGet("[action]")]
+        /*     
+               [HttpGet("[action]")]
                public async Task<IActionResult> GetAllHomesPDF(string fileName = "HomesPDF")
                {
                    var result = await Mediator.Send(new GetHomePDF(FileName: fileName));
 
                    return File(result.FileContents, result.Options, result.FileName);
-               }*/
+               }
+        */
     }
 }

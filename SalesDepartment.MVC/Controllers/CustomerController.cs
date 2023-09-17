@@ -4,6 +4,7 @@ using SalesDepartment.Application.UseCases.Customers.Commands.DeleteCustomer;
 using SalesDepartment.Application.UseCases.Customers.Commands.UpdateCustomer;
 using SalesDepartment.Application.UseCases.Customers.Queries.GetAllCustomers;
 using SalesDepartment.Application.UseCases.Customers.Queries.GetCustomerById;
+using SalesDepartment.Application.UseCases.Customers.Reports;
 
 namespace SalesDepartment.MVC.Controllers
 {
@@ -35,6 +36,14 @@ namespace SalesDepartment.MVC.Controllers
             var Customers = await Mediator.Send(new GetAllCustomersQuery());
 
             return View(Customers);
+        }
+
+        [HttpGet("[action]")]
+        public async ValueTask<FileResult> GetAllCustomersExcel(string fileName = "CustomersExcel")
+        {
+            var result = await Mediator.Send(new GetCustomersExcel { FileName = fileName });
+
+            return File(result.FileContents, result.Option, result.FileName);
         }
 
         [HttpGet("[action]")]

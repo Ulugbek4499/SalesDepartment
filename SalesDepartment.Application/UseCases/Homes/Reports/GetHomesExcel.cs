@@ -59,7 +59,6 @@ namespace SalesDepartment.Application.UseCases.Homes.Reports
                 TableName = "Empdata"
             };
 
-            excelDataTable.Columns.Add("Id", typeof(int));
             excelDataTable.Columns.Add("Block", typeof(string));
             excelDataTable.Columns.Add("Entrance", typeof(int));
             excelDataTable.Columns.Add("Floor", typeof(int));
@@ -74,8 +73,14 @@ namespace SalesDepartment.Application.UseCases.Homes.Reports
             {
                 HomesList.ForEach(item =>
                 {
-                    excelDataTable.Rows.Add(item.Id, item.Block, item.Entrance, item.Floor, item.ApartmentNumber,
-                        item.NumberOfRooms, item.Area, item.Contract.ContractNumber);
+                    excelDataTable.Rows.Add(
+                        item.Block,
+                        item.Entrance,
+                        item.Floor,
+                        item.ApartmentNumber,
+                        item.NumberOfRooms,
+                        item.Area,
+                        item.Contract?.ContractNumber); // Use ?. to handle nullable Contract.ContractNumber
                 });
             }
 
