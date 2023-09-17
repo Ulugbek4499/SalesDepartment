@@ -7,12 +7,68 @@
 <h3 class="text-center">All Contracts</h3>
 <div class="row">
     <div class="col">
-        <div class="input-group mb-1 mt-3" style="display:flex; justify-content:space-between; gap:170px">
-            <a href="@Url.Action("CreateContract")" class="btn btn-success mr-2">Create Contract</a>
+            <div class="input-group mb-1 mt-3" style="display:flex; justify-content:space-between; gap:20px;">
+            <a href="@Url.Action("CreateContract")" class="btn btn-success mr-2">
+                <i class="fa-solid fa-plus"></i> Contract
+            </a>
             <div style="display:flex; gap:5px">
                 <input id="searchInput" type="text" class="form-control" placeholder="Search" style="max-width: 200px;">
                 <div class="input-group-append">
-                    <button id="searchButton" class="btn btn-primary" type="button">Search</button>
+                    <button id="searchButtonSimple" class="btn btn-primary" type="button">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        <div class="input-group mb-1 mt-3" style="display:flex; justify-content:space-between; gap:170px">
+
+            <div>
+                <button id="toggleExtendedSearch" class="btn btn-info">
+                    <i class="fa-solid fa-filter"></i> Filter
+                </button>
+
+                <button id="refreshButton" class="btn btn-warning"><i class="fa-solid fa-arrows-rotate"></i> Refresh</button>
+            </div>
+            <div style="display:flex; gap:5px">
+                <select id="sortColumn" class="form-control">
+                    <option value="ContractNumber">ContractNumber</option>
+                    <option value="ContractStartDate">ContractStartDate</option>
+                    <option value="TotalAmountOfContract">TotalAmountOfContract</option>
+                    <option value="ContractEndDate">ContractEndDate</option>
+                    <option value="HomeId">HomeId</option>
+                    <option value="CustomerId">CustomerId</option>
+                    <option value="FounderId">FounderId</option>
+                </select>
+                <select id="sortOrder" class="form-control">
+                    <option value="asc">Ascending</option>
+                    <option value="desc">Descending</option>
+                </select>
+                <button id="sortButton" class="btn btn-info"><i class="fa-solid fa-arrow-up-a-z"></i> </button>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div id="extendedSearchContainer" style="display: none;">
+    <div class="row">
+        <div class="col">
+            <div class="input-group mb-1 mt-3" style="display:flex; justify-content:space-between; gap:5px;">
+                <!-- Add input fields for each column you want to search -->
+                <input id="searchContractNumber" type="text" class="form-control" placeholder="Search ContractNumber">
+                <input id="searchContractStartDate" type="date" class="form-control" placeholder="Search ContractStartDate">
+                <input id="searchTotalAmountOfContract" type="text" class="form-control" placeholder="Search TotalAmountOfContract">
+                <input id="searchContractEndDate" type="text" class="form-control" placeholder="Search ContractEndDate">
+                <input id="searchHomeId" type="text" class="form-control" placeholder="Search HomeId">
+                <input id="searchCustomerId" type="text" class="form-control" placeholder="Search CustomerId">
+                <input id="searchFounderId" type="text" class="form-control" placeholder="Search FounderId">
+                <div class="input-group-append">
+                    <button id="searchButton" class="btn btn-primary" type="button">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
                 </div>
             </div>
         </div>
@@ -20,7 +76,7 @@
 </div>
 <hr />
 
-<div class="container" style="height: 55vh;">
+<div class="container" style="height: 95vh;">
     <div class="row" style="display:flex; justify-content:center;">
         <div class="col-lg-6" style="width:100%">
             <div class="custom-cards">
@@ -36,13 +92,13 @@
                         <thead>
                             <tr>
                                 <th style="width: 25%;">Actions</th>
-                                <th style="width: 15vh;" onclick="sortTable(0)"><span style="display: flex; align-items: center;">ContractNumber <i id="sortIcon0" class="fas fa-sort"></i></span></th>
-                                <th style="width: 25%;" onclick="sortTable(1)"><span style="display: flex; align-items: center;">ContractStartDate <i id="sortIcon1" class="fas fa-sort"></i></span></th>
-                                <th style="width: 25%;" onclick="sortTable(2)"><span style="display: flex; align-items: center;">TotalAmountOfContract <i id="sortIcon2" class="fas fa-sort"></i></span></th>
-                                <th style="width: 25%;" onclick="sortTable(3)"><span style="display: flex; align-items: center;">ContractEndDate <i id="sortIcon3" class="fas fa-sort"></i></span></th>
-                                <th style="width: 15vh;" onclick="sortTable(0)"><span style="display: flex; align-items: center;">HomeId <i id="sortIcon0" class="fas fa-sort"></i></span></th>
-                                <th style="width: 25%;" onclick="sortTable(1)"><span style="display: flex; align-items: center;">CustomerId <i id="sortIcon1" class="fas fa-sort"></i></span></th>
-                                <th style="width: 25%;" onclick="sortTable(2)"><span style="display: flex; align-items: center;">FounderId <i id="sortIcon2" class="fas fa-sort"></i></span></th>
+                                <th style="width: 25%;">ContractNumber</th>
+                                <th style="width: 25%;">ContractStartDate</th>
+                                <th style="width: 25%;">TotalAmountOfContract</th>
+                                <th style="width: 25%;">ContractEndDate</th>
+                                <th style="width: 25%;">HomeId</th>
+                                <th style="width: 25%;">CustomerId</th>
+                                <th style="width: 25%;">FounderId</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -74,7 +130,7 @@
 </div>
 
 <script>
-    document.getElementById('searchButton').addEventListener('click', function () {
+    document.getElementById('searchButtonSimple').addEventListener('click', function () {
         var input = document.getElementById('searchInput').value.toLowerCase();
         var rows = document.getElementById('ContractsTable').getElementsByTagName('tbody')[0].getElementsByTagName('tr');
 
@@ -93,61 +149,106 @@
             rows[i].style.display = match ? '' : 'none';
         }
     });
+
+    document.getElementById('sortButton').addEventListener('click', function () {
+        var column = document.getElementById('sortColumn').value;
+        var sortOrder = document.getElementById('sortOrder').value;
+        var rows = Array.from(document.getElementById('ContractsTable').getElementsByTagName('tbody')[0].getElementsByTagName('tr'));
+
+        rows.sort(function (a, b) {
+            var cellA = a.querySelector('td[data-column="' + column + '"]').textContent.toLowerCase();
+            var cellB = b.querySelector('td[data-column="' + column + '"]').textContent.toLowerCase();
+
+            if (sortOrder === 'asc') {
+                return cellA.localeCompare(cellB);
+            } else {
+                return cellB.localeCompare(cellA);
+            }
+        });
+
+        var tbody = document.getElementById('ContractsTable').getElementsByTagName('tbody')[0];
+        for (var i = 0; i < rows.length; i++) {
+            tbody.appendChild(rows[i]);
+        }
+    });
 </script>
 
 <script>
-    var ascendingOrder = true; // Initially, set the sorting order to ascending
+    document.getElementById('searchButton').addEventListener('click', function () {
+        var searchContractNumber = document.getElementById('searchContractNumber').value.toLowerCase();
+        var searchContractStartDate = document.getElementById('searchContractStartDate').value.toLowerCase();
+        var searchTotalAmountOfContract = document.getElementById('searchTotalAmountOfContract').value.toLowerCase();
+        var searchContractEndDate = document.getElementById('searchContractEndDate').value.toLowerCase();
+        var searchHomeId = document.getElementById('searchHomeId').value.toLowerCase();
+        var searchCustomerId = document.getElementById('searchCustomerId').value.toLowerCase();
+        var searchFounderId = document.getElementById('searchFounderId').value.toLowerCase();
 
-    function sortTable(columnIndex) {
-        var table, rows, switching, i, x, y, shouldSwitch;
-        table = document.getElementById("ContractsTable");
-        switching = true;
+        var rows = document.getElementById('ContractsTable').getElementsByTagName('tbody')[0].getElementsByTagName('tr');
 
-        // Hide all sort icons
-        var sortIcons = document.getElementsByClassName("fas fa-sort");
-        for (i = 0; i < sortIcons.length; i++) {
-            sortIcons[i].classList.remove("fa-sort-up");
-            sortIcons[i].classList.remove("fa-sort-down");
-        }
+        for (var i = 0; i < rows.length; i++) {
+            var cells = rows[i].getElementsByTagName('td');
+            var match = true; // Assume it's a match initially
 
-        while (switching) {
-            switching = false;
-            rows = table.getElementsByTagName("tr");
-
-            for (i = 1; i < (rows.length - 1); i++) {
-                shouldSwitch = false;
-
-                x = rows[i].getElementsByTagName("td")[columnIndex];
-                y = rows[i + 1].getElementsByTagName("td")[columnIndex];
-
-                if (ascendingOrder) {
-                    if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
-                        shouldSwitch = true;
-                        break;
-                    }
-                } else {
-                    if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
-                        shouldSwitch = true;
-                        break;
-                    }
-                }
+            if (searchContractNumber && !cells[1].innerText.toLowerCase().includes(searchContractNumber)) {
+                match = false;
+            }
+            if (searchContractStartDate && !cells[2].innerText.toLowerCase().includes(searchContractStartDate)) {
+                match = false;
+            }
+            if (searchTotalAmountOfContract && !cells[3].innerText.toLowerCase().includes(searchTotalAmountOfContract)) {
+                match = false;
+            }
+            if (searchContractEndDate && !cells[4].innerText.toLowerCase().includes(searchContractEndDate)) {
+                match = false;
+            }
+            if (searchHomeId && !cells[5].innerText.toLowerCase().includes(searchHomeId)) {
+                match = false;
+            }
+            if (searchCustomerId && !cells[6].innerText.toLowerCase().includes(searchCustomerId)) {
+                match = false;
+            }
+            if (searchFounderId && !cells[6].innerText.toLowerCase().includes(searchFounderId)) {
+                match = false;
             }
 
-            if (shouldSwitch) {
-                rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
-                switching = true;
-            }
+            rows[i].style.display = match ? '' : 'none';
         }
+    });
+</script>
 
-        // Toggle sorting order and update the sort icon
-        ascendingOrder = !ascendingOrder;
-        var sortIcon = document.getElementById("sortIcon" + columnIndex);
-        if (ascendingOrder) {
-            sortIcon.classList.remove("fa-sort-down");
-            sortIcon.classList.add("fa-sort-up");
+<script>
+    document.getElementById('refreshButton').addEventListener('click', function () {
+        // Clear the search input field
+        document.getElementById('simpleSearchInput').value = '';
+
+        // Reset the sorting to default values
+        document.getElementById('sortColumn').value = 'Block';
+        document.getElementById('sortOrder').value = 'asc';
+
+        // Reset the extended search fields
+        document.getElementById('searchContractNumber').value = '';
+        document.getElementById('searchContractStartDate').value = '';
+        document.getElementById('searchTotalAmountOfContract').value = '';
+        document.getElementById('searchContractEndDate').value = '';
+        document.getElementById('searchHomeId').value = '';
+        document.getElementById('searchCustomerId').value = '';
+        document.getElementById('searchFounderId').value = '';
+
+        // Show all rows in the table
+        var rows = document.getElementById('ContractsTable').getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+        for (var i = 0; i < rows.length; i++) {
+            rows[i].style.display = '';
+        }
+    });
+</script>
+
+<script>
+    document.getElementById('toggleExtendedSearch').addEventListener('click', function () {
+        var extendedSearchContainer = document.getElementById('extendedSearchContainer');
+        if (extendedSearchContainer.style.display === 'none' || extendedSearchContainer.style.display === '') {
+            extendedSearchContainer.style.display = 'block';
         } else {
-            sortIcon.classList.remove("fa-sort-up");
-            sortIcon.classList.add("fa-sort-down");
+            extendedSearchContainer.style.display = 'none';
         }
-    }
+    });
 </script>

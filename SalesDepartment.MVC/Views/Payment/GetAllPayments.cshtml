@@ -7,12 +7,64 @@
 <h3 class="text-center">All Payments</h3>
 <div class="row">
     <div class="col">
-        <div class="input-group mb-1 mt-3" style="display:flex; justify-content:space-between; gap:170px">
-            <a href="@Url.Action("CreatePayment")" class="btn btn-success mr-2">Create Payment</a>
+        <div class="input-group mb-1 mt-3" style="display:flex; justify-content:space-between; gap:20px;">
+            <a href="@Url.Action("CreatePayment")" class="btn btn-success mr-2">
+                <i class="fa-solid fa-plus"></i> Payment
+            </a>
             <div style="display:flex; gap:5px">
                 <input id="searchInput" type="text" class="form-control" placeholder="Search" style="max-width: 200px;">
                 <div class="input-group-append">
-                    <button id="searchButton" class="btn btn-primary" type="button">Search</button>
+                    <button id="searchButtonSimple" class="btn btn-primary" type="button">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        <div class="input-group mb-1 mt-3" style="display:flex; justify-content:space-between; gap:170px">
+
+            <div>
+                <button id="toggleExtendedSearch" class="btn btn-info">
+                    <i class="fa-solid fa-filter"></i> Filter
+                </button>
+
+                <button id="refreshButton" class="btn btn-warning"><i class="fa-solid fa-arrows-rotate"></i> Refresh</button>
+            </div>
+            <div style="display:flex; gap:5px">
+                <select id="sortColumn" class="form-control">
+                    <option value="PaymentNumber">PaymentNumber</option>
+                    <option value="PaymentDate">PaymentDate</option>
+                    <option value="Amount">Amount</option>
+                    <option value="ContractId">ContractId</option>
+                    <option value="PaymentTypeId">PaymentTypeId</option>
+                </select>
+                <select id="sortOrder" class="form-control">
+                    <option value="asc">Ascending</option>
+                    <option value="desc">Descending</option>
+                </select>
+                <button id="sortButton" class="btn btn-info"><i class="fa-solid fa-arrow-up-a-z"></i> </button>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div id="extendedSearchContainer" style="display: none;">
+    <div class="row">
+        <div class="col">
+            <div class="input-group mb-1 mt-3" style="display:flex; justify-content:space-between; gap:5px;">
+                <!-- Add input fields for each column you want to search -->
+                <input id="searchPaymentNumber" type="text" class="form-control" placeholder="Search PaymentNumber">
+                <input id="searchPaymentDate" type="date" class="form-control" placeholder="Search PaymentDate">
+                <input id="searchAmount" type="text" class="form-control" placeholder="Search Amount">
+                <input id="searchContractId" type="text" class="form-control" placeholder="Search ContractId">
+                <input id="searchPaymentTypeId" type="text" class="form-control" placeholder="Search PaymentTypeId">
+                <div class="input-group-append">
+                    <button id="searchButton" class="btn btn-primary" type="button">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
                 </div>
             </div>
         </div>
@@ -36,11 +88,11 @@
                         <thead>
                             <tr>
                                 <th style="width: 25%;">Actions</th>
-                                <th style="width: 15vh;" onclick="sortTable(0)"><span style="display: flex; align-items: center;">PaymentNumber <i id="sortIcon0" class="fas fa-sort"></i></span></th>
-                                <th style="width: 25%;" onclick="sortTable(1)"><span style="display: flex; align-items: center;">PaymentDate <i id="sortIcon1" class="fas fa-sort"></i></span></th>
-                                <th style="width: 25%;" onclick="sortTable(2)"><span style="display: flex; align-items: center;">Amount <i id="sortIcon2" class="fas fa-sort"></i></span></th>
-                                <th style="width: 25%;" onclick="sortTable(3)"><span style="display: flex; align-items: center;">ContractId <i id="sortIcon3" class="fas fa-sort"></i></span></th>
-                                <th style="width: 25%;" onclick="sortTable(3)"><span style="display: flex; align-items: center;">PaymentTypeId <i id="sortIcon3" class="fas fa-sort"></i></span></th>
+                                <th style="width: 25%;">PaymentNumber</th>
+                                <th style="width: 25%;">PaymentDate</th>
+                                <th style="width: 25%;">Amount</th>
+                                <th style="width: 25%;">ContractId</th>
+                                <th style="width: 25%;">PaymentTypeId</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -70,7 +122,7 @@
 </div>
 
 <script>
-    document.getElementById('searchButton').addEventListener('click', function () {
+    document.getElementById('searchButtonSimple').addEventListener('click', function () {
         var input = document.getElementById('searchInput').value.toLowerCase();
         var rows = document.getElementById('PaymentsTable').getElementsByTagName('tbody')[0].getElementsByTagName('tr');
 
@@ -89,61 +141,95 @@
             rows[i].style.display = match ? '' : 'none';
         }
     });
+
+    document.getElementById('sortButton').addEventListener('click', function () {
+        var column = document.getElementById('sortColumn').value;
+        var sortOrder = document.getElementById('sortOrder').value;
+        var rows = Array.from(document.getElementById('PaymentsTable').getElementsByTagName('tbody')[0].getElementsByTagName('tr'));
+
+        rows.sort(function (a, b) {
+            var cellA = a.querySelector('td[data-column="' + column + '"]').textContent.toLowerCase();
+            var cellB = b.querySelector('td[data-column="' + column + '"]').textContent.toLowerCase();
+
+            if (sortOrder === 'asc') {
+                return cellA.localeCompare(cellB);
+            } else {
+                return cellB.localeCompare(cellA);
+            }
+        });
+
+        var tbody = document.getElementById('PaymentsTable').getElementsByTagName('tbody')[0];
+        for (var i = 0; i < rows.length; i++) {
+            tbody.appendChild(rows[i]);
+        }
+    });
 </script>
 
 <script>
-    var ascendingOrder = true; // Initially, set the sorting order to ascending
+    document.getElementById('searchButton').addEventListener('click', function () {
+        var searchPaymentNumber = document.getElementById('searchPaymentNumber').value.toLowerCase();
+        var searchPaymentDate = document.getElementById('searchPaymentDate').value.toLowerCase();
+        var searchAmount = document.getElementById('searchAmount').value.toLowerCase();
+        var searchContractId = document.getElementById('searchContractId').value.toLowerCase();
+        var searchPaymentTypeId = document.getElementById('searchPaymentTypeId').value.toLowerCase();
 
-    function sortTable(columnIndex) {
-        var table, rows, switching, i, x, y, shouldSwitch;
-        table = document.getElementById("PaymentsTable");
-        switching = true;
+        var rows = document.getElementById('PaymentsTable').getElementsByTagName('tbody')[0].getElementsByTagName('tr');
 
-        // Hide all sort icons
-        var sortIcons = document.getElementsByClassName("fas fa-sort");
-        for (i = 0; i < sortIcons.length; i++) {
-            sortIcons[i].classList.remove("fa-sort-up");
-            sortIcons[i].classList.remove("fa-sort-down");
-        }
+        for (var i = 0; i < rows.length; i++) {
+            var cells = rows[i].getElementsByTagName('td');
+            var match = true; // Assume it's a match initially
 
-        while (switching) {
-            switching = false;
-            rows = table.getElementsByTagName("tr");
-
-            for (i = 1; i < (rows.length - 1); i++) {
-                shouldSwitch = false;
-
-                x = rows[i].getElementsByTagName("td")[columnIndex];
-                y = rows[i + 1].getElementsByTagName("td")[columnIndex];
-
-                if (ascendingOrder) {
-                    if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
-                        shouldSwitch = true;
-                        break;
-                    }
-                } else {
-                    if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
-                        shouldSwitch = true;
-                        break;
-                    }
-                }
+            if (searchPaymentNumber && !cells[1].innerText.toLowerCase().includes(searchPaymentNumber)) {
+                match = false;
+            }
+            if (searchPaymentDate && !cells[2].innerText.toLowerCase().includes(searchPaymentDate)) {
+                match = false;
+            }
+            if (searchAmount && !cells[3].innerText.toLowerCase().includes(searchAmount)) {
+                match = false;
+            }
+            if (searchContractId && !cells[4].innerText.toLowerCase().includes(searchContractId)) {
+                match = false;
+            }
+            if (searchPaymentTypeId && !cells[5].innerText.toLowerCase().includes(searchPaymentTypeId)) {
+                match = false;
             }
 
-            if (shouldSwitch) {
-                rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
-                switching = true;
-            }
+            rows[i].style.display = match ? '' : 'none';
         }
+    });
+</script>
 
-        // Toggle sorting order and update the sort icon
-        ascendingOrder = !ascendingOrder;
-        var sortIcon = document.getElementById("sortIcon" + columnIndex);
-        if (ascendingOrder) {
-            sortIcon.classList.remove("fa-sort-down");
-            sortIcon.classList.add("fa-sort-up");
+<script>
+    document.getElementById('refreshButton').addEventListener('click', function () {
+        // Clear the search input field
+        document.getElementById('simpleSearchInput').value = '';
+
+        // Reset the sorting to default values
+        document.getElementById('sortColumn').value = 'Block';
+        document.getElementById('sortOrder').value = 'asc';
+
+        // Reset the extended search fields
+        document.getElementById('searchPaymentNumber').value = '';
+        document.getElementById('searchPaymentDate').value = '';
+        document.getElementById('searchAmount').value = '';
+        document.getElementById('searchContractId').value = '';
+        document.getElementById('searchPaymentTypeId').value = '';
+        // Show all rows in the table
+        var rows = document.getElementById('PaymentsTable').getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+        for (var i = 0; i < rows.length; i++) {
+            rows[i].style.display = '';
+        }
+    });
+</script>
+
+<script>
+    document.getElementById('toggleExtendedSearch').addEventListener('click', function () {
+        var extendedSearchContainer = document.getElementById('extendedSearchContainer');
+        if (extendedSearchContainer.style.display === 'none' || extendedSearchContainer.style.display === '') {
+            extendedSearchContainer.style.display = 'block';
         } else {
-            sortIcon.classList.remove("fa-sort-up");
-            sortIcon.classList.add("fa-sort-down");
+            extendedSearchContainer.style.display = 'none';
         }
-    }
+    });
 </script>

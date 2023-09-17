@@ -7,11 +7,11 @@
 <h3 class="text-center">All Customers</h3>
 <div class="row">
     <div class="col">
-        <div class="input-group mb-1 mt-3" style="display:flex; justify-content:space-between; gap:170px">
+        <div class="input-group mb-1 mt-3" style="display: flex; justify-content: space-between; gap: 170px;">
             <a href="@Url.Action("CreateCustomer")" class="btn btn-success mr-2">
                 <i class="fa-solid fa-plus"></i> Customer
             </a>
-            <div style="display:flex; gap:5px">
+            <div style="display: flex; gap: 5px;">
                 <input id="simpleSearchInput" type="text" class="form-control" placeholder="Search" style="max-width: 200px;">
                 <button id="simpleSearchButton" class="btn btn-primary" type="button">
                     <i class="fa-solid fa-magnifying-glass"></i> Search
@@ -20,18 +20,17 @@
         </div>
     </div>
 </div>
+
 <div class="row">
     <div class="col">
-        <div class="input-group mb-1 mt-3" style="display:flex; justify-content:space-between; gap:170px">
-
+        <div class="input-group mb-1 mt-3" style="display: flex; justify-content: space-between; gap: 170px;">
             <div>
                 <button id="extendedSearchButton" class="btn btn-info">
                     <i class="fa-solid fa-filter"></i> Filter
                 </button>
-
                 <button id="refreshButton" class="btn btn-warning"><i class="fa-solid fa-arrows-rotate"></i> Refresh</button>
             </div>
-            <div style="display:flex; gap:5px">
+            <div style="display: flex; gap: 5px;">
                 <select id="sortColumn" class="form-control">
                     <option value="FirstName">FirstName</option>
                     <option value="LastName">LastName</option>
@@ -46,9 +45,10 @@
                     <option value="asc">Ascending</option>
                     <option value="desc">Descending</option>
                 </select>
-                <button id="sortButton" class="btn btn-info"><i class="fa-solid fa-arrow-up-a-z"></i> </button>
+                <button id="sortButton" class="btn btn-info">
+                    <i class="fa-solid fa-arrow-up-a-z"></i>
+                </button>
             </div>
-
         </div>
     </div>
 </div>
@@ -56,7 +56,7 @@
 <div id="extendedSearchContainer" style="display: none;">
     <div class="row">
         <div class="col">
-            <div class="input-group mb-1 mt-3" style="display:flex; justify-content:space-between; gap:5px;">
+            <div class="input-group mb-1 mt-3" style="display: flex; justify-content: space-between; gap: 5px;">
                 <!-- Add input fields for each column you want to search -->
                 <input id="searchFirstName" type="text" class="form-control" placeholder="Search FirstName">
                 <input id="searchLastName" type="text" class="form-control" placeholder="Search LastName">
@@ -79,17 +79,15 @@
 <hr />
 
 <div class="container" style="height: 55vh;">
-    <div class="row" style="display:flex; justify-content:center;">
-        <div class="col-lg-6" style="width:100%">
+    <div class="row" style="display: flex; justify-content: center;">
+        <div class="col-lg-6" style="width: 100%;">
             <div class="custom-cards">
-                @{
-                    if (Model.Length == 0)
-                    {
-                        <h2>There are no Customers yet...</h2>
-                    }
+                @if (Model.Length == 0)
+                {
+                    <h2>There are no Customers yet...</h2>
                 }
 
-                <div class="table-container" style="overflow-y: scroll; height: 58vh; width:100% ">
+                <div class="table-container" style="overflow-y: scroll; height: 58vh; width: 100%;">
                     <table id="CustomersTable" class="table">
                         <thead>
                             <tr>
@@ -105,24 +103,24 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach (var Customer in Model)
+                            @foreach (var customer in Model)
                             {
                                 <tr>
                                     <td class="action-links">
-                                        <div style="display:flex; gap:5px">
-                                            <a href="@Url.Action("ViewCustomer", new { id = Customer.Id })" class="btn btn-secondary">Details</a>
-                                            <a href="@Url.Action("UpdateCustomer", new { id = Customer.Id })" class="btn btn-secondary"><i class="fas fa-pen-to-square"></i></a>
-                                            <a href="@Url.Action("DeleteCustomer", new { id = Customer.Id })" class="btn btn-danger"><i class="fas fa-trash-can"></i></a>
+                                        <div style="display: flex; gap: 5px;">
+                                            <a href="@Url.Action("ViewCustomer", new { id = customer.Id })" class="btn btn-secondary">Details</a>
+                                            <a href="@Url.Action("UpdateCustomer", new { id = customer.Id })" class="btn btn-secondary"><i class="fas fa-pen-to-square"></i></a>
+                                            <a href="@Url.Action("DeleteCustomer", new { id = customer.Id })" class="btn btn-danger"><i class="fas fa-trash-can"></i></a>
                                         </div>
                                     </td>
-                                    <td data-column="FirstName">@Customer.FirstName</td>
-                                    <td data-column="LastName">@Customer.LastName</td>
-                                    <td data-column="MiddleName">@Customer.MiddleName</td>
-                                    <td data-column="Passport">@Customer.Passport</td>
-                                    <td data-column="PassportIssuedBy">@Customer.PassportIssuedBy</td>
-                                    <td data-column="Address">@Customer.Address</td>
-                                    <td data-column="PhoneNumberOne">@Customer.PhoneNumberOne</td>
-                                    <td data-column="PhoneNumberTwo">@Customer.PhoneNumberTwo</td>
+                                    <td data-column="FirstName">@customer.FirstName</td>
+                                    <td data-column="LastName">@customer.LastName</td>
+                                    <td data-column="MiddleName">@customer.MiddleName</td>
+                                    <td data-column="Passport">@customer.Passport</td>
+                                    <td data-column="PassportIssuedBy">@customer.PassportIssuedBy</td>
+                                    <td data-column="Address">@customer.Address</td>
+                                    <td data-column="PhoneNumberOne">@customer.PhoneNumberOne</td>
+                                    <td data-column="PhoneNumberTwo">@customer.PhoneNumberTwo</td>
                                 </tr>
                             }
                         </tbody>
@@ -227,10 +225,10 @@
 <script>
     document.getElementById('refreshButton').addEventListener('click', function () {
         // Clear the search input field
-        document.getElementById('searchInput').value = '';
+        document.getElementById('simpleSearchInput').value = '';
 
         // Reset the sorting to default values
-        document.getElementById('sortColumn').value = 'Block';
+        document.getElementById('sortColumn').value = 'FirstName';
         document.getElementById('sortOrder').value = 'asc';
 
         // Reset the extended search fields
