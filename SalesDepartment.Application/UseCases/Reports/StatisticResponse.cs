@@ -16,6 +16,6 @@ namespace SalesDepartment.Application.UseCases.Reports
         public decimal TotalAmountOfAllContractsInCurrentMonth { get; set; }
         public decimal TotalAmountOfAllContractsInCurrentWeek { get; set; }
         public decimal TotalAmountOfAllContractsInCurrentDay { get; set; }
-        public Dictionary<int, string> AllContractsByFounders { get; set;}
+        public Dictionary<string, int> AllContractsByFounders { get; set; }
     }
 }

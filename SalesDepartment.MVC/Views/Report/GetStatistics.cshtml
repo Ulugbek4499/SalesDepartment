@@ -1,0 +1,51 @@
+﻿@model SalesDepartment.Application.UseCases.Reports.StatisticResponse
+
+@{
+    Layout = "_Layout";
+}
+
+<h3 class="text-center">Statistic</h3>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <h4>All Contracts</h4>
+            <p>@Model.AllContracts</p>
+            <h4>All Contracts in Current Month</h4>
+            <p>@Model.AllContractsInCurrentMonth</p>
+            <h4>All Contracts in Current Week</h4>
+            <p>@Model.AllContractsInCurrentWeek</p>
+            <h4>All Contracts in Current Day</h4>
+            <p>@Model.AllContractsInCurrentDay</p>
+        </div>
+        <div class="col-md-6">
+            <h4>Total Amount of All Contracts</h4>
+            <p>@Model.TotalAmountOfAllContracts</p>
+            <h4>Total Amount of All Contracts in Current Month</h4>
+            <p>@Model.TotalAmountOfAllContractsInCurrentMonth</p>
+            <h4>Total Amount of All Contracts in Current Week</h4>
+            <p>@Model.TotalAmountOfAllContractsInCurrentWeek</p>
+            <h4>Total Amount of All Contracts in Current Day</h4>
+            <p>@Model.TotalAmountOfAllContractsInCurrentDay</p>
+        </div>
+    </div>
+
+    <h4>All Contracts by Founders</h4>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Founder Name</th>
+                <th>Founder's Contract Number</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var founder in Model.AllContractsByFounders)
+            {
+                <tr>
+                    <td>@founder.Key</td>
+                    <td>@founder.Value</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

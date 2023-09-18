@@ -24,6 +24,22 @@ namespace SalesDepartment.Application.UseCases.Reports
 
             var contracts = await _context.Contracts.ToArrayAsync();
 
+            var founderContractsCount = new Dictionary<string, int>();
+
+            foreach (var contract in contracts)
+            {
+                var founderName = $"{contract.Founder.FirstName} {contract.Founder.LastName}";
+
+                if (founderContractsCount.ContainsKey(founderName))
+                {
+                    founderContractsCount[founderName]++;
+                }
+                else
+                {
+                    founderContractsCount[founderName] = 1;
+                }
+            }
+
             var statistic = new StatisticResponse
             {
                 AllContracts = contracts.Length,
@@ -40,11 +56,7 @@ namespace SalesDepartment.Application.UseCases.Reports
                 TotalAmountOfAllContractsInCurrentDay = contracts
                     .Where(c => c.ContractStartDate.Date == currentDate.Date)
                     .Sum(c => c.TotalAmountOfContract),
-                AllContractsByFounders = contracts
-                    .GroupBy(c => c.FounderId)
-                    .ToDictionary(
-                        group => group.Key,
-                        group => string.Join(", ", group.Select(c => c.Founder.LastName + c.Founder.FirstName)))
+                AllContractsByFounders = founderContractsCount
             };
 
             return statistic;
