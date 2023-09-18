@@ -93,7 +93,7 @@ public class ContractController : ApiBaseController
         return View("ViewContract", Contract);
     }
 
-    [HttpGet("{id}")]
+    [HttpGet("[action]")]
     public async ValueTask<IActionResult> ContractInDocx(int id)
     {
 
