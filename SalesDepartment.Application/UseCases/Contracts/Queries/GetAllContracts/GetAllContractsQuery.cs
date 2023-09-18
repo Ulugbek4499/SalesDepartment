@@ -21,9 +21,9 @@ namespace SalesDepartment.Application.UseCases.Contracts.Queries.GetAllContracts
 
         public async Task<ContractResponse[]> Handle(GetAllContractsQuery request, CancellationToken cancellationToken)
         {
-            var Employees = await _context.Contracts.ToArrayAsync();
+            var contracts = await _context.Contracts.ToArrayAsync();
 
-            return _mapper.Map<ContractResponse[]>(Employees);
+            return _mapper.Map<ContractResponse[]>(contracts);
         }
     }
 }
