@@ -60,9 +60,9 @@
             <div class="input-group mb-1 mt-3" style="display:flex; justify-content:space-between; gap:5px;">
                 <!-- Add input fields for each column you want to search -->
                 <input id="searchContractNumber" type="text" class="form-control" placeholder="Search ContractNumber">
-                <input id="searchContractStartDate" type="date" class="form-control" placeholder="Search ContractStartDate">
+                <input id="searchStartDate" type="date" class="form-control" placeholder="Start Date">
+                <input id="searchEndDate" type="date" class="form-control" placeholder="End Date">
                 <input id="searchTotalAmountOfContract" type="text" class="form-control" placeholder="Search TotalAmountOfContract">
-                <input id="searchContractEndDate" type="text" class="form-control" placeholder="Search ContractEndDate">
                 <input id="searchHomeId" type="text" class="form-control" placeholder="Search HomeId">
                 <input id="searchCustomerId" type="text" class="form-control" placeholder="Search CustomerId">
                 <input id="searchFounderId" type="text" class="form-control" placeholder="Search FounderId">
@@ -190,9 +190,9 @@
 <script>
     document.getElementById('searchButton').addEventListener('click', function () {
         var searchContractNumber = document.getElementById('searchContractNumber').value.toLowerCase();
-        var searchContractStartDate = document.getElementById('searchContractStartDate').value.toLowerCase();
+        var searchStartDate = document.getElementById('searchStartDate').value;
+        var searchEndDate = document.getElementById('searchEndDate').value;
         var searchTotalAmountOfContract = document.getElementById('searchTotalAmountOfContract').value.toLowerCase();
-        var searchContractEndDate = document.getElementById('searchContractEndDate').value.toLowerCase();
         var searchHomeId = document.getElementById('searchHomeId').value.toLowerCase();
         var searchCustomerId = document.getElementById('searchCustomerId').value.toLowerCase();
         var searchFounderId = document.getElementById('searchFounderId').value.toLowerCase();
@@ -201,18 +201,27 @@
 
         for (var i = 0; i < rows.length; i++) {
             var cells = rows[i].getElementsByTagName('td');
+            var contractStartDate = new Date(cells[2].innerText);
+
             var match = true; // Assume it's a match initially
 
             if (searchContractNumber && !cells[1].innerText.toLowerCase().includes(searchContractNumber)) {
                 match = false;
             }
-            if (searchContractStartDate && !cells[2].innerText.toLowerCase().includes(searchContractStartDate)) {
-                match = false;
+            if (searchStartDate || searchEndDate) {
+                var startDate = new Date(searchStartDate);
+                var endDate = new Date(searchEndDate);
+                if (!isNaN(startDate) && !isNaN(endDate)) {
+                    if (contractStartDate < startDate || contractStartDate > endDate) {
+                        match = false;
+                    }
+                } else if (!isNaN(startDate) && isNaN(endDate)) {
+                    if (!isSameDay(contractStartDate, startDate)) {
+                        match = false;
+                    }
+                }
             }
             if (searchTotalAmountOfContract && !cells[3].innerText.toLowerCase().includes(searchTotalAmountOfContract)) {
-                match = false;
-            }
-            if (searchContractEndDate && !cells[4].innerText.toLowerCase().includes(searchContractEndDate)) {
                 match = false;
             }
             if (searchHomeId && !cells[5].innerText.toLowerCase().includes(searchHomeId)) {
@@ -221,13 +230,19 @@
             if (searchCustomerId && !cells[6].innerText.toLowerCase().includes(searchCustomerId)) {
                 match = false;
             }
-            if (searchFounderId && !cells[6].innerText.toLowerCase().includes(searchFounderId)) {
+            if (searchFounderId && !cells[7].innerText.toLowerCase().includes(searchFounderId)) {
                 match = false;
             }
 
             rows[i].style.display = match ? '' : 'none';
         }
     });
+
+    function isSameDay(date1, date2) {
+        return date1.getDate() === date2.getDate() &&
+            date1.getMonth() === date2.getMonth() &&
+            date1.getFullYear() === date2.getFullYear();
+    }
 </script>
 
 <script>

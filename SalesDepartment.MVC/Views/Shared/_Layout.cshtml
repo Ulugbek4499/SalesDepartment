@@ -87,8 +87,8 @@
     <div class="container-fluid" style="position: fixed">
         <div class="row">
             <aside class="bg-dark text-light col-2 sidebar" style="height: 100vh; width: 150px">
-                <ul class="nav flex-column" style="padding-top: 25px">
-                    <li class="nav-item mb-3">
+                <ul class="nav flex-column" style="padding-top: 15px">
+                    <li class="nav-item mb-1">
                         <a asp-controller="Home" asp-action="Index" class="nav-link">
                             <div class="icon-wrapper">
                                 <i class="fa-solid fa-bars"></i>
@@ -98,7 +98,7 @@
                             </div>
                         </a>
                     </li>
-                    <li class="nav-item mb-3">
+                    <li class="nav-item mb-2">
                         <a asp-controller="HomeBuilding" asp-action="GetAllHomes" class="nav-link">
                             <div class="icon-wrapper">
                                 <i class="fa-solid fa-building"></i>
@@ -108,7 +108,7 @@
                             </div>
                         </a>
                     </li>
-                    <li class="nav-item mb-3">
+                    <li class="nav-item mb-2">
                         <a asp-controller="Customer" asp-action="GetAllCustomers" class="nav-link">
                             <div class="icon-wrapper">
                                 <i class="fa-solid fa-address-card"></i>
@@ -118,7 +118,7 @@
                             </div>
                         </a>
                     </li>
-                    <li class="nav-item mb-3">
+                    <li class="nav-item mb-2">
                         <a asp-controller="Contract" asp-action="GetAllContracts" class="nav-link">
                             <div class="icon-wrapper">
                                 <i class="fa-solid fa-file-signature"></i>
@@ -128,7 +128,7 @@
                             </div>
                         </a>
                     </li>
-                    <li class="nav-item mb-3">
+                    <li class="nav-item mb-2">
                         <a asp-controller="Payment" asp-action="GetAllPayments" class="nav-link">
                             <div class="icon-wrapper">
                                 <i class="fa-solid fa-money-bill-wave"></i>
@@ -138,7 +138,27 @@
                             </div>
                         </a>
                     </li>
-                    <li class="nav-item mb-3">
+                    <li class="nav-item mb-2">
+                        <a asp-controller="Report" asp-action="GetAllReports" class="nav-link">
+                            <div class="icon-wrapper">
+                                <i class="fa-solid fa-chart-line"></i>
+                            </div>
+                            <div class="name-wrapper">
+                                Reports
+                            </div>
+                        </a>
+                    </li>
+                    <li class="nav-item mb-2">
+                        <a asp-controller="PaymentSchedule" asp-action="GetAllPaymentSchedules" class="nav-link">
+                            <div class="icon-wrapper">
+                                <i class="fa-solid fa-calendar-days"></i>
+                            </div>
+                            <div class="name-wrapper">
+                                Payment Schedule
+                            </div>
+                        </a>
+                    </li>
+                    <li class="nav-item mb-2">
                         <a asp-controller="Founder" asp-action="GetAllFounders" class="nav-link">
                             <div class="icon-wrapper">
                                 <i class="fa-solid fa-user-group"></i>
@@ -148,7 +168,7 @@
                             </div>
                         </a>
                     </li>
-                    <li class="nav-item mb-3">
+                    <li class="nav-item mb-2">
                         <a asp-controller="PaymentType" asp-action="GetAllPaymentTypes" class="nav-link">
                             <div class="icon-wrapper">
                                 <i class="fa-solid fa-file-invoice-dollar"></i>

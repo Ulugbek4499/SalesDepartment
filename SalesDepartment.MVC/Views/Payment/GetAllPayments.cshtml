@@ -60,7 +60,9 @@
             <div class="input-group mb-1 mt-3" style="display:flex; justify-content:space-between; gap:5px;">
                 <!-- Add input fields for each column you want to search -->
                 <input id="searchPaymentNumber" type="text" class="form-control" placeholder="Search PaymentNumber">
-                <input id="searchPaymentDate" type="date" class="form-control" placeholder="Search PaymentDate">
+               @* <input id="searchPaymentDate" type="date" class="form-control" placeholder="Search PaymentDate">*@
+                <input id="searchStartDate" type="date" class="form-control" placeholder="Start Date">
+                <input id="searchEndDate" type="date" class="form-control" placeholder="End Date">
                 <input id="searchAmount" type="text" class="form-control" placeholder="Search Amount">
                 <input id="searchContractId" type="text" class="form-control" placeholder="Search ContractId">
                 <input id="searchPaymentTypeId" type="text" class="form-control" placeholder="Search PaymentTypeId">
@@ -184,6 +186,62 @@
 <script>
     document.getElementById('searchButton').addEventListener('click', function () {
         var searchPaymentNumber = document.getElementById('searchPaymentNumber').value.toLowerCase();
+        var searchStartDate = document.getElementById('searchStartDate').value;
+        var searchEndDate = document.getElementById('searchEndDate').value;
+        var searchAmount = document.getElementById('searchAmount').value.toLowerCase();
+        var searchContractId = document.getElementById('searchContractId').value.toLowerCase();
+        var searchPaymentTypeId = document.getElementById('searchPaymentTypeId').value.toLowerCase();
+
+        var rows = document.getElementById('PaymentsTable').getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+
+        for (var i = 0; i < rows.length; i++) {
+            var cells = rows[i].getElementsByTagName('td');
+            var paymentDate = new Date(cells[2].innerText);
+
+            var match = true; // Assume it's a match initially
+
+            if (searchPaymentNumber && !cells[1].innerText.toLowerCase().includes(searchPaymentNumber)) {
+                match = false;
+            }
+            if (searchStartDate) {
+                var startDate = new Date(searchStartDate);
+                if (searchEndDate) {
+                    var endDate = new Date(searchEndDate);
+                    if (paymentDate < startDate || paymentDate > endDate) {
+                        match = false;
+                    }
+                } else {
+                    // If only start date is entered, show payments for that specific day
+                    if (!isSameDay(paymentDate, startDate)) {
+                        match = false;
+                    }
+                }
+            }
+            if (searchAmount && !cells[3].innerText.toLowerCase().includes(searchAmount)) {
+                match = false;
+            }
+            if (searchContractId && !cells[4].innerText.toLowerCase().includes(searchContractId)) {
+                match = false;
+            }
+            if (searchPaymentTypeId && !cells[5].innerText.toLowerCase().includes(searchPaymentTypeId)) {
+                match = false;
+            }
+
+            rows[i].style.display = match ? '' : 'none';
+        }
+    });
+
+    function isSameDay(date1, date2) {
+        return date1.getDate() === date2.getDate() &&
+            date1.getMonth() === date2.getMonth() &&
+            date1.getFullYear() === date2.getFullYear();
+    }
+</script>
+
+
+@*<script>
+    document.getElementById('searchButton').addEventListener('click', function () {
+        var searchPaymentNumber = document.getElementById('searchPaymentNumber').value.toLowerCase();
         var searchPaymentDate = document.getElementById('searchPaymentDate').value.toLowerCase();
         var searchAmount = document.getElementById('searchAmount').value.toLowerCase();
         var searchContractId = document.getElementById('searchContractId').value.toLowerCase();
@@ -215,7 +273,7 @@
         }
     });
 </script>
-
+*@
 <script>
     document.getElementById('refreshButton').addEventListener('click', function () {
         // Clear the search input field
