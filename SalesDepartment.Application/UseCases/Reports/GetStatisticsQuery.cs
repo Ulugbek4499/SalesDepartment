@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using SalesDepartment.Application.Common.Interfaces;
-using SalesDepartment.Application.UseCases.Contracts.Response;
 
 namespace SalesDepartment.Application.UseCases.Reports
 {
