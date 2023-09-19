@@ -25,5 +25,8 @@ namespace SalesDepartment.Application.UseCases.Contracts.Response
         public DateTime ModifyDate { get; set; }
 
         public ICollection<Payment> Payments { get; set; }
+
+        public Dictionary<DateOnly, decimal> ScheduledInfo { get; set; }
+        public Dictionary<DateOnly, decimal> ActualInfo { get; set; }
     }
 }

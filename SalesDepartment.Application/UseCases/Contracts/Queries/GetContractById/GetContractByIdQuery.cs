@@ -1,9 +1,11 @@
-﻿using AutoMapper;
+﻿using System.Diagnostics.Contracts;
+using AutoMapper;
 using MediatR;
 using SalesDepartment.Application.Common.Exceptions;
 using SalesDepartment.Application.Common.Interfaces;
 using SalesDepartment.Application.UseCases.Contracts.Response;
 using SalesDepartment.Domain.Entities;
+using Telegram.Bot.Types;
 
 namespace SalesDepartment.Application.UseCases.Contracts.Queries.GetContractById
 {
@@ -22,16 +24,28 @@ namespace SalesDepartment.Application.UseCases.Contracts.Queries.GetContractById
 
         public async Task<ContractResponse> Handle(GetContractByIdQuery request, CancellationToken cancellationToken)
         {
-            var Contract = FilterIfContractExsists(request.Id);
+            var contract = _dbContext.Contracts.Find(request.Id);
 
-            var result = _mapper.Map<ContractResponse>(Contract);
+            var result = _mapper.Map<ContractResponse>(contract);
+
+            result.ActualInfo = result.Payments.ToDictionary(
+                             payment => DateOnly.FromDateTime(payment.PaymentDate),
+                             payment => payment.Amount);
+
+
+            decimal remainingDebt = result.TotalAmountOfContract - result.InAdvancePaymentOfContract;
+            decimal monthlyPayment = remainingDebt / result.NumberOfMonths;
+            DateOnly paymentDate = DateOnly.FromDateTime(result.PaymentStartDate);
+
+            for (int month = 1; month <= result.NumberOfMonths; month++)
+            {
+                result.ScheduledInfo[paymentDate] = remainingDebt;
+                paymentDate = paymentDate.AddMonths(1);
+                remainingDebt -= monthlyPayment;
+            }
+
+
             return await Task.FromResult(result);
         }
-
-        private Contract FilterIfContractExsists(int id)
-            => _dbContext.Contracts
-                .Find(id)
-                     ?? throw new NotFoundException(
-                            " There is no Contract with this Id. ");
     }
 }
