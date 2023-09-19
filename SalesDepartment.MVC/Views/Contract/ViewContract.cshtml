@@ -19,12 +19,13 @@
                         <thead>
                             <tr>
                                 <th style="width: 25%;">Contract Number</th>
-                                <th style="width: 25%;">ContractStartDate</th>
-                                <th style="width: 25%;">TotalAmountOfContract</th>
-                                <th style="width: 25%;">PaymentStartDate</th>
-                                <th style="width: 25%;">FounderName</th>
-                                <th style="width: 25%;">InAdvancePaymentOfContract</th>
+                                <th style="width: 25%;">Contract Date</th>
+                                <th style="width: 25%;">Total Amount Of Contract</th>
+                                <th style="width: 25%;">Advance Payment</th>
+                                <th style="width: 25%;">Monthly Payment</th>
                                 <th style="width: 25%;">Number Of Months</th>
+                                <th style="width: 25%;">Payment Start Date</th>
+                                <th style="width: 25%;">Founder Name</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -32,10 +33,11 @@
                                     <td>@Model.ContractNumber</td>
                                     <td>@Model.ContractStartDate</td>
                                     <td>@Model.TotalAmountOfContract</td>
+                                    <td>@Model.InAdvancePaymentOfContract</td>
+                                    <td>@Model.AmountOfMonthlyPayment</td>
+                                    <td>@Model.NumberOfMonths</td>
                                     <td>@Model.PaymentStartDate</td>
                                     <td>@Model.Founder.FirstName @Model.Founder.LastName</td>
-                                    <td>@Model.InAdvancePaymentOfContract</td>
-                                    <td>@Model.NumberOfMonths</td>
                                 </tr>
                         </tbody>
                     </table>

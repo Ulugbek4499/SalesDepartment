@@ -120,9 +120,9 @@ public class ContractController : ApiBaseController
 
         doc.ReplaceText("«Этаже»", contract.Home.Floor.ToString());
         doc.ReplaceText("«Проектной_площадью»", contract.Home.Area.ToString());
-        doc.ReplaceText("«Общая_сумма_контракта» ", contract.TotalAmountOfContract.ToString());
+        doc.ReplaceText("«Общая_сумма_контракта»", contract.TotalAmountOfContract.ToString());
         doc.ReplaceText("«Сумма_контракта_прописью»", TotalAmountInWords);
-        doc.ReplaceText("«Сумма_1_М2» ", SumOfOneMeterSquare.ToString());
+        doc.ReplaceText("«Сумма_1_М2»", SumOfOneMeterSquare.ToString());
 
         doc.ReplaceText("«Сумма_1_М2_прописью»", SumOfOneMeterSquareInWords);
         doc.ReplaceText("«Тел_Ном_»", contract.Customer.PhoneNumberOne);

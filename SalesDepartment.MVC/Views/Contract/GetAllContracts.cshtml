@@ -111,6 +111,9 @@
                                             <a href="@Url.Action("ContractInDocx", "Contract", new { id = Contract.Id })" class="btn btn-secondary">
                                                 <i class="fa-regular fa-file-word"></i> 
                                             </a>
+                                            <a href="@Url.Action("GraphicInDocx", "Report", new { id = Contract.Id })" class="btn btn-secondary">
+                                                <i class="fa-regular fa-file-pdf"></i>
+                                            </a>
                                             <a href="@Url.Action("ViewContract", "Contract", new { id = Contract.Id })" class="btn btn-secondary">Details</a>
                                             <a href="@Url.Action("UpdateContract", new { id = Contract.Id })" class="btn btn-secondary"><i class="fas fa-pen-to-square"></i></a>
                                             <a href="@Url.Action("DeleteContract", new { id = Contract.Id })" class="btn btn-danger"><i class="fas fa-trash-can"></i></a>
