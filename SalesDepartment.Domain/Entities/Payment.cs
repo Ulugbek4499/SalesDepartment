@@ -8,7 +8,6 @@ namespace SalesDepartment.Domain.Entities
         public DateTime PaymentDate { get; set; }
 
         public decimal Amount { get; set; }
-        public string AmountsInWords { get; set; }
 
         public int ContractId { get; set; }
         public virtual Contract Contract { get; set; }

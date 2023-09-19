@@ -6,13 +6,14 @@ namespace SalesDepartment.Domain.Entities
     {
         public string ContractNumber { get; set; }
         public DateTime ContractStartDate { get; set; }
-
+        public DateTime PaymentStartDate { get; set; }
+        
         public decimal TotalAmountOfContract { get; set; }
-        public DateTime ContractEndDate { get; set; }
-
-        public int NumberOfMonths { get; set; }
-        public int PaymentDay { get; set; }
-
+        public decimal InAdvancePaymentOfContract { get; set; } = 0;
+        public decimal AmountOfBalance { get; set; } = 0;
+        public int NumberOfMonths { get; set; } = 0;
+        public decimal AmountOfMonthlyPayment => CalculateMonthlyPayment();
+      
         public int HomeId { get; set; }
         public virtual Home Home { get; set; }
 
@@ -23,5 +24,10 @@ namespace SalesDepartment.Domain.Entities
         public virtual Founder Founder { get; set; }
 
         public virtual ICollection<Payment> Payments { get; set; }
+
+        private decimal CalculateMonthlyPayment()
+        {
+            return (TotalAmountOfContract - InAdvancePaymentOfContract) / NumberOfMonths;
+        }
     }
 }

@@ -7,10 +7,14 @@ namespace SalesDepartment.Application.UseCases.Contracts.Response
         public int Id { get; set; }
         public string ContractNumber { get; set; }
         public DateTime ContractStartDate { get; set; }
+        public DateTime PaymentStartDate { get; set; }
+
         public decimal TotalAmountOfContract { get; set; }
-        public DateTime ContractEndDate { get; set; }
+        public decimal InAdvancePaymentOfContract { get; set; }
+        public decimal AmountOfBalance { get; set; }
         public int NumberOfMonths { get; set; }
-        public int PaymentDay { get; set; }
+        public decimal AmountOfMonthlyPayment { get; set; }
+
         public int HomeId { get; set; }
         public Home Home { get; set; }
         public int CustomerId { get; set; }

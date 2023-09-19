@@ -11,10 +11,12 @@ namespace SalesDepartment.Application.UseCases.Contracts.Commands.UpdateContract
         public int Id { get; set; }
         public string ContractNumber { get; set; }
         public DateTime ContractStartDate { get; set; }
+        public DateTime PaymentStartDate { get; set; }
+
         public decimal TotalAmountOfContract { get; set; }
-        public DateTime ContractEndDate { get; set; }
+        public decimal InAdvancePaymentOfContract { get; set; }
         public int NumberOfMonths { get; set; }
-        public int PaymentDay { get; set; }
+
         public int HomeId { get; set; }
         public int CustomerId { get; set; }
         public int FounderId { get; set; }

@@ -10,7 +10,6 @@ namespace SalesDepartment.Application.UseCases.Payments.Commands.CreatePayment
         public string PaymentNumber { get; set; }
         public DateTime PaymentDate { get; set; }
         public decimal Amount { get; set; }
-        public string AmountsInWords { get; set; }
         public int ContractId { get; set; }
         public int PaymentTypeId { get; set; }
     }

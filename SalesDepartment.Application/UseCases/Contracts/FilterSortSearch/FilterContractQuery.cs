@@ -10,10 +10,12 @@ namespace SalesDepartment.Application.UseCases.Contracts.FilterSortSearch
     {
         public string? ContractNumber { get; set; }
         public DateTime? ContractStartDate { get; set; }
+        public DateTime? PaymentStartDate { get; set; }
+
         public decimal? TotalAmountOfContract { get; set; }
-        public DateTime? ContractEndDate { get; set; }
+        public decimal? InAdvancePaymentOfContract { get; set; }
         public int? NumberOfMonths { get; set; }
-        public int? PaymentDay { get; set; }
+
         public int? HomeId { get; set; }
         public int? CustomerId { get; set; }
         public int? FounderId { get; set; }
@@ -44,9 +46,9 @@ namespace SalesDepartment.Application.UseCases.Contracts.FilterSortSearch
                 contracts = contracts.Where(c => c.ContractStartDate == request.ContractStartDate);
             }
 
-            if (request.ContractEndDate.HasValue)
+            if (request.PaymentStartDate.HasValue)
             {
-                contracts = contracts.Where(c => c.ContractEndDate == request.ContractEndDate);
+                contracts = contracts.Where(c => c.PaymentStartDate == request.PaymentStartDate);
             }
 
             if (request.TotalAmountOfContract.HasValue)
@@ -59,9 +61,9 @@ namespace SalesDepartment.Application.UseCases.Contracts.FilterSortSearch
                 contracts = contracts.Where(c => c.NumberOfMonths == request.NumberOfMonths);
             }
 
-            if (request.PaymentDay.HasValue)
+            if (request.PaymentStartDate.HasValue)
             {
-                contracts = contracts.Where(c => c.PaymentDay == request.PaymentDay);
+                contracts = contracts.Where(c => c.PaymentStartDate == request.PaymentStartDate);
             }
 
             if (request.HomeId.HasValue)

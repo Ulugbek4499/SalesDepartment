@@ -68,9 +68,9 @@ namespace SalesDepartment.Application.UseCases.Contracts.Reports
             excelDataTable.Columns.Add("ContractNumber", typeof(string));
             excelDataTable.Columns.Add("ContractStartDate", typeof(DateTime));
             excelDataTable.Columns.Add("TotalAmountOfContract", typeof(decimal));
-            excelDataTable.Columns.Add("ContractEndDate", typeof(DateTime));
+            excelDataTable.Columns.Add("PaymentStartDate", typeof(DateTime));
             excelDataTable.Columns.Add("NumberOfMonths", typeof(int));
-            excelDataTable.Columns.Add("PaymentDay", typeof(int));
+            excelDataTable.Columns.Add("InAdvancePaymentOfContract", typeof(decimal));
             excelDataTable.Columns.Add("Home Number", typeof(string));
             excelDataTable.Columns.Add("Customer FullName", typeof(string));
             excelDataTable.Columns.Add("Founder Name", typeof(string));
@@ -81,8 +81,8 @@ namespace SalesDepartment.Application.UseCases.Contracts.Reports
             {
                 ContractsList.ForEach(item =>
                 {
-                    excelDataTable.Rows.Add(item.ContractNumber, item.ContractStartDate, item.TotalAmountOfContract, item.ContractEndDate,
-                        item.NumberOfMonths, item.PaymentDay, item.Home.Block+" " + item.Home.Entrance.ToString() + " " + item.Home.Floor.ToString() + " " + item.Home.ApartmentNumber.ToString() + " " + item.Home.Area.ToString(), item.Customer.FirstName + " " + item.Customer.LastName, item.Founder.FirstName + " " + item.Founder.LastName);
+                    excelDataTable.Rows.Add(item.ContractNumber, item.ContractStartDate, item.TotalAmountOfContract, item.PaymentStartDate,
+                        item.NumberOfMonths, item.InAdvancePaymentOfContract, item.Home.Block+" " + item.Home.Entrance.ToString() + " " + item.Home.Floor.ToString() + " " + item.Home.ApartmentNumber.ToString() + " " + item.Home.Area.ToString(), item.Customer.FirstName + " " + item.Customer.LastName, item.Founder.FirstName + " " + item.Founder.LastName);
                 });
             }
 

@@ -97,13 +97,15 @@ public class PaymentController : ApiBaseController
         PaymentResponse payment = await Mediator.Send(new GetPaymentByIdQuery(id));
         var templatePath = @"D:\PDP\SalesDepartment\SalesDepartment.MVC\wwwroot\docs\Kvitansiya.docx";
 
+        string AmountInWords = payment.Amount.ToString(); 
+
         var doc = DocX.Load(templatePath);
 
         doc.ReplaceText("«Договар_»", payment.Contract.ContractNumber);
         doc.ReplaceText("«Договар_дата»", payment.Contract.ContractStartDate.ToString());
         doc.ReplaceText("«Принято_от_ФИО»", payment.Contract.Customer.LastName + " " + payment.Contract.Customer.FirstName + " " + payment.Contract.Customer.MiddleName);
         doc.ReplaceText("«Сумма»", payment.Amount.ToString());
-        doc.ReplaceText("«Summa_soz_bilan»", payment.AmountsInWords);
+        doc.ReplaceText("«Summa_soz_bilan»", AmountInWords);
 
         doc.ReplaceText("«Номер_документа_»", payment.PaymentNumber);
         doc.ReplaceText("«Дата_составления»", payment.PaymentDate.ToString());
