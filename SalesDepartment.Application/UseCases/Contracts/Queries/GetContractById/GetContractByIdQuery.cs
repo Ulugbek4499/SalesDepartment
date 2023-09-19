@@ -28,9 +28,13 @@ namespace SalesDepartment.Application.UseCases.Contracts.Queries.GetContractById
 
             var result = _mapper.Map<ContractResponse>(contract);
 
+            // Initialize the ScheduledInfo dictionary
+            result.ScheduledInfo = new Dictionary<DateOnly, decimal>();
+
+            // Populate the ActualInfo dictionary
             result.ActualInfo = result.Payments.ToDictionary(
-                             payment => DateOnly.FromDateTime(payment.PaymentDate),
-                             payment => payment.Amount);
+              payment => DateOnly.FromDateTime(payment.PaymentDate), // Convert PaymentDate to DateOnly
+              payment => payment.Amount);
 
 
             decimal remainingDebt = result.TotalAmountOfContract - result.InAdvancePaymentOfContract;
@@ -43,7 +47,6 @@ namespace SalesDepartment.Application.UseCases.Contracts.Queries.GetContractById
                 paymentDate = paymentDate.AddMonths(1);
                 remainingDebt -= monthlyPayment;
             }
-
 
             return await Task.FromResult(result);
         }

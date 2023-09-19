@@ -111,6 +111,45 @@
                             }
                         </tbody>
                     </table>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Number</th>
+                                <th>Scheduled Dates</th>
+                                <th>Scheduled Payment</th>
+                                <th>Payed Date</th>
+                                <th>Payment Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model.ScheduledInfo != null)
+                            {
+                                int rowNumber = 1;
+                                foreach (var scheduled in Model.ScheduledInfo)
+                                {
+                                    <tr>
+                                        <td>@rowNumber</td>
+                                        <td>@scheduled.Key.ToString("yyyy-MM-dd")</td> <!-- Display scheduled date as a formatted string -->
+                                        <td>@scheduled.Value.ToString("C")</td> <!-- Display scheduled payment -->
+                                        @if (Model.ActualInfo != null && Model.ActualInfo.ContainsKey(scheduled.Key))
+                                        {
+                                            var actualPayment = Model.ActualInfo[scheduled.Key];
+                                            <td>@scheduled.Key.ToString("yyyy-MM-dd")</td> <!-- Display payed date as a formatted string -->
+                                            <td>@actualPayment.ToString("C")</td> <!-- Display payment amount -->
+                                        }
+                                        else
+                                        {
+                                            <td></td>
+                                            <td></td>
+                                        }
+                                    </tr>
+                                    rowNumber++;
+                                }
+                            }
+                        </tbody>
+                    </table>
+
+
                 </div>
             </div>
         </div>
