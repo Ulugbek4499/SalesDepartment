@@ -10,12 +10,12 @@
         <div class="input-group mb-1 mt-3" style="display:flex; justify-content:space-between; gap:20px;">
             <div style="display:flex; gap:5px">
                 <a href="@Url.Action("CreateHome")" class="btn btn-primary mr-2">
-                    <i class="fa-solid fa-plus"></i> Home
+                    <i class="fa-solid fa-plus"></i> Квартира
                 </a>
             </div>
             <div style="display:flex; gap:5px">
                 <button id="refreshButton" class="btn btn-warning"><i class="fa-solid fa-arrows-rotate"></i> </button>
-                <input id="searchInput" type="text" class="form-control" placeholder="Search" style="max-width: 200px;">
+                <input id="searchInput" type="text" class="form-control" placeholder="Поиск" style="max-width: 200px;">
                 <div class="input-group-append">
                     <button id="searchButtonSimple" class="btn btn-info" type="button">
                         <i class="fa-solid fa-magnifying-glass"></i>
@@ -30,25 +30,25 @@
         <div class="input-group mb-1 mt-3" style="display:flex; justify-content:space-between; gap:170px">
             <div>
                 <a asp-controller="HomeBuilding" asp-action="CreateHomeFromExcel" class="btn btn-success">
-                    <i class="fa-solid fa-file-excel"></i> <i class="fa-solid fa-upload"></i>CreateFromExcel
+                    <i class="fa-solid fa-file-excel"></i> <i class="fa-solid fa-upload"></i>СоздатьИзExcel
                 </a>
                 <a asp-controller="HomeBuilding" asp-action="GetAllHomesExcel" class="btn btn-success">
-                    <i class="fa-solid fa-file-excel"></i> <i class="fa-solid fa-download"></i>GetInExcel
+                    <i class="fa-solid fa-file-excel"></i> <i class="fa-solid fa-download"></i>ПолучитьExcel
                 </a>
             </div>
             <div style="display:flex; gap:5px">
                 <select id="sortColumn" class="form-control">
-                    <option value="Block">Block</option>
-                    <option value="Entrance">Entrance</option>
-                    <option value="Floor">Floor</option>
-                    <option value="ApartmentNumber">ApartmentNumber</option>
-                    <option value="NumberOfRooms">NumberOfRooms</option>
-                    <option value="Area">Area</option>
-                    <option value="ContractId">Contract</option>
+                    <option value="Block">Здания</option>
+                    <option value="Entrance">Подъезд №</option>
+                    <option value="Floor">Этаже</option>
+                    <option value="ApartmentNumber">Квартира №</option>
+                    <option value="NumberOfRooms">Количество комнат</option>
+                    <option value="Area">Проектной площадью </option>
+                    <option value="ContractId">Договор</option>
                 </select>
                 <select id="sortOrder" class="form-control">
-                    <option value="asc">Ascending</option>
-                    <option value="desc">Descending</option>
+                    <option value="asc">Восходящий</option>
+                    <option value="desc">Нисходящий</option>
                 </select>
                 <button id="sortButton" class="btn btn-info"><i class="fa-solid fa-arrow-up-a-z"></i> </button>
                 <button id="toggleExtendedSearch" class="btn btn-info"><i class="fa-solid fa-filter"></i> </button>
@@ -63,16 +63,16 @@
         <div class="col">
             <div class="input-group mb-1 mt-3" style="display:flex; justify-content:space-between; gap:5px;">
                 <!-- Add input fields for each column you want to search -->
-                <input id="searchBlock" type="text" class="form-control" placeholder="Search Block">
-                <input id="searchEntrance" type="text" class="form-control" placeholder="Search Entrance">
-                <input id="searchFloor" type="text" class="form-control" placeholder="Search Floor">
-                <input id="searchApartmentNumber" type="text" class="form-control" placeholder="Search ApartmentNumber">
-                <input id="searchNumberOfRooms" type="text" class="form-control" placeholder="Search NumberOfRooms">
-                <input id="searchArea" type="text" class="form-control" placeholder="Search Area">
+                <input id="searchBlock" type="text" class="form-control" placeholder="Здания">
+                <input id="searchEntrance" type="text" class="form-control" placeholder="Подъезд №">
+                <input id="searchFloor" type="text" class="form-control" placeholder="Этаже">
+                <input id="searchApartmentNumber" type="text" class="form-control" placeholder="Квартира №">
+                <input id="searchNumberOfRooms" type="text" class="form-control" placeholder="Количество комнат">
+                <input id="searchArea" type="text" class="form-control" placeholder="Проектной площадью">
                 <select id="searchContract" class="form-control">
-                    <option value="">Show All</option>
-                    <option value="Yes">Yes</option>
-                    <option value="No">No</option>
+                    <option value="">Показать все</option>
+                    <option value="Yes">С договором</option>
+                    <option value="No">Без договора</option>
                 </select>
                 <div class="input-group-append">
                     <button id="searchButton" class="btn btn-info" type="button">
@@ -92,7 +92,7 @@
                 @{
                     if (Model.Length == 0)
                     {
-                        <h2>There are no Homes yet...</h2>
+                        <h2>Дома пока нет...</h2>
                     }
                 }
 
@@ -100,14 +100,14 @@
                     <table id="HomesTable" class="table">
                         <thead>
                             <tr>
-                                <th style="width: 25%;">Actions</th>
-                                <th data-column="Block" style="width: 25%;">Block</th>
-                                <th data-column="Entrance" style="width: 25%;">Entrance</th>
-                                <th data-column="Floor" style="width: 25%;">Floor</th>
-                                <th data-column="ApartmentNumber" style="width: 25%;">ApartmentNumber</th>
-                                <th data-column="NumberOfRooms" style="width: 25%;">NumberOfRooms</th>
-                                <th data-column="Area" style="width: 25%;">Area</th>
-                                <th data-column="ContractId" style="width: 25%;">Contract</th>
+                                <th style="width: 25%;">Действия</th>
+                                <th data-column="Block" style="width: 25%;">Здания</th>
+                                <th data-column="Entrance" style="width: 25%;">Подъезд №</th>
+                                <th data-column="Floor" style="width: 25%;">Этаже</th>
+                                <th data-column="ApartmentNumber" style="width: 25%;">Квартира №</th>
+                                <th data-column="NumberOfRooms" style="width: 25%;">Количество комнат</th>
+                                <th data-column="Area" style="width: 25%;">Проектной площадью</th>
+                                <th data-column="ContractId" style="width: 25%;">Договор</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -130,7 +130,7 @@
                                         @if (!string.IsNullOrEmpty(Home.ContractId.ToString()))
                                         {
                                             <div style="display: flex; gap: 5px;">
-                                                <a href="@Url.Action("ViewContract", "Contract", new { id = Home.ContractId })" class="btn btn-secondary">Contract</a>
+                                                <a href="@Url.Action("ViewContract", "Contract", new { id = Home.ContractId })" class="btn btn-secondary">Договор</a>
                                             </div>
                                         }
                                     </td>

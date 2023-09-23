@@ -8,9 +8,17 @@
 <div class="row">
     <div class="col">
             <div class="input-group mb-1 mt-3" style="display:flex; justify-content:space-between; gap:20px;">
-            <a href="@Url.Action("CreateContract")" class="btn btn-primary mr-2">
-                <i class="fa-solid fa-plus"></i> Contract
-            </a>
+            <div style="display: flex; gap: 20px;">
+                <a href="@Url.Action("CreateContract")" class="btn btn-primary mr-2">
+                    <i class="fa-solid fa-plus"></i> Contract
+                </a>
+                <a asp-controller="Founder" asp-action="GetAllFounders" class="nav-link">
+                    <div class="icon-wrapper">
+                        <i class="fa-solid fa-user-group"></i> Founders
+                    </div>
+                </a>
+            </div>
+           
             
             <div style="display:flex; gap:5px">
                 <button id="refreshButton" class="btn btn-warning"><i class="fa-solid fa-arrows-rotate"></i></button>

@@ -80,13 +80,22 @@
             .navbar-nav .user-manager-link:hover {
                 color: yellow;
             }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+        }
+
+            .nav-link .icon-wrapper {
+                margin-right: 10px; /* Adjust the spacing between the icon and text */
+            }
     </style>
 
 </head>
 <body>
     <div class="container-fluid" style="position: fixed">
         <div class="row">
-            <aside class="bg-dark text-light col-2 sidebar" style="height: 100vh; width: 150px">
+            <aside class="bg-dark text-light col-2 sidebar" style="height: 100vh; width: 160px">
                 <ul class="nav flex-column" style="padding-top: 15px">
                     <li class="nav-item mb-1">
                         <a asp-controller="Home" asp-action="Index" class="nav-link">
@@ -94,7 +103,7 @@
                                 <i class="fa-solid fa-bars"></i>
                             </div>
                             <div class="name-wrapper">
-                                Main Menu
+                                Главное Меню
                             </div>
                         </a>
                     </li>
@@ -104,7 +113,7 @@
                                 <i class="fa-solid fa-building"></i>
                             </div>
                             <div class="name-wrapper">
-                                Apartments
+                                Квартиры
                             </div>
                         </a>
                     </li>
@@ -114,7 +123,7 @@
                                 <i class="fa-solid fa-address-card"></i>
                             </div>
                             <div class="name-wrapper">
-                                Customers
+                                Клиенты
                             </div>
                         </a>
                     </li>
@@ -124,7 +133,7 @@
                                 <i class="fa-solid fa-file-signature"></i>
                             </div>
                             <div class="name-wrapper">
-                                Contracts
+                                Контракты
                             </div>
                         </a>
                     </li>
@@ -134,17 +143,7 @@
                                 <i class="fa-solid fa-money-bill-wave"></i>
                             </div>
                             <div class="name-wrapper">
-                                Payments
-                            </div>
-                        </a>
-                    </li>
-                    <li class="nav-item mb-2">
-                        <a asp-controller="Report" asp-action="GetStatistics" class="nav-link">
-                            <div class="icon-wrapper">
-                                <i class="fa-solid fa-chart-line"></i>
-                            </div>
-                            <div class="name-wrapper">
-                                Reports
+                                Платежи
                             </div>
                         </a>
                     </li>
@@ -154,27 +153,7 @@
                                 <i class="fa-solid fa-calendar"></i>
                             </div>
                             <div class="name-wrapper">
-                                Contracts with Depts
-                            </div>
-                        </a>
-                    </li>
-                    <li class="nav-item mb-2">
-                        <a asp-controller="Founder" asp-action="GetAllFounders" class="nav-link">
-                            <div class="icon-wrapper">
-                                <i class="fa-solid fa-user-group"></i>
-                            </div>
-                            <div class="name-wrapper">
-                                Founders
-                            </div>
-                        </a>
-                    </li>
-                    <li class="nav-item mb-2">
-                        <a asp-controller="PaymentType" asp-action="GetAllPaymentTypes" class="nav-link">
-                            <div class="icon-wrapper">
-                                <i class="fa-solid fa-file-invoice-dollar"></i>
-                            </div>
-                            <div class="name-wrapper">
-                                PaymentTypes
+                                Долг Клиента
                             </div>
                         </a>
                     </li>

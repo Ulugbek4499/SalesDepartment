@@ -8,9 +8,16 @@
 <div class="row">
     <div class="col">
         <div class="input-group mb-1 mt-3" style="display:flex; justify-content:space-between; gap:20px;">
-            <a href="@Url.Action("CreatePayment")" class="btn btn-primary mr-2">
-                <i class="fa-solid fa-plus"></i> Payment
-            </a>
+            <div style="display: flex; gap: 20px;">
+                <a href="@Url.Action("CreatePayment")" class="btn btn-primary mr-2">
+                    <i class="fa-solid fa-plus"></i> Payment
+                </a>
+                <a asp-controller="PaymentType" asp-action="GetAllPaymentTypes" class="nav-link">
+                    <div class="icon-wrapper">
+                        <i class="fa-solid fa-file-invoice-dollar"></i> PaymentTypes
+                    </div>
+                </a>
+            </div>
 
             <div style="display:flex; gap:5px">
                 <button id="refreshButton" class="btn btn-warning"><i class="fa-solid fa-arrows-rotate"></i> </button>
