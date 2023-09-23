@@ -11,7 +11,6 @@ namespace SalesDepartment.Application.UseCases.Contracts.Response
 
         public decimal TotalAmountOfContract { get; set; }
         public decimal InAdvancePaymentOfContract { get; set; }
-        public decimal AmountOfBalance { get; set; }
         public int NumberOfMonths { get; set; }
         public decimal AmountOfMonthlyPayment { get; set; }
 

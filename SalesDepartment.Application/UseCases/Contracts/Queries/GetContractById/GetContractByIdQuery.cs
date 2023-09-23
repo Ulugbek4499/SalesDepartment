@@ -24,31 +24,69 @@ namespace SalesDepartment.Application.UseCases.Contracts.Queries.GetContractById
 
         public async Task<ContractResponse> Handle(GetContractByIdQuery request, CancellationToken cancellationToken)
         {
+            /*       var contract = _dbContext.Contracts.Find(request.Id);
+
+                   var result = _mapper.Map<ContractResponse>(contract);
+
+                   return await Task.FromResult(result);*/
+
             var contract = _dbContext.Contracts.Find(request.Id);
 
-            var result = _mapper.Map<ContractResponse>(contract);
-
-            // Initialize the ScheduledInfo dictionary
-            result.ScheduledInfo = new Dictionary<DateOnly, decimal>();
-
-            // Populate the ActualInfo dictionary
-            result.ActualInfo = result.Payments.ToDictionary(
-              payment => DateOnly.FromDateTime(payment.PaymentDate), // Convert PaymentDate to DateOnly
-              payment => payment.Amount);
+            Dictionary<DateTime, decimal> actualPaymentSchedule = contract.Payments
+                         .ToDictionary(payment => payment.PaymentDate, payment => payment.Amount);
 
 
-            decimal remainingDebt = result.TotalAmountOfContract - result.InAdvancePaymentOfContract;
-            decimal monthlyPayment = remainingDebt / result.NumberOfMonths;
-            DateOnly paymentDate = DateOnly.FromDateTime(result.PaymentStartDate);
+            Dictionary<DateTime, decimal> paymentSchedule = new Dictionary<DateTime, decimal>();
 
-            for (int month = 1; month <= result.NumberOfMonths; month++)
+            DateTime paymentDate = contract.PaymentStartDate;
+
+            for (int i = 0; i < contract.NumberOfMonths; i++)
             {
-                result.ScheduledInfo[paymentDate] = remainingDebt;
+                decimal paymentAmount = contract.InAdvancePaymentOfContract + (i * contract.AmountOfMonthlyPayment);
+
+                paymentSchedule.Add(paymentDate, paymentAmount);
+
                 paymentDate = paymentDate.AddMonths(1);
-                remainingDebt -= monthlyPayment;
             }
 
-            return await Task.FromResult(result);
+            DateTime calculationDate = DateTime.Now;
+            var sumOfPayments = contract.Payments.Sum(x => x.Amount);
+            var scheduledPayment = paymentSchedule.FirstOrDefault(x => x.Key.Month == calculationDate.Month);
+            decimal deptAmount = 0;
+
+            if (scheduledPayment.Key != default(DateTime))
+            {
+                decimal scheduledPaymentAmount = scheduledPayment.Value;
+
+                deptAmount = scheduledPaymentAmount - sumOfPayments;
+            }
+
+
+            ContractResponse contractResponse = new ContractResponse()
+            {
+                Id = request.Id,
+                ContractNumber = contract.ContractNumber,
+                ContractStartDate = contract.ContractStartDate,
+                PaymentStartDate = contract.PaymentStartDate,
+                TotalAmountOfContract = contract.TotalAmountOfContract,
+                InAdvancePaymentOfContract = contract.InAdvancePaymentOfContract,
+                NumberOfMonths = contract.NumberOfMonths,
+                AmountOfMonthlyPayment = contract.AmountOfMonthlyPayment,
+                HomeId = contract.HomeId,
+                Home = contract.Home,
+                CustomerId = contract.CustomerId,
+                Customer = contract.Customer,
+                FounderId = contract.FounderId,
+                Founder = contract.Founder,
+                CreatedDate = contract.CreatedDate,
+                ModifyDate = contract.ModifyDate,
+                Payments = contract.Payments,
+                DeptAmout = deptAmount,
+                ScheduledInfo = paymentSchedule,
+                ActualInfo = actualPaymentSchedule
+            };
+
+            return contractResponse;
         }
     }
 }

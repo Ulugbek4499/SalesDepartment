@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Castle.Core.Resource;
 using DocumentFormat.OpenXml.Office2010.Excel;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using SalesDepartment.Application.Common.Interfaces;
 using SalesDepartment.Application.UseCases.Contracts.Response;
 using SalesDepartment.Application.UseCases.Payments.Response;
+using SalesDepartment.Domain.Entities;
 
 namespace SalesDepartment.Application.UseCases.Reports
 {
@@ -25,13 +27,12 @@ namespace SalesDepartment.Application.UseCases.Reports
 
         public async Task<ContractResponse> Handle(ContractWithDept request, CancellationToken cancellationToken)
         {
-            DateTime calculationDate = request.DateTime;
-
             var contract = _dbContext.Contracts.Find(request.Id);
-            var sumOfPayments= contract.Payments.Sum(x => x.Amount);
+
+            Dictionary<DateTime, decimal> actualPaymentSchedule = contract.Payments
+                         .ToDictionary(payment => payment.PaymentDate, payment => payment.Amount);
 
 
-           
             Dictionary<DateTime, decimal> paymentSchedule = new Dictionary<DateTime, decimal>();
 
             DateTime paymentDate = contract.PaymentStartDate;
@@ -45,17 +46,44 @@ namespace SalesDepartment.Application.UseCases.Reports
                 paymentDate = paymentDate.AddMonths(1);
             }
 
+            DateTime calculationDate = request.DateTime;
+            var sumOfPayments= contract.Payments.Sum(x => x.Amount);
             var scheduledPayment = paymentSchedule.FirstOrDefault(x => x.Key.Month == calculationDate.Month);
+            decimal deptAmount=0;
 
             if (scheduledPayment.Key != default(DateTime))
             {
                 decimal scheduledPaymentAmount = scheduledPayment.Value;
 
-                decimal dept = scheduledPaymentAmount - sumOfPayments;
-
+                deptAmount = scheduledPaymentAmount - sumOfPayments;
             }
 
-            return null; //contractsWithOutstandingPayments;
+
+            ContractResponse contractResponse = new ContractResponse()
+            {
+                Id=request.Id,
+                ContractNumber= contract.ContractNumber,
+                ContractStartDate= contract.ContractStartDate,
+                PaymentStartDate=contract.PaymentStartDate,
+                TotalAmountOfContract=contract.TotalAmountOfContract,
+                InAdvancePaymentOfContract=contract.InAdvancePaymentOfContract,
+                NumberOfMonths=contract.NumberOfMonths,
+                AmountOfMonthlyPayment=contract.AmountOfMonthlyPayment,
+                HomeId=contract.HomeId,
+                Home = contract.Home,
+                CustomerId = contract.CustomerId,
+                Customer = contract.Customer,
+                FounderId = contract.FounderId,
+                Founder = contract.Founder,
+                CreatedDate = contract.CreatedDate,
+                ModifyDate = contract.ModifyDate,
+                Payments = contract.Payments,
+                DeptAmout = deptAmount,
+                ScheduledInfo = paymentSchedule,
+                ActualInfo = actualPaymentSchedule
+            };
+
+            return contractResponse;
         }
     }
 }

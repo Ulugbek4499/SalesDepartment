@@ -10,7 +10,6 @@ namespace SalesDepartment.Domain.Entities
         
         public decimal TotalAmountOfContract { get; set; }
         public decimal InAdvancePaymentOfContract { get; set; } = 0;
-        public decimal AmountOfBalance { get; set; } = 0;
         public int NumberOfMonths { get; set; } = 0;
         public decimal AmountOfMonthlyPayment => CalculateMonthlyPayment();
       
