@@ -117,8 +117,7 @@
                                 <th>Number</th>
                                 <th>Scheduled Dates</th>
                                 <th>Scheduled Payment</th>
-                                <th>Payed Date</th>
-                                <th>Payment Amount</th>
+                                <th>Monthly Payment</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -131,6 +130,7 @@
                                         <td>@rowNumber</td>
                                         <td>@scheduled.Key.ToString("yyyy-MM-dd")</td> <!-- Display scheduled date as a formatted string -->
                                         <td>@scheduled.Value.ToString("C")</td> <!-- Display scheduled payment -->
+                                        <td>@Model.AmountOfMonthlyPayment.ToString("C")</td>
                                         @if (Model.ActualInfo != null && Model.ActualInfo.ContainsKey(scheduled.Key))
                                         {
                                             var actualPayment = Model.ActualInfo[scheduled.Key];

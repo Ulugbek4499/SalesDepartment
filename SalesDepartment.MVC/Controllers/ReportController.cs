@@ -29,6 +29,14 @@ namespace SalesDepartment.MVC.Controllers
         }
 
         [HttpGet("[action]")]
+        public async ValueTask<IActionResult> GetContractsWithDepts(DateTime Time)
+        {
+            var contractsWithDepts = await Mediator.Send(new GetContractsWithDepts(Time));
+
+            return View(contractsWithDepts);
+        }
+
+        [HttpGet("[action]")]
         public async ValueTask<IActionResult> GraphicInDocx(int id)
         {
 

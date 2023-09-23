@@ -1,0 +1,304 @@
+﻿@{
+    Layout = "_Layout";
+}
+
+@model SalesDepartment.Application.UseCases.Contracts.Response.ContractResponse[]
+
+<h3 class="text-center">All Contracts</h3>
+<div class="row">
+    <div class="col">
+        <div class="input-group mb-1 mt-3" style="display:flex; justify-content:space-between; gap:20px;">
+            <div style="display:flex; gap:5px">
+                <button id="refreshButton" class="btn btn-warning"><i class="fa-solid fa-arrows-rotate"></i></button>
+                <input id="searchInput" type="text" class="form-control" placeholder="Search" style="max-width: 200px;">
+                <div class="input-group-append">
+                    <button id="searchButtonSimple" class="btn btn-info" type="button">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        <div class="input-group mb-1 mt-3" style="display:flex; justify-content:space-between; gap:170px">
+
+            <div>
+                <a asp-controller="Contract" asp-action="GetAllContractsExcel" class="btn btn-success">
+                    <i class="fa-solid fa-file-excel"></i> <i class="fa-solid fa-download"></i>GetInExcel
+                </a>
+            </div>
+            <div style="display:flex; gap:5px">
+                <select id="sortColumn" class="form-control">
+                    <option value="ContractNumber">ContractNumber</option>
+                    <option value="Customer">Customer</option>
+                    <option value="PaymentStartDate">PaymentStartDate</option>
+                    <option value="TotalAmountOfContract">TotalAmountOfContract</option>
+                    <option value="AmountOfMonthlyPayment">AmountOfMonthlyPayment</option>
+                    <option value="InAdvancePaymentOfContract">InAdvancePaymentOfContract</option>
+                    <option value="ScheduledInfo">ScheduledInfo</option>
+                    <option value="ActualInfo">ActualInfo</option>
+                    <option value="DeptAmout">DeptAmout</option>
+
+
+                </select>
+                <select id="sortOrder" class="form-control">
+                    <option value="asc">Ascending</option>
+                    <option value="desc">Descending</option>
+                </select>
+                <button id="sortButton" class="btn btn-info"><i class="fa-solid fa-arrow-up-a-z"></i> </button>
+                <button id="toggleExtendedSearch" class="btn btn-info"> <i class="fa-solid fa-filter"></i> </button>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div id="extendedSearchContainer" style="display: none;">
+    <div class="row">
+        <div class="col">
+            <div class="input-group mb-1 mt-3" style="display:flex; justify-content:space-between; gap:5px;">
+                <!-- Add input fields for each column you want to search -->
+                <input id="searchContractNumber" type="text" class="form-control" placeholder="Search ContractNumber">
+                <input id="searchCustomer" type="text" class="form-control" placeholder="Search Customer">
+                <input id="searchPaymentStartDate" type="date" class="form-control" placeholder="PaymentStartDate">
+                <input id="searchTotalAmountOfContract" type="text" class="form-control" placeholder="Search TotalAmountOfContract">
+                <input id="searchAmountOfMonthlyPayment" type="text" class="form-control" placeholder="Search AmountOfMonthlyPayment">
+                <input id="searchInAdvancePaymentOfContract" type="text" class="form-control" placeholder="Search InAdvancePaymentOfContract">
+                <input id="searchScheduledInfo" type="text" class="form-control" placeholder="Search ScheduledInfo">
+                <input id="searchActualInfo" type="text" class="form-control" placeholder="Search ActualInfo">
+                <input id="searchDeptAmout" type="text" class="form-control" placeholder="Search DeptAmout">
+                <div class="input-group-append">
+                    <button id="searchButton" class="btn btn-info" type="button">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<hr />
+
+<div class="container" style="height: 95vh;">
+    <div class="row" style="display:flex; justify-content:center;">
+        <div class="col-lg-6" style="width:100%">
+            <div class="custom-cards">
+                @{
+                    if (Model.Length == 0)
+                    {
+                        <h2>There are no Contracts yet...</h2>
+                    }
+                }
+
+                <div class="table-container" style="overflow-y: scroll; height: 58vh; width:100% ">
+                    <table id="ContractsTable" class="table">
+                        <thead>
+                            <tr>
+                                <th style="width: 25%;">Actions</th>
+                                <th style="width: 25%;">ContractNumber</th>
+                                <th style="width: 25%;">Customer</th>
+                                <th style="width: 25%;">PaymentStartDate</th>
+                                <th style="width: 25%;">TotalAmountOfContract</th>
+                                <th style="width: 25%;">AmountOfMonthlyPayment</th>
+                                <th style="width: 25%;">InAdvancePaymentOfContract</th>
+                                <th style="width: 25%;">ScheduledInfo</th>
+                                <th style="width: 25%;">ActualInfo</th>
+                                <th style="width: 25%;">DeptAmout</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var Contract in Model)
+                            {
+                                <tr>
+                                    <td class="action-links">
+                                        <div style="display:flex; gap:5px">
+                                            <a href="@Url.Action("ViewContract", "Contract", new { id = Contract.Id })" class="btn btn-secondary">Details</a>
+                                        </div>
+                                    </td>
+                                    <td>@Contract.ContractNumber</td>
+                                    <td>@Contract.Customer.FirstName +" "+@Contract.Customer.LastName</td>
+                                    <td>@Contract.PaymentStartDate.ToString("yyyy-MM-dd")</td>
+                                    <td class="amount-cell">@Contract.TotalAmountOfContract</td>
+                                    <td class="amount-cell">@Contract.AmountOfMonthlyPayment</td>
+                                    <td class="amount-cell">@Contract.InAdvancePaymentOfContract</td>
+                                    <td class="amount-cell">@Contract.ScheduledInfo.Values.Sum()</td>
+                                    <td class="amount-cell">@Contract.ActualInfo.Values.Sum()</td>
+                                    <td class="amount-cell">@Contract.DeptAmout</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.getElementById('searchButtonSimple').addEventListener('click', function () {
+        var input = document.getElementById('searchInput').value.toLowerCase();
+        var rows = document.getElementById('ContractsTable').getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+
+        for (var i = 0; i < rows.length; i++) {
+            var cells = rows[i].getElementsByTagName('td');
+            var match = false;
+
+            for (var j = 0; j < cells.length; j++) {
+                var cellText = cells[j].innerText.toLowerCase();
+                if (cellText.includes(input)) {
+                    match = true;
+                    break;
+                }
+            }
+
+            rows[i].style.display = match ? '' : 'none';
+        }
+    });
+
+    document.getElementById('sortButton').addEventListener('click', function () {
+        var column = document.getElementById('sortColumn').value;
+        var sortOrder = document.getElementById('sortOrder').value;
+        var rows = Array.from(document.getElementById('ContractsTable').getElementsByTagName('tbody')[0].getElementsByTagName('tr'));
+
+        rows.sort(function (a, b) {
+            var cellA = a.cells[columnIndex(column)].textContent.toLowerCase();
+            var cellB = b.cells[columnIndex(column)].textContent.toLowerCase();
+
+            if (sortOrder === 'asc') {
+                return cellA.localeCompare(cellB);
+            } else {
+                return cellB.localeCompare(cellA);
+            }
+        });
+
+        var tbody = document.getElementById('ContractsTable').getElementsByTagName('tbody')[0];
+        for (var i = 0; i < rows.length; i++) {
+            tbody.appendChild(rows[i]);
+        }
+    });
+
+    function columnIndex(columnName) {
+        var headers = document.getElementById('ContractsTable').getElementsByTagName('thead')[0].getElementsByTagName('th');
+        for (var i = 0; i < headers.length; i++) {
+            if (headers[i].textContent.trim() === columnName) {
+                return i;
+            }
+        }
+        return -1;
+    }
+</script>
+
+<script>
+    document.getElementById('searchButton').addEventListener('click', function () {
+        var searchContractNumber = document.getElementById('searchContractNumber').value.toLowerCase();
+        var searchCustomer = document.getElementById('searchCustomer').value;
+        var searchPaymentStartDate = document.getElementById('searchPaymentStartDate').value;
+        var searchTotalAmountOfContract = document.getElementById('searchTotalAmountOfContract').value.toLowerCase();
+        var searchAmountOfMonthlyPayment = document.getElementById('searchAmountOfMonthlyPayment').value.toLowerCase();
+        var searchInAdvancePaymentOfContract = document.getElementById('searchInAdvancePaymentOfContract').value.toLowerCase();
+        var searchScheduledInfo = document.getElementById('searchScheduledInfo').value.toLowerCase();
+        var searchActualInfo = document.getElementById('searchActualInfo').value.toLowerCase();
+        var searchDeptAmout = document.getElementById('searchDeptAmout').value.toLowerCase();
+
+        var rows = document.getElementById('ContractsTable').getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+
+        for (var i = 0; i < rows.length; i++) {
+            var cells = rows[i].getElementsByTagName('td');
+            var contractStartDate = new Date(cells[2].innerText);
+
+            var match = true; // Assume it's a match initially
+
+            if (searchContractNumber && !cells[1].innerText.toLowerCase().includes(searchContractNumber)) {
+                match = false;
+            }
+            if (searchStartDate || searchEndDate) {
+                var startDate = new Date(searchStartDate);
+                var endDate = new Date(searchEndDate);
+                if (!isNaN(startDate) && !isNaN(endDate)) {
+                    if (contractStartDate < startDate || contractStartDate > endDate) {
+                        match = false;
+                    }
+                } else if (!isNaN(startDate) && isNaN(endDate)) {
+                    if (!isSameDay(contractStartDate, startDate)) {
+                        match = false;
+                    }
+                }
+            }
+            if (searchTotalAmountOfContract && !cells[3].innerText.toLowerCase().includes(searchTotalAmountOfContract)) {
+                match = false;
+            }
+            if (searchHomeId && !cells[5].innerText.toLowerCase().includes(searchHomeId)) {
+                match = false;
+            }
+            if (searchCustomerId && !cells[6].innerText.toLowerCase().includes(searchCustomerId)) {
+                match = false;
+            }
+            if (searchFounderId && !cells[7].innerText.toLowerCase().includes(searchFounderId)) {
+                match = false;
+            }
+
+            rows[i].style.display = match ? '' : 'none';
+        }
+    });
+
+    function isSameDay(date1, date2) {
+        return date1.getDate() === date2.getDate() &&
+            date1.getMonth() === date2.getMonth() &&
+            date1.getFullYear() === date2.getFullYear();
+    }
+</script>
+
+<script>
+    document.getElementById('refreshButton').addEventListener('click', function () {
+        // Clear the search input field
+        document.getElementById('searchInput').value = '';
+
+        // Reset the sorting to default values
+        document.getElementById('sortColumn').value = 'Block';
+        document.getElementById('sortOrder').value = 'asc';
+
+        // Reset the extended search fields
+        document.getElementById('searchContractNumber').value = '';
+        document.getElementById('searchContractStartDate').value = '';
+        document.getElementById('searchTotalAmountOfContract').value = '';
+        document.getElementById('searchContractEndDate').value = '';
+        document.getElementById('searchHomeId').value = '';
+        document.getElementById('searchCustomerId').value = '';
+        document.getElementById('searchFounderId').value = '';
+
+        // Show all rows in the table
+        var rows = document.getElementById('ContractsTable').getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+        for (var i = 0; i < rows.length; i++) {
+            rows[i].style.display = '';
+        }
+    });
+</script>
+
+<script>
+    document.getElementById('toggleExtendedSearch').addEventListener('click', function () {
+        var extendedSearchContainer = document.getElementById('extendedSearchContainer');
+        if (extendedSearchContainer.style.display === 'none' || extendedSearchContainer.style.display === '') {
+            extendedSearchContainer.style.display = 'block';
+        } else {
+            extendedSearchContainer.style.display = 'none';
+        }
+    });
+</script>
+
+<script>
+    // Function to format the amount cells
+    function formatAmountCells() {
+        var amountCells = document.querySelectorAll('.amount-cell');
+        amountCells.forEach(function (cell) {
+            var amount = parseFloat(cell.textContent);
+            if (!isNaN(amount)) {
+                cell.textContent = amount.toLocaleString(undefined, { minimumFractionDigits: 2 });
+            }
+        });
+    }
+
+    // Call the function when the document is ready
+    document.addEventListener('DOMContentLoaded', function () {
+        formatAmountCells();
+    });
+</script>

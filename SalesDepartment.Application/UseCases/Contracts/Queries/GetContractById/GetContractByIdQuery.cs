@@ -24,12 +24,6 @@ namespace SalesDepartment.Application.UseCases.Contracts.Queries.GetContractById
 
         public async Task<ContractResponse> Handle(GetContractByIdQuery request, CancellationToken cancellationToken)
         {
-            /*       var contract = _dbContext.Contracts.Find(request.Id);
-
-                   var result = _mapper.Map<ContractResponse>(contract);
-
-                   return await Task.FromResult(result);*/
-
             var contract = _dbContext.Contracts.Find(request.Id);
 
             Dictionary<DateTime, decimal> actualPaymentSchedule = contract.Payments
@@ -40,7 +34,7 @@ namespace SalesDepartment.Application.UseCases.Contracts.Queries.GetContractById
 
             DateTime paymentDate = contract.PaymentStartDate;
 
-            for (int i = 0; i < contract.NumberOfMonths; i++)
+            for (int i = 1; i <=contract.NumberOfMonths; i++)
             {
                 decimal paymentAmount = contract.InAdvancePaymentOfContract + (i * contract.AmountOfMonthlyPayment);
 
