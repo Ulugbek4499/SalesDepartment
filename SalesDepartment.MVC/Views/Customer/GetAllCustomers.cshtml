@@ -4,17 +4,17 @@
 
 @model SalesDepartment.Application.UseCases.Customers.Response.CustomerResponse[]
 
-<h3 class="text-center">All Customers</h3>
+<h3 class="text-center">Все Клиенты</h3>
 <div class="row">
     <div class="col">
         <div class="input-group mb-1 mt-3" style="display: flex; justify-content: space-between; gap: 170px;">
             <a href="@Url.Action("CreateCustomer")" class="btn btn-primary mr-2">
-                <i class="fa-solid fa-plus"></i> Customer
+                <i class="fa-solid fa-plus"></i> Клиент
             </a>
 
             <div style="display: flex; gap: 5px;">
                 <button id="refreshButton" class="btn btn-warning"><i class="fa-solid fa-arrows-rotate"></i> </button>
-                <input id="simpleSearchInput" type="text" class="form-control" placeholder="Search" style="max-width: 200px;">
+                <input id="simpleSearchInput" type="text" class="form-control" placeholder="Поиск" style="max-width: 200px;">
                 <button id="simpleSearchButton" class="btn btn-info" type="button">
                     <i class="fa-solid fa-magnifying-glass"></i>
                 </button>
@@ -28,26 +28,26 @@
         <div class="input-group mb-1 mt-3" style="display: flex; justify-content: space-between; gap: 170px;">
             <div>
                 <a asp-controller="Customer" asp-action="CreateCustomerFromExcel" class="btn btn-success">
-                    <i class="fa-solid fa-file-excel"></i> <i class="fa-solid fa-upload"></i>CreateFromExcel
+                    <i class="fa-solid fa-file-excel"></i> <i class="fa-solid fa-upload"></i>СоздатьИзExcel
                 </a>
                 <a asp-controller="Customer" asp-action="GetAllCustomersExcel" class="btn btn-success">
-                    <i class="fa-solid fa-file-excel"></i> <i class="fa-solid fa-download"></i>GetInExcel
+                    <i class="fa-solid fa-file-excel"></i> <i class="fa-solid fa-download"></i>Получить в Excel
                 </a>
             </div>
             <div style="display: flex; gap: 5px;">
                 <select id="sortColumn" class="form-control">
-                    <option value="FirstName">FirstName</option>
-                    <option value="LastName">LastName</option>
-                    <option value="MiddleName">MiddleName</option>
-                    <option value="Passport">Passport</option>
-                    <option value="PassportIssuedBy">PassportIssuedBy</option>
-                    <option value="Address">Address</option>
-                    <option value="PhoneNumberOne">PhoneNumberOne</option>
-                    <option value="PhoneNumberTwo">PhoneNumberTwo</option>
+                    <option value="FirstName">Имя</option>
+                    <option value="LastName">Фамилия</option>
+                    <option value="MiddleName">Очество</option>
+                    <option value="Passport">Паспорт</option>
+                    <option value="PassportIssuedBy">Выдан Паспорт</option>
+                    <option value="Address">Адрес</option>
+                    <option value="PhoneNumberOne">Номер телефона 1</option>
+                    <option value="PhoneNumberTwo">Номер телефона 2</option>
                 </select>
                 <select id="sortOrder" class="form-control">
-                    <option value="asc">Ascending</option>
-                    <option value="desc">Descending</option>
+                    <option value="asc">Восходящий</option>
+                    <option value="desc">Нисходящий</option>
                 </select>
                 <button id="sortButton" class="btn btn-info">
                     <i class="fa-solid fa-arrow-up-a-z"></i>
@@ -64,14 +64,14 @@
         <div class="col">
             <div class="input-group mb-1 mt-3" style="display: flex; justify-content: space-between; gap: 5px;">
                 <!-- Add input fields for each column you want to search -->
-                <input id="searchFirstName" type="text" class="form-control" placeholder="Search FirstName">
-                <input id="searchLastName" type="text" class="form-control" placeholder="Search LastName">
-                <input id="searchMiddleName" type="text" class="form-control" placeholder="Search MiddleName">
-                <input id="searchPassport" type="text" class="form-control" placeholder="Search Passport">
-                <input id="searchPassportIssuedBy" type="text" class="form-control" placeholder="Search PassportIssuedBy">
-                <input id="searchAddress" type="text" class="form-control" placeholder="Search Address">
-                <input id="searchPhoneNumberOne" type="text" class="form-control" placeholder="Search PhoneNumberOne">
-                <input id="searchPhoneNumberTwo" type="text" class="form-control" placeholder="Search PhoneNumberTwo">
+                <input id="searchFirstName" type="text" class="form-control" placeholder="Имя">
+                <input id="searchLastName" type="text" class="form-control" placeholder="Фамилия">
+                <input id="searchMiddleName" type="text" class="form-control" placeholder="Очество">
+                <input id="searchPassport" type="text" class="form-control" placeholder="Паспорт">
+                <input id="searchPassportIssuedBy" type="text" class="form-control" placeholder="Выдан Паспорт">
+                <input id="searchAddress" type="text" class="form-control" placeholder="Адрес">
+                <input id="searchPhoneNumberOne" type="text" class="form-control" placeholder="Номер телефона 1">
+                <input id="searchPhoneNumberTwo" type="text" class="form-control" placeholder="Номер телефона 2">
                 <div class="input-group-append">
                     <button id="searchButton" class="btn btn-info" type="button">
                         <i class="fa-solid fa-magnifying-glass"></i>
@@ -97,15 +97,15 @@
                     <table id="CustomersTable" class="table">
                         <thead>
                             <tr>
-                                <th style="width: 25%;">Actions</th>
-                                <th data-column="FirstName" style="width: 25%;">FirstName</th>
-                                <th data-column="LastName" style="width: 25%;">LastName</th>
-                                <th data-column="MiddleName" style="width: 25%;">MiddleName</th>
-                                <th data-column="Passport" style="width: 25%;">Passport</th>
-                                <th data-column="PassportIssuedBy" style="width: 25%;">PassportIssuedBy</th>
-                                <th data-column="Address" style="width: 25%;">Address</th>
-                                <th data-column="PhoneNumberOne" style="width: 25%;">PhoneNumberOne</th>
-                                <th data-column="PhoneNumberTwo" style="width: 25%;">PhoneNumberTwo</th>
+                                <th style="width: 25%;">Действия</th>
+                                <th data-column="FirstName" style="width: 25%;">Имя</th>
+                                <th data-column="LastName" style="width: 25%;">Фамилия</th>
+                                <th data-column="MiddleName" style="width: 25%;">Очество</th>
+                                <th data-column="Passport" style="width: 25%;">Паспорт</th>
+                                <th data-column="PassportIssuedBy" style="width: 25%;">Выдан Паспорт</th>
+                                <th data-column="Address" style="width: 25%;">Адрес</th>
+                                <th data-column="PhoneNumberOne" style="width: 25%;">Номер телефона 1</th>
+                                <th data-column="PhoneNumberTwo" style="width: 25%;">Номер телефона 2</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -114,9 +114,8 @@
                                 <tr>
                                     <td class="action-links">
                                         <div style="display: flex; gap: 5px;">
-                                            <a href="@Url.Action("ViewCustomer", new { id = customer.Id })" class="btn btn-secondary">Details</a>
-                                            <a href="@Url.Action("UpdateCustomer", new { id = customer.Id })" class="btn btn-secondary"><i class="fas fa-pen-to-square"></i></a>
-                                            <a href="@Url.Action("DeleteCustomer", new { id = customer.Id })" class="btn btn-danger"><i class="fas fa-trash-can"></i></a>
+                                            <a href="@Url.Action("ViewCustomer", new { id = customer.Id })" class="btn btn-secondary">Подробно</a>
+                                          
                                         </div>
                                     </td>
                                     <td data-column="FirstName">@customer.FirstName</td>
