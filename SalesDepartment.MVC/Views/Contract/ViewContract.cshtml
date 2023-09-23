@@ -35,38 +35,38 @@
                 <div class="table-container" style="overflow-y: scroll; height: 80vh; width: 100%;">
                     <div class="col-lg-6">
                         <div class="custom-cards">
-                            <h4 class="text-center">Contract Information</h4>
+                            <h4 class="text-center">Информация о контракте</h4>
                             <table class="table table-bordered">
                                 <tr>
-                                    <th>Contract Number</th>
+                                    <th>Контракт №</th>
                                     <td>@Model.ContractNumber</td>
                                 </tr>
                                 <tr>
-                                    <th>Contract Start Date</th>
+                                    <th>Дата начала контракта</th>
                                     <td>@Model.ContractStartDate</td>
                                 </tr>
                                 <tr>
-                                    <th>Total Amount Of Contract</th>
+                                    <th>Общая сумма контракта</th>
                                     <td>@Model.TotalAmountOfContract</td>
                                 </tr>
                                 <tr>
-                                    <th>Advance Payment</th>
+                                    <th>Предоплата</th>
                                     <td>@Model.InAdvancePaymentOfContract</td>
                                 </tr>
                                 <tr>
-                                    <th>Monthly Payment</th>
+                                    <th>Ежемесячно оплата</th>
                                     <td>@Model.AmountOfMonthlyPayment</td>
                                 </tr>
                                 <tr>
-                                    <th>Number Of Months</th>
+                                    <th>Количество месяцев</th>
                                     <td>@Model.NumberOfMonths</td>
                                 </tr>
                                 <tr>
-                                    <th>Payment Start Date</th>
+                                    <th>Дата начала платежа</th>
                                     <td>@Model.PaymentStartDate</td>
                                 </tr>
                                 <tr>
-                                    <th>Founder Name</th>
+                                    <th>Имя основателя</th>
                                     <td>@Model.Founder.FirstName @Model.Founder.LastName</td>
                                 </tr>
                             </table>
@@ -74,38 +74,38 @@
                     </div>
                     <div class="col-lg-6">
                         <div class="custom-cards">
-                            <h4 class="text-center">Customer Information</h4>
+                            <h4 class="text-center">Информация о клиенте</h4>
                             <table class="table table-bordered">
                                 <tr>
-                                    <th>First Name</th>
+                                    <th>Имя</th>
                                     <td>@Model.Customer.FirstName</td>
                                 </tr>
                                 <tr>
-                                    <th>Last Name</th>
+                                    <th>Фамилия</th>
                                     <td>@Model.Customer.LastName</td>
                                 </tr>
                                 <tr>
-                                    <th>Middle Name</th>
+                                    <th>Отчество</th>
                                     <td>@Model.Customer.MiddleName</td>
                                 </tr>
                                 <tr>
-                                    <th>Passport</th>
+                                    <th>Паспорт</th>
                                     <td>@Model.Customer.Passport</td>
                                 </tr>
                                 <tr>
-                                    <th>Passport Issued By</th>
+                                    <th>Выданное место</th>
                                     <td>@Model.Customer.PassportIssuedBy</td>
                                 </tr>
                                 <tr>
-                                    <th>Address</th>
+                                    <th>Адрес</th>
                                     <td>@Model.Customer.Address</td>
                                 </tr>
                                 <tr>
-                                    <th>Phone Number One</th>
+                                    <th>Телефон номер 1</th>
                                     <td>@Model.Customer.PhoneNumberOne</td>
                                 </tr>
                                 <tr>
-                                    <th>Phone Number Two</th>
+                                    <th>Телефон номер 2</th>
                                     <td>@Model.Customer.PhoneNumberTwo</td>
                                 </tr>
                             </table>
@@ -116,91 +116,104 @@
                             <h4 class="text-center">Apartment Information</h4>
                             <table class="table table-bordered">
                                 <tr>
-                                    <th>Block</th>
+                                    <th>Здания</th>
                                     <td>@Model.Home.Block</td>
                                 </tr>
                                 <tr>
-                                    <th>Entrance</th>
+                                    <th>Подъезд №</th>
                                     <td>@Model.Home.Entrance</td>
                                 </tr>
                                 <tr>
-                                    <th>Floor</th>
+                                    <th>Этаже</th>
                                     <td>@Model.Home.Floor</td>
                                 </tr>
                                 <tr>
-                                    <th>Apartment Number</th>
+                                    <th>Квартира №</th>
                                     <td>@Model.Home.ApartmentNumber</td>
                                 </tr>
                                 <tr>
-                                    <th>Number Of Rooms</th>
+                                    <th>Количество комнат</th>
                                     <td>@Model.Home.NumberOfRooms</td>
                                 </tr>
                                 <tr>
-                                    <th>Area</th>
+                                    <th>Проектной площадью</th>
                                     <td>@Model.Home.Area</td>
                                 </tr>
                             </table>
                         </div>
                     </div>
-                    <table id="Payment History" class="table">
-                        <thead>
-                            <tr>
-                                <th style="width: 25%;">PaymentNumber</th>
-                                <th style="width: 25%;">PaymentDate</th>
-                                <th style="width: 25%;">Amount</th>
-                                <th style="width: 25%;">AmountsInWords</th>
-                                <th style="width: 25%;">PaymentType</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var payment in Model.Payments)
-                            {
-                                <tr>
-                                    <td>@payment.PaymentNumber</td>
-                                    <td>@payment.PaymentDate</td>
-                                    <td>@payment.Amount</td>
-                                    <td>@payment.PaymentType.Name</td>
-                                </tr>
-                            }
-                        </tbody>
-                    </table>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Number</th>
-                                <th>Scheduled Dates</th>
-                                <th>Scheduled Payment</th>
-                                <th>Monthly Payment</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @if (Model.ScheduledInfo != null)
-                            {
-                                int rowNumber = 1;
-                                foreach (var scheduled in Model.ScheduledInfo)
-                                {
-                                    <tr>
-                                        <td>@rowNumber</td>
-                                        <td>@scheduled.Key.ToString("yyyy-MM-dd")</td> <!-- Display scheduled date as a formatted string -->
-                                        <td>@scheduled.Value.ToString("C")</td> <!-- Display scheduled payment -->
-                                        <td>@Model.AmountOfMonthlyPayment.ToString("C")</td>
-                                        @if (Model.ActualInfo != null && Model.ActualInfo.ContainsKey(scheduled.Key))
-                                        {
-                                            var actualPayment = Model.ActualInfo[scheduled.Key];
-                                            <td>@scheduled.Key.ToString("yyyy-MM-dd")</td> <!-- Display payed date as a formatted string -->
-                                            <td>@actualPayment.ToString("C")</td> <!-- Display payment amount -->
-                                        }
-                                        else
-                                        {
-                                            <td></td>
-                                            <td></td>
-                                        }
-                                    </tr>
-                                    rowNumber++;
-                                }
-                            }
-                        </tbody>
-                    </table>
+                    <div class="container" style="height: 100vh;">
+                        <div class="row" style="display: flex; justify-content: center;">
+                            <div class="col-lg-12" style="width: 100%;">
+                                <div class="custom-cards">
+                                    <div class="table-container" >
+                                        <!-- Scheduled Payments Table -->
+                                        <div class="col-lg-12">
+                                            <div class="custom-cards">
+                                                <h4 class="text-center">Графики платежей</h4>
+                                                <table class="table table-bordered">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Номер №</th>
+                                                            <th>Запланированные даты</th>
+                                                            <th>Запланированный платеж</th>
+                                                            <th>Ежемесячно оплата</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        @if (Model.ScheduledInfo != null)
+                                                        {
+                                                            int rowNumber = 1;
+                                                            foreach (var scheduled in Model.ScheduledInfo)
+                                                            {
+                                                                <tr>
+                                                                    <td>@rowNumber</td>
+                                                                    <td>@scheduled.Key.ToString("yyyy-MM-dd")</td>
+                                                                    <td>@scheduled.Value.ToString("N2")</td> <!-- Remove the dollar sign and format with two decimal places -->
+                                                                    <td>@Model.AmountOfMonthlyPayment.ToString("N2")</td> <!-- Remove the dollar sign and format with two decimal places -->
+                                                                </tr>
+                                                                rowNumber++;
+                                                            }
+                                                        }
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+
+                                        <!-- Payments History Table -->
+                                        <div class="col-lg-12">
+                                            <div class="custom-cards">
+                                                <h4 class="text-center">История платежей</h4>
+                                                <table class="table table-bordered">
+                                                    <thead>
+                                                        <tr>
+                                                            <th style="width: 25%;">Номер платежа №</th>
+                                                            <th style="width: 25%;">Дата платежа</th>
+                                                            <th style="width: 25%;">Сумма</th>
+                                                            <th style="width: 25%;">Способ оплаты</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        @foreach (var payment in Model.Payments)
+                                                        {
+                                                            <tr>
+                                                                <td>@payment.PaymentNumber</td>
+                                                                <td>@payment.PaymentDate.ToString("yyyy-MM-dd")</td>
+                                                                <td>@payment.Amount.ToString("N2")</td> <!-- Format with commas and two decimal places -->
+                                                                <td>@payment.PaymentType.Name</td>
+                                                            </tr>
+                                                        }
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
 
 
                 </div>
