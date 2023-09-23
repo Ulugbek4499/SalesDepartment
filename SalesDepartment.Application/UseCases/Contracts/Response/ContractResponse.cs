@@ -26,7 +26,8 @@ namespace SalesDepartment.Application.UseCases.Contracts.Response
 
         public ICollection<Payment> Payments { get; set; }
 
-        public Dictionary<DateOnly, decimal>? ScheduledInfo { get; set; }
-        public Dictionary<DateOnly, decimal>? ActualInfo { get; set; }
+        public decimal? DeptAmout { get; set; }
+        public Dictionary<DateTime, decimal>? ScheduledInfo { get; set; }
+        public Dictionary<DateTime, decimal>? ActualInfo { get; set; }
     }
 }
