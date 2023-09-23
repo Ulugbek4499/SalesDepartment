@@ -203,10 +203,17 @@
                                                                 <td>@payment.PaymentType.Name</td>
                                                             </tr>
                                                         }
+                                                        <!-- Add a row for today's date and total amount -->
+                                                        <tr>
+                                                            <td colspan="2" class="text-right"><strong>Итого:</strong></td>
+                                                            <td><strong>@Model.Payments.Sum(p => p.Amount).ToString("N2")</strong></td> <!-- Calculate and format total amount -->
+                                                            <td></td>
+                                                        </tr>
                                                     </tbody>
                                                 </table>
                                             </div>
                                         </div>
+
 
                                     </div>
                                 </div>
