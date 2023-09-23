@@ -20,12 +20,12 @@
                     <table id="Contracts" class="table">
                         <thead>
                             <tr>
-                                <th style="width: 25%;">Contract Number</th>
-                                <th style="width: 25%;">ContractStartDate</th>
-                                <th style="width: 25%;">TotalAmountOfContract</th>
-                                <th style="width: 25%;">PaymentStartDate</th>
-                                <th style="width: 25%;">FounderName</th>
-                                <th style="width: 25%;">Actions</th>
+                                <th style="width: 25%;">Contract №</th>
+                                <th style="width: 25%;">Дата начала контракта</th>
+                                <th style="width: 25%;">Общая сумма контракта</th>
+                                <th style="width: 25%;">Ежемесячно оплата</th>
+                                <th style="width: 25%;">Имя основателя</th>
+                                <th style="width: 25%;">Действия</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -35,11 +35,11 @@
                                     <td>@contract.ContractNumber</td>
                                     <td>@contract.ContractStartDate</td>
                                     <td>@contract.TotalAmountOfContract</td>
-                                    <td>@contract.PaymentStartDate</td>
-                                    <td>@contract.Founder.FirstName @contract.Founder.LastName</td>
+                                    <td>@contract.AmountOfMonthlyPayment</td>
+                                    <td>@contract.Founder.LastName @contract.Founder.FirstName </td>
                                     <td class="action-links">
                                         <div style="display: flex; gap: 5px;">
-                                            <a href="@Url.Action("ViewContract", "Contract", new { id = contract.Id })" class="btn btn-secondary">Deails</a>
+                                            <a href="@Url.Action("ViewContract", "Contract", new { id = contract.Id })" class="btn btn-outline-dark">Договор</a>
                                         </div>
                                     </td>
                                 </tr>
