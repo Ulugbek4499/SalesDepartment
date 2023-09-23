@@ -8,7 +8,7 @@
     Layout = "_Layout";
 }
 
-<h3 class="text-center">Edit Payment</h3>
+<h3 class="text-center">Изменить информацию об оплате</h3>
 <hr />
 
 <form asp-controller="Payment" asp-action="UpdatePayment" enctype="multipart/form-data" method="post">
@@ -20,37 +20,37 @@
                 <div class="custom-input">
 
                     <div class="form-group mt-3">
-                        <label asp-for="PaymentNumber">PaymentNumber:</label>
+                        <label asp-for="PaymentNumber">Номер платежа №::</label>
                         <input asp-for="PaymentNumber" class="form-control" required value="@Model.PaymentNumber" />
                         <span asp-validation-for="PaymentNumber" class="text-danger"></span>
                     </div>
 
                     <div class="form-group mt-3">
-                        <label asp-for="PaymentDate">Payment StartDate:</label>
+                        <label asp-for="PaymentDate">Дата платежа:</label>
                         <input asp-for="PaymentDate" type="date" class="form-control" required value="@Model.PaymentDate.ToString("yyyy-MM-dd")" />
                         <span asp-validation-for="PaymentDate" class="text-danger"></span>
                     </div>
                    
                     <div class="form-group mt-3">
-                        <label asp-for="Amount" class="form-label">Amount</label>
+                        <label asp-for="Amount" class="form-label">Сумма:</label>
                         <input asp-for="Amount" type="text" class="form-control" value="@Model.Amount">
                         <span asp-validation-for="Amount" class="text-danger"></span>
                     </div>
 
                     <div class="form-group mt-3">
-                        <label asp-for="ContractId">ContractId:</label>
+                        <label asp-for="ContractId">Контракт №: </label>
                         <input asp-for="ContractId" class="form-control" required value="@Model.ContractId" />
                         <span asp-validation-for="ContractId" class="text-danger"></span>
                     </div>
 
                     <div class="form-group mt-3">
-                        <label asp-for="PaymentTypeId">PaymentTypeId:</label>
+                        <label asp-for="PaymentTypeId">Тип платежей :</label>
                         <input asp-for="PaymentTypeId" class="form-control" required value="@Model.PaymentTypeId" />
                         <span asp-validation-for="PaymentTypeId" class="text-danger"></span>
                     </div>
 
                     <div class="form-group button-group mt-3">
-                        <button type="submit" class="btn btn-success">Save</button>
+                        <button type="submit" class="btn btn-success">Сохранять</button>
                     </div>
                 </div>
             </div>

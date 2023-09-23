@@ -4,24 +4,24 @@
 
 @model SalesDepartment.Application.UseCases.Payments.Response.PaymentResponse[]
 
-<h3 class="text-center">All Payments</h3>
+<h3 class="text-center">Все Платежи</h3>
 <div class="row">
     <div class="col">
         <div class="input-group mb-1 mt-3" style="display:flex; justify-content:space-between; gap:20px;">
             <div style="display: flex; gap: 20px;">
                 <a href="@Url.Action("CreatePayment")" class="btn btn-primary mr-2">
-                    <i class="fa-solid fa-plus"></i> Payment
+                    <i class="fa-solid fa-plus"></i> Платеж
                 </a>
                 <a asp-controller="PaymentType" asp-action="GetAllPaymentTypes" class="nav-link">
                     <div class="icon-wrapper">
-                        <i class="fa-solid fa-file-invoice-dollar"></i> PaymentTypes
+                        <i class="fa-solid fa-file-invoice-dollar"></i> Типы платежей
                     </div>
                 </a>
             </div>
 
             <div style="display:flex; gap:5px">
                 <button id="refreshButton" class="btn btn-warning"><i class="fa-solid fa-arrows-rotate"></i> </button>
-                <input id="searchInput" type="text" class="form-control" placeholder="Search" style="max-width: 200px;">
+                <input id="searchInput" type="text" class="form-control" placeholder="Поиск" style="max-width: 200px;">
                 <div class="input-group-append">
                     <button id="searchButtonSimple" class="btn btn-info" type="button">
                         <i class="fa-solid fa-magnifying-glass"></i>
@@ -36,22 +36,22 @@
         <div class="input-group mb-1 mt-3" style="display:flex; justify-content:space-between; gap:170px">
             <div>
                 <a asp-controller="Payment" asp-action="CreatePaymentFromExcel" class="btn btn-success">
-                    <i class="fa-solid fa-file-excel"></i> <i class="fa-solid fa-upload"></i>CreateFromExcel
+                    <i class="fa-solid fa-file-excel"></i> <i class="fa-solid fa-upload"></i>Создать Из Excel
                 </a>
                 <a asp-controller="Payment" asp-action="GetAllPaymentsExcel" class="btn btn-success">
-                    <i class="fa-solid fa-file-excel"></i> <i class="fa-solid fa-download"></i>GetInExcel
+                    <i class="fa-solid fa-file-excel"></i> <i class="fa-solid fa-download"></i>Получить в Excel
                 </a>
             </div>
             <div style="display:flex; gap:5px">
                 <select id="sortColumn" class="form-control">
-                    <option value="PaymentNumber">PaymentNumber</option>
-                    <option value="PaymentDate">PaymentDate</option>
-                    <option value="Amount">Amount</option>
-                    <option value="ContractId">ContractId</option>
-                    <option value="PaymentTypeId">PaymentTypeId</option>
+                    <option value="PaymentNumber">Номер платежа №</option>
+                    <option value="PaymentDate">Дата платежа</option>
+                    <option value="Amount">Сумма </option>
+                    <option value="ContractId">Контракт №</option>
+                    <option value="PaymentTypeId">Тип платежей</option>
                 </select>
                 <select id="sortOrder" class="form-control">
-                    <option value="asc">Ascending</option>
+                    <option value="asc">Восходящий</option>
                     <option value="desc">Descending</option>
                 </select>
                 <button id="sortButton" class="btn btn-info"><i class="fa-solid fa-arrow-up-a-z"></i> </button>
@@ -69,7 +69,6 @@
                 <input id="searchPaymentNumber" type="text" class="form-control" placeholder="Search PaymentNumber">
                @* <input id="searchPaymentDate" type="date" class="form-control" placeholder="Search PaymentDate">*@
                 <input id="searchStartDate" type="date" class="form-control" placeholder="Start Date">
-                <input id="searchEndDate" type="date" class="form-control" placeholder="End Date">
                 <input id="searchAmount" type="text" class="form-control" placeholder="Search Amount">
                 <input id="searchContractId" type="text" class="form-control" placeholder="Search ContractId">
                 <input id="searchPaymentTypeId" type="text" class="form-control" placeholder="Search PaymentTypeId">
@@ -99,12 +98,12 @@
                     <table id="PaymentsTable" class="table">
                         <thead>
                             <tr>
-                                <th style="width: 25%;">Actions</th>
-                                <th style="width: 25%;">PaymentNumber</th>
-                                <th style="width: 25%;">PaymentDate</th>
-                                <th style="width: 25%;">Amount</th>
-                                <th style="width: 25%;">ContractId</th>
-                                <th style="width: 25%;">PaymentTypeId</th>
+                                <th style="width: 25%;">Действия</th>
+                                <th style="width: 25%;">Номер платежа №</th>
+                                <th style="width: 25%;">Дата платежа</th>
+                                <th style="width: 25%;">Сумма</th>
+                                <th style="width: 25%;">Контракт №</th>
+                                <th style="width: 25%;">Тип платежей</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -116,7 +115,7 @@
                                             <a href="@Url.Action("PaymentInDocx", "Payment", new { id = Payment.Id })" class="btn btn-secondary">
                                                 <i class="fa-regular fa-file-word"></i>
                                             </a>
-                                            <a href="@Url.Action("ViewContract", "Contract", new { id = Payment.Contract.Id })" class="btn btn-secondary">Deails</a>
+                                            <a href="@Url.Action("ViewContract", "Contract", new { id = Payment.Contract.Id })" class="btn btn-secondary"><i class="fas fa-info-circle"></i> Подробно</a>
                                             <a href="@Url.Action("UpdatePayment", new { id = Payment.Id })" class="btn btn-secondary"><i class="fas fa-pen-to-square"></i></a>
                                             <a href="@Url.Action("DeletePayment", new { id = Payment.Id })" class="btn btn-danger"><i class="fas fa-trash-can"></i></a>
                                         </div>

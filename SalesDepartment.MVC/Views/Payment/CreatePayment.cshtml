@@ -13,7 +13,7 @@
 
 @model CreatePaymentCommand
 
-<h3 class="text-center">Add new Payment</h3>
+<h3 class="text-center">Добавить новый платеж</h3>
 <hr />
 <form asp-controller="Payment" asp-action="CreatePayment" enctype="multipart/form-data" method="post">
     <div class="container mt-4">
@@ -21,27 +21,27 @@
             <div class="col-lg-6 offset-lg-3" style="overflow-y:scroll; width:50%; height:70vh">
 
                 <div class="form-group mt-3">
-                    <label asp-for="PaymentNumber" class="form-label">PaymentNumber:</label>
-                    <input asp-for="PaymentNumber" type="text" class="form-control" placeholder="Enter PaymentNumber">
+                    <label asp-for="PaymentNumber" class="form-label">Номер платежа №:</label>
+                    <input asp-for="PaymentNumber" type="text" class="form-control" placeholder="Введите Номер платежа №">
                     <span asp-validation-for="PaymentNumber" class="text-danger"></span>
                 </div>
 
                 <div class="form-group mt-3">
-                    <label asp-for="PaymentDate">PaymentDate:</label>
+                    <label asp-for="PaymentDate">Дата платежа:</label>
                     <input asp-for="PaymentDate" type="date" class="form-control" required />
                     <span asp-validation-for="PaymentDate" class="text-danger"></span>
                 </div>
 
                 <div class="form-group mt-3">
-                    <label asp-for="Amount" class="form-label">Amount:</label>
-                    <input asp-for="Amount" type="text" class="form-control" placeholder="Enter Amount">
+                    <label asp-for="Amount" class="form-label">Сумма:</label>
+                    <input asp-for="Amount" type="text" class="form-control" placeholder="Введите Сумма">
                     <span asp-validation-for="Amount" class="text-danger"></span>
                 </div>
 
                 <div class="form-group mt-3">
-                    <label for="ContractId">ContractId:</label>
-                    <select class="form-control" id="ContractId" name="ContractId" required>
-                        <option value="">Choose Contract Number</option>
+                    <label for="ContractId">Контракт №:</label>
+                    <select class="form-control" id="ContractId" name="Контракт №" required>
+                        <option value="">Выбрать Contract Number</option>
                         @foreach (var contract in Contracts)
                         {
                             <option value="@contract.Id">@contract.ContractNumber</option>
@@ -50,9 +50,9 @@
                 </div>
 
                 <div class="form-group mt-3">
-                    <label for="PaymentTypeId">PaymentTypeId:</label>
+                    <label for="PaymentTypeId">Тип платежей:</label>
                     <select class="form-control" id="PaymentTypeId" name="PaymentTypeId" required>
-                        <option value="">Choose Payment Type</option>
+                        <option value="">Выбрать Тип платежей</option>
                         @foreach (var paymentType in PaymentTypes)
                         {
                             <option value="@paymentType.Id">@paymentType.Name</option>
@@ -61,7 +61,7 @@
                 </div>
 
                 <div class="form-group button-group mt-3">
-                    <button type="submit" class="btn btn-success">Save</button>
+                    <button type="submit" class="btn btn-success">Сохранять</button>
                 </div>
             </div>
         </div>
