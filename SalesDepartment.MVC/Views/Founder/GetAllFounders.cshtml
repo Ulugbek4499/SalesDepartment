@@ -5,20 +5,25 @@
 @model SalesDepartment.Application.UseCases.Founders.Response.FounderResponse[]
 
 
-<h3 class="text-center">All Founders</h3>
+<h3 class="text-center">Все основатели</h3>
 <div class="row">
     <div class="col">
         <div class="input-group mb-1 mt-3" style="display:flex; justify-content:space-between; gap:170px">
-            <a href="@Url.Action("CreateFounder")" class="btn btn-success mr-2">Create Founder</a>
+            <a href="@Url.Action("CreateFounder")" class="btn btn-primary mr-2">
+                <i class="fa-solid fa-plus"></i> Основатель
+            </a>
             <div style="display:flex; gap:5px">
-                <input id="searchInput" type="text" class="form-control" placeholder="Search" style="max-width: 200px;">
+                <input id="searchInput" type="text" class="form-control" placeholder="Поиск" style="max-width: 200px;">
                 <div class="input-group-append">
-                    <button id="searchButton" class="btn btn-primary" type="button">Search</button>
+                    <button id="searchButton" class="btn btn-info" type="button">
+                        <i class="fa-solid fa-magnifying-glass"></i> 
+                    </button>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
 <hr />
 
 <div class="container" style="height: 55vh;">
@@ -36,11 +41,11 @@
                     <table id="FoundersTable" class="table">
                         <thead>
                             <tr>
-                                <th style="width: 25%;">Actions</th>
-                                <th style="width: 25%;">FirstName</th>
-                                <th style="width: 25%;">LastName</th>
-                                <th style="width: 25%;">MiddleName</th>
-                                <th style="width: 25%;">PhoneNumber</th>
+                                <th style="width: 25%;">Действия</th>
+                                <th style="width: 25%;">Имя</th>
+                                <th style="width: 25%;">Фамилия</th>
+                                <th style="width: 25%;">Очество</th>
+                                <th style="width: 25%;">Номер телефона</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -49,9 +54,9 @@
                                 <tr>
                                     <td class="action-links">
                                         <div style="display:flex; gap:5px">
-                                            <a href="@Url.Action("ViewFounder", new { id = Founder.Id })" class="btn btn-secondary">Details</a>
                                             <a href="@Url.Action("UpdateFounder", new { id = Founder.Id })" class="btn btn-secondary"><i class="fas fa-pen-to-square"></i></a>
                                             <a href="@Url.Action("DeleteFounder", new { id = Founder.Id })" class="btn btn-danger"><i class="fas fa-trash-can"></i></a>
+                                            <a href="@Url.Action("ViewFounder", new { id = Founder.Id })" class="btn btn-secondary"> <i class="fas fa-info-circle"></i> Подробно</a>
                                         </div>
                                     </td>
                                     <td>@Founder.FirstName</td>
