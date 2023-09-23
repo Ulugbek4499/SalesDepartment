@@ -8,7 +8,7 @@
     Layout = "_Layout";
 }
 
-<h3 class="text-center">Edit Contract</h3>
+<h3 class="text-center">Изменить информацию о контракте</h3>
 <hr />
 
 <form asp-controller="Contract" asp-action="UpdateContract" enctype="multipart/form-data" method="post">
@@ -20,61 +20,61 @@
                 <div class="custom-input">
 
                     <div class="form-group mt-3">
-                        <label asp-for="ContractNumber">ContractNumber:</label>
+                        <label asp-for="ContractNumber">Контракт №:</label>
                         <input asp-for="ContractNumber" class="form-control" required value="@Model.ContractNumber" />
                         <span asp-validation-for="ContractNumber" class="text-danger"></span>
                     </div>
 
                     <div class="form-group mt-3">
-                        <label asp-for="ContractStartDate">Contract ContractStartDate:</label>
+                        <label asp-for="ContractStartDate">Дата контракта:</label>
                         <input asp-for="ContractStartDate" type="date" class="form-control" required value="@Model.ContractStartDate.ToString("yyyy-MM-dd")" />
                         <span asp-validation-for="ContractStartDate" class="text-danger"></span>
                     </div>
 
                     <div class="form-group mt-3">
-                        <label asp-for="TotalAmountOfContract" class="form-label">TotalAmountOfContract</label>
+                        <label asp-for="TotalAmountOfContract" class="form-label">Общая сумма контракта:</label>
                         <input asp-for="TotalAmountOfContract" type="text" class="form-control" value="@Model.TotalAmountOfContract">
                         <span asp-validation-for="TotalAmountOfContract" class="text-danger"></span>
                     </div>
 
                     <div class="form-group mt-3">
-                        <label asp-for="PaymentStartDate">PaymentStartDate:</label>
+                        <label asp-for="PaymentStartDate">Дата начала платежа:</label>
                         <input asp-for="PaymentStartDate" class="form-control" required value="@Model.PaymentStartDate" />
                         <span asp-validation-for="PaymentStartDate" class="text-danger"></span>
                     </div>
 
                     <div class="form-group mt-3">
-                        <label asp-for="NumberOfMonths">NumberOfMonths:</label>
+                        <label asp-for="NumberOfMonths">Количество месяцев:</label>
                         <input asp-for="NumberOfMonths" class="form-control" required value="@Model.NumberOfMonths" />
                         <span asp-validation-for="NumberOfMonths" class="text-danger"></span>
                     </div>
 
                     <div class="form-group mt-3">
-                        <label asp-for="InAdvancePaymentOfContract">InAdvancePaymentOfContract:</label>
+                        <label asp-for="InAdvancePaymentOfContract">Сумма предоплаты:</label>
                         <input asp-for="InAdvancePaymentOfContract" class="form-control" required value="@Model.InAdvancePaymentOfContract" />
                         <span asp-validation-for="InAdvancePaymentOfContract" class="text-danger"></span>
                     </div>
 
                     <div class="form-group mt-3">
-                        <label asp-for="HomeId">HomeId:</label>
+                        <label asp-for="HomeId">Квартира:</label>
                         <input asp-for="HomeId" class="form-control" required value="@Model.HomeId" />
                         <span asp-validation-for="HomeId" class="text-danger"></span>
                     </div>
 
                     <div class="form-group mt-3">
-                        <label asp-for="CustomerId" class="form-label">CustomerId</label>
+                        <label asp-for="CustomerId" class="form-label">Клиент:</label>
                         <input asp-for="CustomerId" type="text" class="form-control" value="@Model.CustomerId">
                         <span asp-validation-for="CustomerId" class="text-danger"></span>
                     </div>
 
                     <div class="form-group mt-3">
-                        <label asp-for="FounderId">FounderId:</label>
+                        <label asp-for="FounderId">Основатель:</label>
                         <input asp-for="FounderId" class="form-control" required value="@Model.FounderId" />
                         <span asp-validation-for="FounderId" class="text-danger"></span>
                     </div>
 
                     <div class="form-group button-group mt-3">
-                        <button type="submit" class="btn btn-success">Save</button>
+                        <button type="submit" class="btn btn-success">Сохранять</button>
                     </div>
                 </div>
             </div>
