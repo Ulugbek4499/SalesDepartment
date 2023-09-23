@@ -28,7 +28,7 @@ namespace SalesDepartment.Application.UseCases.Reports
 
             foreach (var contract in contracts)
             {
-                var founderName = $"{contract.Founder.FirstName} {contract.Founder.LastName}";
+                var founderName = $"{contract.Founder.LastName} {contract.Founder.FirstName} {contract.Founder.MiddleName}";
 
                 if (founderContractsCount.ContainsKey(founderName))
                 {

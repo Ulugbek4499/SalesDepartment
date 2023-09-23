@@ -3,39 +3,106 @@
 @{
     Layout = "_Layout";
 }
+<style>
+    /* Add your custom styles here */
+    .container {
+        margin-top: 20px;
+    }
 
-<h3 class="text-center">Statistic</h3>
+    h3 {
+        color: #007bff; /* Change the color to your preference */
+    }
+
+    .col-md-6 {
+        margin-bottom: 20px;
+    }
+
+    .table {
+        width: 100%;
+        margin-top: 20px;
+    }
+
+        .table th {
+            background-color: #007bff; /* Change the background color to your preference */
+            color: #fff; /* Change the text color to your preference */
+        }
+
+        .table th, .table td {
+            text-align: center;
+        }
+</style>
+<style>
+    /* Add your custom styles here */
+    .container {
+        margin-top: 20px;
+        background-color: #f8f9fa; /* Add a light background color */
+        padding: 20px;
+        border-radius: 10px;
+    }
+
+    h3 {
+        color: #007bff;
+    }
+
+    .col-md-6 {
+        margin-bottom: 20px;
+        background-color: #fff; /* Add a white background color */
+        padding: 20px;
+        border-radius: 5px;
+    }
+
+    .table {
+        width: 100%;
+        margin-top: 20px;
+        border-collapse: collapse;
+    }
+
+        .table th {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px;
+        }
+
+        .table th, .table td {
+            text-align: center;
+            padding: 10px;
+            border: 1px solid #ddd; /* Add a border to table cells */
+        }
+</style>
+
+<h3 class="text-center">Статистика продаж «BagishamalCity»</h3>
+<hr>
 
 <div class="container">
     <div class="row">
         <div class="col-md-6">
-            <h4>All Contracts</h4>
+            <h4>Все контракты</h4>
             <p>@Model.AllContracts</p>
-            <h4>All Contracts in Current Month</h4>
+            <h4>Все контракты в текущем месяце</h4>
             <p>@Model.AllContractsInCurrentMonth</p>
-            <h4>All Contracts in Current Week</h4>
+            <h4>Все контракты на текущей неделе</h4>
             <p>@Model.AllContractsInCurrentWeek</p>
-            <h4>All Contracts in Current Day</h4>
+            <h4>Все контракты за текущий день</h4>
             <p>@Model.AllContractsInCurrentDay</p>
         </div>
         <div class="col-md-6">
-            <h4>Total Amount of All Contracts</h4>
-            <p>@Model.TotalAmountOfAllContracts</p>
-            <h4>Total Amount of All Contracts in Current Month</h4>
-            <p>@Model.TotalAmountOfAllContractsInCurrentMonth</p>
-            <h4>Total Amount of All Contracts in Current Week</h4>
-            <p>@Model.TotalAmountOfAllContractsInCurrentWeek</p>
-            <h4>Total Amount of All Contracts in Current Day</h4>
-            <p>@Model.TotalAmountOfAllContractsInCurrentDay</p>
+            <h4>Общая сумма всех контрактов</h4>
+            <p>@string.Format("{0:N2}", Model.TotalAmountOfAllContracts)</p>
+            <h4>Общая сумма всех контрактов в текущем месяце</h4>
+            <p>@string.Format("{0:N2}", Model.TotalAmountOfAllContractsInCurrentMonth)</p>
+            <h4>Общая сумма всех контрактов на текущей неделе</h4>
+            <p>@string.Format("{0:N2}", Model.TotalAmountOfAllContractsInCurrentWeek)</p>
+            <h4>Общая сумма всех контрактов в текущий день</h4>
+            <p>@string.Format("{0:N2}", Model.TotalAmountOfAllContractsInCurrentDay)</p>
         </div>
     </div>
 
-    <h4>All Contracts by Founders</h4>
+    <h4>Все контракты учредителей</h4>
     <table class="table">
         <thead>
             <tr>
-                <th>Founder Name</th>
-                <th>Founder's Contract Number</th>
+                <th>ФИО основателя</th>
+                <th>Количество контрактов</th>
             </tr>
         </thead>
         <tbody>

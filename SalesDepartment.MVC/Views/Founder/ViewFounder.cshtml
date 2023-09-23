@@ -13,30 +13,30 @@
     <div class="row" style="display: flex; justify-content: center;">
         <div class="col-lg-6" style="width: 100%;">
             <div class="custom-cards">
-                <div class="table-container" style="overflow-y: scroll; height: 58vh; width: 100%;">
+                <div class="table-container" style="overflow-y: scroll; height: 85vh; width: 100%;">
                     <table id="FoundersTable" class="table">
                         <thead>
                             <tr>
-                                <th style="width: 25%;">Contract Number</th>
-                                <th style="width: 25%;">Total Amount</th>
-                                <th style="width: 25%;">Home</th>
-                                <th style="width: 25%;">Customer</th>
-                                <th style="width: 25%;">Actions</th>
+                                <th style="width: 25%;">Действия</th>
+                                <th style="width: 25%;">Контракт №</th>
+                                <th style="width: 25%;">Общая сумма контракта</th>
+                                <th style="width: 25%;">Квартира</th>
+                                <th style="width: 25%;">Клиент</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach (var contract in Model.Contracts)
                             {
                                 <tr>
-                                    <td>@contract.ContractNumber</td>
-                                    <td>@contract.TotalAmountOfContract</td>
-                                    <td>@contract.Home.ApartmentNumber</td>
-                                    <td>@contract.Customer.FirstName @contract.Customer.LastName</td>
                                     <td class="action-links">
                                         <div style="display: flex; gap: 5px;">
-                                            <a href="@Url.Action("ViewContract", "Contract", new { id = contract.Id })" class="btn btn-secondary">Deails</a>
-                                        </div>
+                                            <a href="@Url.Action("ViewContract", "Contract", new { id = contract.Id })" class="btn btn-outline-dark">Договор</a>
+                                        </div> 
                                     </td>
+                                    <td>@contract.ContractNumber</td>
+                                    <td>@string.Format("{0:N2}", contract.TotalAmountOfContract)</td>
+                                    <td>@contract.Home.Block / @contract.Home.Entrance / @contract.Home.Floor / @contract.Home.ApartmentNumber</td>
+                                    <td>@contract.Customer.LastName @contract.Customer.FirstName </td>
                                 </tr>
                             }
                         </tbody>
