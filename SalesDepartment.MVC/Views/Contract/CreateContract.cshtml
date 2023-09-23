@@ -16,7 +16,7 @@
 
 @model CreateContractCommand
 
-<h3 class="text-center">Add new Contract</h3>
+<h3 class="text-center">Добавить новый контракт</h3>
 <hr />
 <form asp-controller="Contract" asp-action="CreateContract" enctype="multipart/form-data" method="post">
     <div class="container mt-4">
@@ -24,45 +24,47 @@
             <div class="col-lg-6 offset-lg-3" style="overflow-y:scroll; width:50%; height:70vh">
 
                 <div class="form-group mt-3">
-                    <label asp-for="ContractNumber" class="form-label">ContractNumber:</label>
-                    <input asp-for="ContractNumber" type="text" class="form-control" placeholder="Enter ContractNumber">
+                    <label asp-for="ContractNumber" class="form-label">Контракт №:</label>
+                    <input asp-for="ContractNumber" type="text" class="form-control" placeholder="Введите Контракт №">
                     <span asp-validation-for="ContractNumber" class="text-danger"></span>
                 </div>
 
                 <div class="form-group mt-3">
-                    <label asp-for="ContractStartDate">Contract ContractStartDate:</label>
+                    <label asp-for="ContractStartDate">Дата контракта:</label>
                     <input asp-for="ContractStartDate" type="date" class="form-control" required />
                     <span asp-validation-for="ContractStartDate" class="text-danger"></span>
                 </div>
 
                 <div class="form-group mt-3">
-                    <label asp-for="TotalAmountOfContract" class="form-label">TotalAmountOfContract:</label>
-                    <input asp-for="TotalAmountOfContract" type="text" class="form-control" placeholder="Enter TotalAmountOfContract">
+                    <label asp-for="TotalAmountOfContract" class="form-label">Общая сумма контракта:</label>
+                    <input asp-for="TotalAmountOfContract" type="text" class="form-control" placeholder="Введите oбщая сумма контракта">
                     <span asp-validation-for="TotalAmountOfContract" class="text-danger"></span>
                 </div>
 
                 <div class="form-group mt-3">
-                    <label asp-for="PaymentStartDate">Contract PaymentStartDate:</label>
+                    <label asp-for="PaymentStartDate"> Дата начала платежа:</label>
                     <input asp-for="PaymentStartDate" type="date" class="form-control" required />
                     <span asp-validation-for="PaymentStartDate" class="text-danger"></span>
                 </div>
 
                 <div class="form-group mt-3">
-                    <label asp-for="NumberOfMonths" class="form-label">NumberOfMonths:</label>
-                    <input asp-for="NumberOfMonths" type="text" class="form-control" placeholder="Enter NumberOfMonths">
+                    <label asp-for="NumberOfMonths" class="form-label">Количество месяцев:</label>
+                    <input asp-for="NumberOfMonths" type="text" class="form-control" placeholder="Введите количество месяцев">
                     <span asp-validation-for="NumberOfMonths" class="text-danger"></span>
                 </div>
 
                 <div class="form-group mt-3">
-                    <label asp-for="InAdvancePaymentOfContract" class="form-label">InAdvancePaymentOfContract:</label>
-                    <input asp-for="InAdvancePaymentOfContract" type="decimal" class="form-control" placeholder="Enter InAdvancePaymentOfContract">
+                    <label asp-for="InAdvancePaymentOfContract" class="form-label">Сумма предоплаты:</label>
+                    <input asp-for="InAdvancePaymentOfContract" type="decimal" class="form-control" placeholder="Введите cумма предоплаты">
                     <span asp-validation-for="InAdvancePaymentOfContract" class="text-danger"></span>
                 </div>
 
                 <div class="form-group mt-3">
-                    <label for="HomeId">HomeId:</label>
+                    <label for="HomeId">Квартира:</label>
                     <select class="form-control" id="HomeId" name="HomeId" required>
-                        <option value="">Choose Home</option>
+                        <option value="">
+                            Выбрать квартиру
+                        </option>
                         @foreach (var home in Homes)
                         {
                             <option value="@home.Id">@home.ApartmentNumber</option>
@@ -71,9 +73,9 @@
                 </div>
 
                 <div class="form-group mt-3">
-                    <label for="CustomerId">CustomerId:</label>
+                    <label for="CustomerId">Клиент:</label>
                     <select class="form-control" id="CustomerId" name="CustomerId" required>
-                        <option value="">Choose Customer</option>
+                        <option value="">Выбрать Клиент</option>
                         @foreach (var customer in Customers)
                         {
                             <option value="@customer.Id">@customer.FirstName</option>
@@ -82,9 +84,9 @@
                 </div>
 
                 <div class="form-group mt-3">
-                    <label for="FounderId">FounderId:</label>
+                    <label for="FounderId">Основатель:</label>
                     <select class="form-control" id="FounderId" name="FounderId" required>
-                        <option value="">Choose Founder</option>
+                        <option value="">Выбрать Основатель</option>
                         @foreach (var founder in Founders)
                         {
                             <option value="@founder.Id">@founder.FirstName</option>
@@ -93,7 +95,7 @@
                 </div>
 
                 <div class="form-group button-group mt-3">
-                    <button type="submit" class="btn btn-success">Save</button>
+                    <button type="submit" class="btn btn-success">Сохранять</button>
                 </div>
             </div>
         </div>
