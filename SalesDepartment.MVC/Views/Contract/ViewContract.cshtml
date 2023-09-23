@@ -6,89 +6,142 @@
 
 @model ContractResponse
 
-<a asp-controller="Home" asp-action="index" class="btn btn-secondary back"><i class="las la-arrow-left"></i> Back to home</a>
-<h3 class="text-center">Contract Info</h3>
-<hr />
+<h3 class="text-center">Информация о контракте</h3>
 
-<div class="container" style="height: 55vh;">
+<div style="display: flex; justify-content: space-between;">
+    <div>
+        <a href="@Url.Action("UpdateContract", new { id = @Model.Id })" class="btn btn-secondary">
+            <i class="fas fa-pen-to-square"></i>Изменить
+        </a>
+        <a href="@Url.Action("DeleteContract", new { id = @Model.Id })" class="btn btn-danger">
+            <i class="fas fa-trash-can"></i>Удалить
+        </a>
+    </div>
+    <div>
+        <a href="@Url.Action("ContractInDocx", "Contract", new { id = @Model.Id })" class="btn btn-outline-info">
+            <i class="fa-regular fa-file-word"></i> Договор в Docx
+        </a>
+        <a href="@Url.Action("GraphicInDocx", "Report", new { id = @Model.Id })" class="btn btn-outline-info">
+            <i class="fa-regular fa-file-word"></i> Графика платежей в Docx
+        </a>
+    </div>
+</div>
+
+<hr />
+<div class="container" style="height: 100vh;">
     <div class="row" style="display: flex; justify-content: center;">
-        <div class="col-lg-6" style="width: 100%;">
+        <div class="col-lg-12" style="width: 100%;">
             <div class="custom-cards">
-                <div class="table-container" style="overflow-y: scroll; height: 58vh; width: 100%;">
-                    <table id="Contract Info" class="table">
-                        <thead>
-                            <tr>
-                                <th style="width: 25%;">Contract Number</th>
-                                <th style="width: 25%;">Contract Date</th>
-                                <th style="width: 25%;">Total Amount Of Contract</th>
-                                <th style="width: 25%;">Advance Payment</th>
-                                <th style="width: 25%;">Monthly Payment</th>
-                                <th style="width: 25%;">Number Of Months</th>
-                                <th style="width: 25%;">Payment Start Date</th>
-                                <th style="width: 25%;">Founder Name</th>
-                            </tr>
-                        </thead>
-                        <tbody>
+                <div class="table-container" style="overflow-y: scroll; height: 80vh; width: 100%;">
+                    <div class="col-lg-6">
+                        <div class="custom-cards">
+                            <h4 class="text-center">Contract Information</h4>
+                            <table class="table table-bordered">
                                 <tr>
+                                    <th>Contract Number</th>
                                     <td>@Model.ContractNumber</td>
+                                </tr>
+                                <tr>
+                                    <th>Contract Start Date</th>
                                     <td>@Model.ContractStartDate</td>
+                                </tr>
+                                <tr>
+                                    <th>Total Amount Of Contract</th>
                                     <td>@Model.TotalAmountOfContract</td>
+                                </tr>
+                                <tr>
+                                    <th>Advance Payment</th>
                                     <td>@Model.InAdvancePaymentOfContract</td>
+                                </tr>
+                                <tr>
+                                    <th>Monthly Payment</th>
                                     <td>@Model.AmountOfMonthlyPayment</td>
+                                </tr>
+                                <tr>
+                                    <th>Number Of Months</th>
                                     <td>@Model.NumberOfMonths</td>
+                                </tr>
+                                <tr>
+                                    <th>Payment Start Date</th>
                                     <td>@Model.PaymentStartDate</td>
+                                </tr>
+                                <tr>
+                                    <th>Founder Name</th>
                                     <td>@Model.Founder.FirstName @Model.Founder.LastName</td>
                                 </tr>
-                        </tbody>
-                    </table>
-                    <table id="Apartment Info" class="table">
-                        <thead>
-                            <tr>
-                                <th style="width: 25%;">Block</th>
-                                <th style="width: 25%;">Entrance</th>
-                                <th style="width: 25%;">Floor</th>
-                                <th style="width: 25%;">ApartmentNumber</th>
-                                <th style="width: 25%;">NumberOfRooms</th>
-                                <th style="width: 25%;">Area</th>
-                            </tr>
-                        </thead>
-                        <tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="custom-cards">
+                            <h4 class="text-center">Customer Information</h4>
+                            <table class="table table-bordered">
                                 <tr>
+                                    <th>First Name</th>
+                                    <td>@Model.Customer.FirstName</td>
+                                </tr>
+                                <tr>
+                                    <th>Last Name</th>
+                                    <td>@Model.Customer.LastName</td>
+                                </tr>
+                                <tr>
+                                    <th>Middle Name</th>
+                                    <td>@Model.Customer.MiddleName</td>
+                                </tr>
+                                <tr>
+                                    <th>Passport</th>
+                                    <td>@Model.Customer.Passport</td>
+                                </tr>
+                                <tr>
+                                    <th>Passport Issued By</th>
+                                    <td>@Model.Customer.PassportIssuedBy</td>
+                                </tr>
+                                <tr>
+                                    <th>Address</th>
+                                    <td>@Model.Customer.Address</td>
+                                </tr>
+                                <tr>
+                                    <th>Phone Number One</th>
+                                    <td>@Model.Customer.PhoneNumberOne</td>
+                                </tr>
+                                <tr>
+                                    <th>Phone Number Two</th>
+                                    <td>@Model.Customer.PhoneNumberTwo</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="custom-cards">
+                            <h4 class="text-center">Apartment Information</h4>
+                            <table class="table table-bordered">
+                                <tr>
+                                    <th>Block</th>
                                     <td>@Model.Home.Block</td>
+                                </tr>
+                                <tr>
+                                    <th>Entrance</th>
                                     <td>@Model.Home.Entrance</td>
+                                </tr>
+                                <tr>
+                                    <th>Floor</th>
                                     <td>@Model.Home.Floor</td>
+                                </tr>
+                                <tr>
+                                    <th>Apartment Number</th>
                                     <td>@Model.Home.ApartmentNumber</td>
+                                </tr>
+                                <tr>
+                                    <th>Number Of Rooms</th>
                                     <td>@Model.Home.NumberOfRooms</td>
+                                </tr>
+                                <tr>
+                                    <th>Area</th>
                                     <td>@Model.Home.Area</td>
                                 </tr>
-                        </tbody>
-                    </table>
-                    <table id="Customer Info" class="table">
-                        <thead>
-                            <tr>
-                                <th style="width: 25%;">FirstName</th>
-                                <th style="width: 25%;">LastName</th>
-                                <th style="width: 25%;">MiddleName</th>
-                                <th style="width: 25%;">Passport</th>
-                                <th style="width: 25%;">PassportIssuedBy</th>
-                                <th style="width: 25%;">Address</th>
-                                <th style="width: 25%;">PhoneNumberOne</th>
-                                <th style="width: 25%;">PhoneNumberTwo</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                           <tr>
-                                <td>@Model.Customer.FirstName</td>
-                                <td>@Model.Customer.LastName</td>
-                                <td>@Model.Customer.MiddleName</td>
-                                <td>@Model.Customer.Passport</td>
-                                <td>@Model.Customer.PassportIssuedBy</td>
-                                <td>@Model.Customer.Address</td>
-                                <td>@Model.Customer.PhoneNumberOne</td>
-                                <td>@Model.Customer.PhoneNumberTwo</td>
-                           </tr>
-                        </tbody>
-                    </table>
+                            </table>
+                        </div>
+                    </div>
                     <table id="Payment History" class="table">
                         <thead>
                             <tr>

@@ -4,17 +4,17 @@
 
 @model SalesDepartment.Application.UseCases.Contracts.Response.ContractResponse[]
 
-<h3 class="text-center">All Contracts</h3>
+<h3 class="text-center">Все Контракты</h3>
 <div class="row">
     <div class="col">
             <div class="input-group mb-1 mt-3" style="display:flex; justify-content:space-between; gap:20px;">
             <div style="display: flex; gap: 20px;">
                 <a href="@Url.Action("CreateContract")" class="btn btn-primary mr-2">
-                    <i class="fa-solid fa-plus"></i> Contract
+                    <i class="fa-solid fa-plus"></i> Договор
                 </a>
                 <a asp-controller="Founder" asp-action="GetAllFounders" class="nav-link">
                     <div class="icon-wrapper">
-                        <i class="fa-solid fa-user-group"></i> Founders
+                        <i class="fa-solid fa-user-group"></i> Основатели
                     </div>
                 </a>
             </div>
@@ -22,7 +22,7 @@
             
             <div style="display:flex; gap:5px">
                 <button id="refreshButton" class="btn btn-warning"><i class="fa-solid fa-arrows-rotate"></i></button>
-                <input id="searchInput" type="text" class="form-control" placeholder="Search" style="max-width: 200px;">
+                <input id="searchInput" type="text" class="form-control" placeholder="Поиск" style="max-width: 200px;">
                 <div class="input-group-append">
                     <button id="searchButtonSimple" class="btn btn-info" type="button">
                         <i class="fa-solid fa-magnifying-glass"></i>
@@ -38,22 +38,21 @@
 
             <div>
                 <a asp-controller="Contract" asp-action="GetAllContractsExcel" class="btn btn-success">
-                    <i class="fa-solid fa-file-excel"></i> <i class="fa-solid fa-download"></i>GetInExcel
+                    <i class="fa-solid fa-file-excel"></i> <i class="fa-solid fa-download"></i>Получить в Excel
                 </a>
             </div>
             <div style="display:flex; gap:5px">
                 <select id="sortColumn" class="form-control">
-                    <option value="ContractNumber">ContractNumber</option>
-                    <option value="ContractStartDate">ContractStartDate</option>
-                    <option value="TotalAmountOfContract">TotalAmountOfContract</option>
-                    <option value="ContractEndDate">ContractEndDate</option>
-                    <option value="HomeId">HomeId</option>
-                    <option value="CustomerId">CustomerId</option>
-                    <option value="FounderId">FounderId</option>
+                    <option value="ContractNumber">Контракт №</option>
+                    <option value="ContractStartDate">Дата контракта</option>
+                    <option value="TotalAmountOfContract">Сумма контракта</option>
+                    <option value="HomeId">Квартира</option>
+                    <option value="CustomerId">Клиент</option>
+                    <option value="FounderId">Основатель</option>
                 </select>
                 <select id="sortOrder" class="form-control">
-                    <option value="asc">Ascending</option>
-                    <option value="desc">Descending</option>
+                    <option value="asc">Восходящий</option>
+                    <option value="desc">Нисходящий</option>
                 </select>
                 <button id="sortButton" class="btn btn-info"><i class="fa-solid fa-arrow-up-a-z"></i> </button>
                 <button id="toggleExtendedSearch" class="btn btn-info"> <i class="fa-solid fa-filter"></i> </button>
@@ -66,14 +65,12 @@
     <div class="row">
         <div class="col">
             <div class="input-group mb-1 mt-3" style="display:flex; justify-content:space-between; gap:5px;">
-                <!-- Add input fields for each column you want to search -->
-                <input id="searchContractNumber" type="text" class="form-control" placeholder="Search ContractNumber">
-                <input id="searchStartDate" type="date" class="form-control" placeholder="Start Date">
-                <input id="searchEndDate" type="date" class="form-control" placeholder="End Date">
-                <input id="searchTotalAmountOfContract" type="text" class="form-control" placeholder="Search TotalAmountOfContract">
-                <input id="searchHomeId" type="text" class="form-control" placeholder="Search HomeId">
-                <input id="searchCustomerId" type="text" class="form-control" placeholder="Search CustomerId">
-                <input id="searchFounderId" type="text" class="form-control" placeholder="Search FounderId">
+                <input id="searchContractNumber" type="text" class="form-control" placeholder="Контракт №">
+                <input id="searchStartDate" type="date" class="form-control" placeholder="Дата контракта">
+                <input id="searchTotalAmountOfContract" type="text" class="form-control" placeholder="Сумма контракта">
+                <input id="searchHomeId" type="text" class="form-control" placeholder="Квартира">
+                <input id="searchCustomerId" type="text" class="form-control" placeholder="Клиент">
+                <input id="searchFounderId" type="text" class="form-control" placeholder="Основатель">
                 <div class="input-group-append">
                     <button id="searchButton" class="btn btn-info" type="button">
                         <i class="fa-solid fa-magnifying-glass"></i>
@@ -92,7 +89,7 @@
                 @{
                     if (Model.Length == 0)
                     {
-                        <h2>There are no Contracts yet...</h2>
+                        <h2>Контрактов пока нет...</h2>
                     }
                 }
 
@@ -100,14 +97,13 @@
                     <table id="ContractsTable" class="table">
                         <thead>
                             <tr>
-                                <th style="width: 25%;">Actions</th>
-                                <th style="width: 25%;">ContractNumber</th>
-                                <th style="width: 25%;">ContractStartDate</th>
-                                <th style="width: 25%;">TotalAmountOfContract</th>
-                                <th style="width: 25%;">PaymentStartDate</th>
-                                <th style="width: 25%;">HomeId</th>
-                                <th style="width: 25%;">CustomerId</th>
-                                <th style="width: 25%;">FounderId</th>
+                                <th style="width: 25%;">Действия</th>
+                                <th style="width: 25%;">Контракт №</th>
+                                <th style="width: 25%;">Дата контракта</th>
+                                <th style="width: 25%;">Сумма контракта</th>
+                                <th style="width: 25%;">Квартира</th>
+                                <th style="width: 25%;">Клиент</th>
+                                <th style="width: 25%;">Основатель</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -116,24 +112,16 @@
                                 <tr>
                                     <td class="action-links">
                                         <div style="display:flex; gap:5px">
-                                            <a href="@Url.Action("ContractInDocx", "Contract", new { id = Contract.Id })" class="btn btn-secondary">
-                                                <i class="fa-regular fa-file-word"></i> 
-                                            </a>
-                                            <a href="@Url.Action("GraphicInDocx", "Report", new { id = Contract.Id })" class="btn btn-secondary">
-                                                <i class="fa-regular fa-file-pdf"></i>
-                                            </a>
-                                            <a href="@Url.Action("ViewContract", "Contract", new { id = Contract.Id })" class="btn btn-secondary">Details</a>
-                                            <a href="@Url.Action("UpdateContract", new { id = Contract.Id })" class="btn btn-secondary"><i class="fas fa-pen-to-square"></i></a>
-                                            <a href="@Url.Action("DeleteContract", new { id = Contract.Id })" class="btn btn-danger"><i class="fas fa-trash-can"></i></a>
+
+                                            <a href="@Url.Action("ViewContract", "Contract", new { id = Contract.Id })" class="btn btn-secondary"><i class="fas fa-info-circle"></i> Подробно</a>
                                         </div>
                                     </td>
                                     <td>@Contract.ContractNumber</td>
                                     <td>@Contract.ContractStartDate.ToString("yyyy-MM-dd")</td>
                                     <td class="amount-cell">@Contract.TotalAmountOfContract</td>
-                                    <td>@Contract.PaymentStartDate.ToString("yyyy-MM-dd")</td>
-                                    <td>@Contract.Home.ApartmentNumber</td>
-                                    <td>@Contract.Customer.FirstName</td>
-                                    <td>@Contract.Founder.FirstName</td>
+                                    <td>@Contract.Home.Block/ @Contract.Home.Entrance / @Contract.Home.Floor / @Contract.Home.ApartmentNumber</td>
+                                    <td>@Contract.Customer.LastName @Contract.Customer.FirstName</td>
+                                    <td>@Contract.Founder.LastName @Contract.Founder.FirstName</td>
                                 </tr>
                             }
                         </tbody>
