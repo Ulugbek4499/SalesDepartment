@@ -41,13 +41,19 @@
                 <div class="form-group mt-3">
                     <label for="ContractId">Контракт №:</label>
                     <select class="form-control" id="ContractId" name="ContractId" required>
-                        <option value="">Выбрать Contract Number</option>
+                        <option value="">Выбрать Номер контракта</option>
                         @foreach (var contract in Contracts)
                         {
-                            <option value="@contract.Id">@contract.ContractNumber</option>
+                            <option value="@contract.Id" data-contract-number="@contract.ContractNumber">@contract.ContractNumber / @contract.Customer.LastName @contract.Customer.FirstName @contract.Customer.MiddleName</option>
                         }
                     </select>
                 </div>
+
+                <script>
+                    $(document).ready(function () {
+                        $('#ContractId').select2(); // Initialize Select2
+                    });
+                </script>
 
                 <div class="form-group mt-3">
                     <label for="PaymentTypeId">Тип платежей:</label>
@@ -67,3 +73,34 @@
         </div>
     </div>
 </form>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // Initialize Select2 with custom options
+        $('#ContractId').select2({
+            placeholder: "Введите Номер контракта",
+            allowClear: true,
+            matcher: function (params, data) {
+                // If there's no search term, return all options
+                if ($.trim(params.term) === '') {
+                    return data;
+                }
+
+                // Modify the search term to match numbers only
+                var term = $.trim(params.term).replace(/[^0-9]/g, '');
+
+                // Check if the data text contains the modified term
+                if (data.text.indexOf(term) > -1) {
+                    return data;
+                }
+
+                return null;
+            }
+        });
+    });
+</script>
+
+
+
+
