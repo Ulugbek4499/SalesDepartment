@@ -47,7 +47,7 @@
 
                     <div class="form-group mt-3">
                         <label asp-for="PaymentStartDate">Дата начала платежа:</label>
-                        <input asp-for="PaymentStartDate" class="form-control" required value="@Model.PaymentStartDate" />
+                        <input asp-for="PaymentStartDate" type="date" class="form-control" required value="@Model.PaymentStartDate.ToString("yyyy-MM-dd")" />
                         <span asp-validation-for="PaymentStartDate" class="text-danger"></span>
                     </div>
 
