@@ -95,16 +95,16 @@
                     }
                 }
 
-                <div class="table-container" style="overflow-y: scroll; height: 58vh; width:100% ">
+                <div class="table-container" style="overflow-y: scroll; height: 68vh; width:100% ">
                     <table id="PaymentsTable" class="table">
                         <thead>
                             <tr>
                                 <th style="width: 25%;">Действия</th>
-                                <th style="width: 25%;">Номер платежа №</th>
-                                <th style="width: 25%;">Дата платежа</th>
-                                <th style="width: 25%;">Сумма</th>
-                                <th style="width: 25%;">Контракт №</th>
-                                <th style="width: 25%;">Тип платежей</th>
+                                <th style="width: 10%;">Платежа №</th>
+                                <th style="width: 15%;">Дата платежа</th>
+                                <th style="width: 15%;">Сумма</th>
+                                <th style="width: 15%;">Контракт №</th>
+                                <th style="width: 15%;">Тип платежей</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -113,7 +113,7 @@
                                 <tr>
                                     <td class="action-links">
                                         <div style="display:flex; gap:5px">
-                                            <a href="@Url.Action("PaymentInDocx", "Payment", new { id = Payment.Id })" class="btn btn-secondary">
+                                            <a href="@Url.Action("PaymentInDocx", "Payment", new { id = Payment.Id })" class="btn btn-outline-primary">
                                                 <i class="fa-regular fa-file-word"></i>
                                             </a>
                                             <a href="@Url.Action("ViewContract", "Contract", new { id = Payment.Contract.Id })" class="btn btn-secondary"><i class="fas fa-info-circle"></i> Подробно</a>
