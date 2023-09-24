@@ -7,8 +7,8 @@
 <h3 class="text-center">Статус оплаты контрактов</h3>
 <div class="row">
     <div class="col">
-        <div class="input-group mb-1 mt-3" style="display:flex; justify-content:space-between; gap:20px;">
-            <div style="display:flex; gap:5px">
+        <div class="input-group mb-1 mt-3" style="display: flex; justify-content: space-between; gap: 20px;">
+            <div style="display: flex; gap: 5px; align-items: center; justify-content: flex-end; flex-grow: 1;">
                 <button id="refreshButton" class="btn btn-warning"><i class="fa-solid fa-arrows-rotate"></i></button>
                 <input id="searchInput" type="text" class="form-control" placeholder="Поиск" style="max-width: 200px;">
                 <div class="input-group-append">
@@ -108,7 +108,7 @@
                                     </td>
                                     <td data-column="Customer">@Contract.Customer.LastName @Contract.Customer.FirstName</td>
                                     <td data-column="CustomerPhoneNumber">@Contract.Customer.PhoneNumberOne  @Contract.Customer.PhoneNumberTwo</td>
-                                    <td data-column="TotalAmountOfContract" class="amount-cell">@Contract.TotalAmountOfContract</td>
+                                    <td data-column="TotalAmountOfContract" class="amount-cell">@string.Format("{0:N2}", Contract.TotalAmountOfContract)</td>
                                     <td data-column="ScheduledInfo" class="amount-cell">
                                         @{
                                             DateTime currentDate = DateTime.Now;
@@ -125,14 +125,14 @@
                                                 }
                                             }
 
-                                            @sumForCurrentMonth
+                                            @string.Format("{0:N2}", sumForCurrentMonth)
                                         }
                                     </td>
-                                    <td data-column="ActualInfo" class="amount-cell">@Contract.ActualInfo.Values.Sum()</td>
-                                    <td data-column="DeptAmout" class="amount-cell">@Contract.DeptAmout</td>
+                                    <td data-column="ActualInfo" class="amount-cell">@string.Format("{0:N2}", Contract.ActualInfo.Values.Sum())</td>
+                                    <td data-column="DeptAmout" class="amount-cell">@string.Format("{0:N2}", Contract.DeptAmout)</td>
                                     <td data-column="PaymentStartDate">@Contract.PaymentStartDate.ToString("yyyy-MM-dd")</td>
-                                    <td data-column="InAdvancePaymentOfContract" class="amount-cell">@Contract.InAdvancePaymentOfContract</td>
-                                    <td data-column="AmountOfMonthlyPayment" class="amount-cell">@Contract.AmountOfMonthlyPayment</td>
+                                    <td data-column="InAdvancePaymentOfContract" class="amount-cell">@string.Format("{0:N2}", Contract.InAdvancePaymentOfContract)</td>
+                                    <td data-column="AmountOfMonthlyPayment" class="amount-cell">@string.Format("{0:N2}", Contract.AmountOfMonthlyPayment)</td>
                                     <td data-column="ContractNumber">@Contract.ContractNumber</td>
                                 </tr>
                             }
@@ -175,12 +175,12 @@
             var cellA = a.querySelector('td[data-column="' + column + '"]').textContent.toLowerCase();
             var cellB = b.querySelector('td[data-column="' + column + '"]').textContent.toLowerCase();
 
-            if (column === "Amount" || column === "PaymentNumber") {
+            if (column === "TotalAmountOfContract" || column === "PaymentNumber" || column === "ActualInfo" || column === "DeptAmout" || column === "AmountOfMonthlyPayment" || column === "ScheduledInfo") {
                 cellA = parseFloat(cellA.replace(',', '.')) || 0;
                 cellB = parseFloat(cellB.replace(',', '.')) || 0;
             }
 
-            if (column === "PaymentDate") {
+            if (column === "PaymentStartDate") {
                 cellA = new Date(cellA);
                 cellB = new Date(cellB);
             }
