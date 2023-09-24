@@ -44,7 +44,6 @@
                     <option value="ApartmentNumber">Квартира №</option>
                     <option value="NumberOfRooms">Количество комнат</option>
                     <option value="Area">Проектной площадью </option>
-                    <option value="ContractId">Договор</option>
                 </select>
                 <select id="sortOrder" class="form-control">
                     <option value="asc">Восходящий</option>
@@ -173,6 +172,15 @@
             var cellA = a.querySelector('td[data-column="' + column + '"]').textContent.toLowerCase();
             var cellB = b.querySelector('td[data-column="' + column + '"]').textContent.toLowerCase();
 
+            // Handle string sorting
+            if (column === 'Block') {
+                if (sortOrder === 'asc') {
+                    return cellA.localeCompare(cellB);
+                } else {
+                    return cellB.localeCompare(cellA);
+                }
+            }
+
             // Define an array of column names that should be treated as numeric
             var numericColumns = ["Area", "Entrance", "Floor", "ApartmentNumber", "NumberOfRooms"];
 
@@ -194,6 +202,7 @@
             tbody.appendChild(rows[i]);
         }
     });
+
 </script>
 
 <script>
