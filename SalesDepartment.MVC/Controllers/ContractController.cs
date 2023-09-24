@@ -68,6 +68,15 @@ public class ContractController : ApiBaseController
     {
         var Contract = await Mediator.Send(new GetContractByIdQuery(Id));
 
+        FounderResponse[] founders = await Mediator.Send(new GetAllFoundersQuery());
+        ViewData["Founders"] = founders;
+
+        CustomerResponse[] customers = await Mediator.Send(new GetAllCustomersQuery());
+        ViewData["Customers"] = customers;
+
+        HomeResponse[] homes = await Mediator.Send(new GetAllHomesQuery());
+        ViewData["Homes"] = homes;
+
         return View(Contract);
     }
 

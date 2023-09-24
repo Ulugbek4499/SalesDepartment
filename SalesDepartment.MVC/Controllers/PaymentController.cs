@@ -73,6 +73,12 @@ public class PaymentController : ApiBaseController
     {
         var Payment = await Mediator.Send(new GetPaymentByIdQuery(Id));
 
+        PaymentTypeResponse[] paymentTypes = await Mediator.Send(new GetAllPaymentTypesQuery());
+        ViewData["PaymentTypes"] = paymentTypes;
+
+        ContractResponse[] contracts = await Mediator.Send(new GetAllContractsQuery());
+        ViewData["Contracts"] = contracts;
+
         return View(Payment);
     }
 

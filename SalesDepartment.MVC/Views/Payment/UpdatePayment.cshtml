@@ -1,11 +1,16 @@
 ﻿@using SalesDepartment.Application.UseCases.Payments.Commands.UpdatePayment;
 @using SalesDepartment.Application.UseCases.Payments.Response;
 @using SalesDepartment.Domain.Entities;
+@using SalesDepartment.Application.UseCases.PaymentTypes.Response;
+@using SalesDepartment.Application.UseCases.Contracts.Response;
 @model PaymentResponse
 
 @{
     ViewData["Title"] = "UpdatePayment";
     Layout = "_Layout";
+
+    PaymentTypeResponse[] PaymentTypes = ViewData["PaymentTypes"] as PaymentTypeResponse[];
+    ContractResponse[] Contracts = ViewData["Contracts"] as ContractResponse[];
 }
 
 <h3 class="text-center">Изменить информацию об оплате</h3>
@@ -38,14 +43,18 @@
                     </div>
 
                     <div class="form-group mt-3">
-                        <label asp-for="ContractId">Контракт №: </label>
-                        <input asp-for="ContractId" class="form-control" required value="@Model.ContractId" />
+                        <label asp-for="ContractId">Контракт №:</label>
+                        <select class="form-control" asp-for="ContractId" asp-items="@(new SelectList(Contracts, "Id", "ContractNumber"))" required>
+                            <option value="">Выбрать Contract Number</option>
+                        </select>
                         <span asp-validation-for="ContractId" class="text-danger"></span>
                     </div>
 
                     <div class="form-group mt-3">
-                        <label asp-for="PaymentTypeId">Тип платежей :</label>
-                        <input asp-for="PaymentTypeId" class="form-control" required value="@Model.PaymentTypeId" />
+                        <label asp-for="PaymentTypeId">Тип платежей:</label>
+                        <select class="form-control" asp-for="PaymentTypeId" asp-items="@(new SelectList(PaymentTypes, "Id", "Name"))" required>
+                            <option value="">Выбрать Тип платежей</option>
+                        </select>
                         <span asp-validation-for="PaymentTypeId" class="text-danger"></span>
                     </div>
 

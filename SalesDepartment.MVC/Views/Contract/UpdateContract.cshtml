@@ -1,11 +1,19 @@
 ﻿@using SalesDepartment.Application.UseCases.Contracts.Commands.UpdateContract;
 @using SalesDepartment.Application.UseCases.Contracts.Response;
 @using SalesDepartment.Domain.Entities;
+@using SalesDepartment.Application.UseCases.Customers.Response;
+@using SalesDepartment.Application.UseCases.Founders.Response;
+@using SalesDepartment.Application.UseCases.Homes.Response;
 @model ContractResponse
 
 @{
     ViewData["Title"] = "UpdateContract";
     Layout = "_Layout";
+
+
+    CustomerResponse[] Customers = ViewData["Customers"] as CustomerResponse[];
+    HomeResponse[] Homes = ViewData["Homes"] as HomeResponse[];
+    FounderResponse[] Founders = ViewData["Founders"] as FounderResponse[];
 }
 
 <h3 class="text-center">Изменить информацию о контракте</h3>
@@ -57,19 +65,25 @@
 
                     <div class="form-group mt-3">
                         <label asp-for="HomeId">Квартира:</label>
-                        <input asp-for="HomeId" class="form-control" required value="@Model.HomeId" />
+                        <select class="form-control" asp-for="HomeId" asp-items="@(new SelectList(Homes, "Id", "ApartmentNumber"))" required>
+                            <option value="">Выбрать Квартира</option>
+                        </select>
                         <span asp-validation-for="HomeId" class="text-danger"></span>
                     </div>
 
                     <div class="form-group mt-3">
-                        <label asp-for="CustomerId" class="form-label">Клиент:</label>
-                        <input asp-for="CustomerId" type="text" class="form-control" value="@Model.CustomerId">
+                        <label asp-for="CustomerId">Клиент:</label>
+                        <select class="form-control" asp-for="CustomerId" asp-items="@(new SelectList(Customers, "Id", "FirstName"))">
+                            <option value="">Выбрать Клиент</option>
+                        </select>
                         <span asp-validation-for="CustomerId" class="text-danger"></span>
                     </div>
 
                     <div class="form-group mt-3">
                         <label asp-for="FounderId">Основатель:</label>
-                        <input asp-for="FounderId" class="form-control" required value="@Model.FounderId" />
+                        <select class="form-control" asp-for="FounderId" asp-items="@(new SelectList(Founders, "Id", "FirstName"))" required>
+                            <option value="">Выбрать Основатель</option>
+                        </select>
                         <span asp-validation-for="FounderId" class="text-danger"></span>
                     </div>
 
