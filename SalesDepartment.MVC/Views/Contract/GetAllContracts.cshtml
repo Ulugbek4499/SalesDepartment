@@ -82,7 +82,7 @@
 </div>
 <hr />
 
-<div class="container" style="height: 95vh;">
+<div class="container" style="height: 90vh;">
     <div class="row" style="display:flex; justify-content:center;">
         <div class="col-lg-6" style="width:100%">
             <div class="custom-cards">
@@ -93,15 +93,15 @@
                     }
                 }
 
-                <div class="table-container" style="overflow-y: scroll; height: 58vh; width:100% ">
+                <div class="table-container" style="overflow-y: scroll; height: 68vh; width:100% ">
                     <table id="ContractsTable" class="table">
                         <thead>
                             <tr>
-                                <th style="width: 25%;">Действия</th>
-                                <th style="width: 25%;">Контракт №</th>
-                                <th style="width: 25%;">Дата контракта</th>
+                                <th style="width: 15%;">Действия</th>
+                                <th style="width: 12%;">Контракт №</th>
+                                <th style="width: 15%;">Дата контракта</th>
                                 <th style="width: 25%;">Сумма контракта</th>
-                                <th style="width: 25%;">Квартира</th>
+                                <th style="width: 23%;">Квартира</th>
                                 <th style="width: 25%;">Клиент</th>
                                 <th style="width: 25%;">Основатель</th>
                             </tr>
@@ -118,7 +118,7 @@
                                     <td>@Contract.ContractNumber</td>
                                     <td>@Contract.ContractStartDate.ToString("yyyy-MM-dd")</td>
                                     <td class="amount-cell">@Contract.TotalAmountOfContract</td>
-                                    <td>@Contract.Home.Block/ @Contract.Home.Entrance / @Contract.Home.Floor / @Contract.Home.ApartmentNumber</td>
+                                    <td>@Contract.Home.Block / @Contract.Home.Entrance / @Contract.Home.Floor / @Contract.Home.ApartmentNumber / @Contract.Home.Area</td>
                                     <td>@Contract.Customer.LastName @Contract.Customer.FirstName</td>
                                     <td>@Contract.Founder.LastName @Contract.Founder.FirstName</td>
                                 </tr>
