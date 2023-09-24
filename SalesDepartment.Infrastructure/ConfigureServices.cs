@@ -13,6 +13,7 @@ namespace SalesDepartment.Infrastructure
         {
             services.AddDbContext<IApplicationDbContext, ApplicationDbContext>(options =>
             {
+
                 options.UseNpgsql(configuration.GetConnectionString("DbConnect"));
                 options.UseLazyLoadingProxies();
             });

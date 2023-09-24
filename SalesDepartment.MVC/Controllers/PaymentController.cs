@@ -32,6 +32,15 @@ public class PaymentController : ApiBaseController
     [HttpPost("[action]")]
     public async ValueTask<IActionResult> CreatePayment([FromForm] CreatePaymentCommand Payment)
     {
+        ContractResponse[] contracts = await Mediator.Send(new GetAllContractsQuery());
+        var contractExists = contracts.Any(c => c.Id == Payment.ContractId);
+
+        if (!contractExists)
+        {
+            ModelState.AddModelError("ContractId", "Invalid contract selected.");
+            return View();
+        }
+
         await Mediator.Send(Payment);
 
         return RedirectToAction("GetAllPayments");

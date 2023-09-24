@@ -4,13 +4,13 @@
 
 @model SalesDepartment.Application.UseCases.Contracts.Response.ContractResponse[]
 
-<h3 class="text-center">All Contracts</h3>
+<h3 class="text-center">Статус оплаты контрактов</h3>
 <div class="row">
     <div class="col">
         <div class="input-group mb-1 mt-3" style="display:flex; justify-content:space-between; gap:20px;">
             <div style="display:flex; gap:5px">
                 <button id="refreshButton" class="btn btn-warning"><i class="fa-solid fa-arrows-rotate"></i></button>
-                <input id="searchInput" type="text" class="form-control" placeholder="Search" style="max-width: 200px;">
+                <input id="searchInput" type="text" class="form-control" placeholder="Поиск" style="max-width: 200px;">
                 <div class="input-group-append">
                     <button id="searchButtonSimple" class="btn btn-info" type="button">
                         <i class="fa-solid fa-magnifying-glass"></i>
@@ -26,26 +26,25 @@
 
             <div>
                 <a asp-controller="Contract" asp-action="GetAllContractsExcel" class="btn btn-success">
-                    <i class="fa-solid fa-file-excel"></i> <i class="fa-solid fa-download"></i>GetInExcel
+                    <i class="fa-solid fa-file-excel"></i> <i class="fa-solid fa-download"></i>Получить в Excel
                 </a>
             </div>
             <div style="display:flex; gap:5px">
                 <select id="sortColumn" class="form-control">
-                    <option value="ContractNumber">ContractNumber</option>
-                    <option value="Customer">Customer</option>
-                    <option value="PaymentStartDate">PaymentStartDate</option>
-                    <option value="TotalAmountOfContract">TotalAmountOfContract</option>
-                    <option value="AmountOfMonthlyPayment">AmountOfMonthlyPayment</option>
-                    <option value="InAdvancePaymentOfContract">InAdvancePaymentOfContract</option>
-                    <option value="ScheduledInfo">ScheduledInfo</option>
-                    <option value="ActualInfo">ActualInfo</option>
-                    <option value="DeptAmout">DeptAmout</option>
-
-
+                    <option value="Customer">Клиент</option>
+                    <option value="CustomerPhoneNumber">Телефон клиента</option>
+                    <option value="TotalAmountOfContract">Общая сумма</option>
+                    <option value="ScheduledInfo">Запланированный платеж</option>
+                    <option value="ActualInfo">Выплаченная сумма</option>
+                    <option value="DeptAmout">Долг</option>
+                    <option value="PaymentStartDate">Дата начала платежа</option>
+                    <option value="InAdvancePaymentOfContract">Предоплата</option>
+                    <option value="AmountOfMonthlyPayment">Ежемесячно оплата</option>
+                    <option value="ContractNumber">Контракт №</option>
                 </select>
                 <select id="sortOrder" class="form-control">
-                    <option value="asc">Ascending</option>
-                    <option value="desc">Descending</option>
+                    <option value="asc">Восходящий</option>
+                    <option value="desc">Нисходящий</option>
                 </select>
                 <button id="sortButton" class="btn btn-info"><i class="fa-solid fa-arrow-up-a-z"></i> </button>
                 <button id="toggleExtendedSearch" class="btn btn-info"> <i class="fa-solid fa-filter"></i> </button>
@@ -58,16 +57,16 @@
     <div class="row">
         <div class="col">
             <div class="input-group mb-1 mt-3" style="display:flex; justify-content:space-between; gap:5px;">
-                <!-- Add input fields for each column you want to search -->
-                <input id="searchContractNumber" type="text" class="form-control" placeholder="Search ContractNumber">
-                <input id="searchCustomer" type="text" class="form-control" placeholder="Search Customer">
-                <input id="searchPaymentStartDate" type="date" class="form-control" placeholder="PaymentStartDate">
-                <input id="searchTotalAmountOfContract" type="text" class="form-control" placeholder="Search TotalAmountOfContract">
-                <input id="searchAmountOfMonthlyPayment" type="text" class="form-control" placeholder="Search AmountOfMonthlyPayment">
-                <input id="searchInAdvancePaymentOfContract" type="text" class="form-control" placeholder="Search InAdvancePaymentOfContract">
-                <input id="searchScheduledInfo" type="text" class="form-control" placeholder="Search ScheduledInfo">
-                <input id="searchActualInfo" type="text" class="form-control" placeholder="Search ActualInfo">
-                <input id="searchDeptAmout" type="text" class="form-control" placeholder="Search DeptAmout">
+                <input id="searchCustomer" type="text" class="form-control" placeholder="Клиент">
+                <input id="searchCustomerPhoneNumber" type="text" class="form-control" placeholder="Телефон клиента">
+                <input id="searchTotalAmountOfContract" type="text" class="form-control" placeholder="Общая сумма">
+                <input id="searchScheduledInfo" type="text" class="form-control" placeholder="Запланированный платеж">
+                <input id="searchActualInfo" type="text" class="form-control" placeholder="Выплаченная сумма">
+                <input id="searchDeptAmout" type="text" class="form-control" placeholder="Долг">
+                <input id="searchPaymentStartDate" type="date" class="form-control" placeholder="Дата начала платежа">
+                <input id="searchInAdvancePaymentOfContract" type="text" class="form-control" placeholder="Предоплата">
+                <input id="searchAmountOfMonthlyPayment" type="text" class="form-control" placeholder="Ежемесячно оплата">
+                <input id="searchContractNumber" type="text" class="form-control" placeholder="Контракт №">
                 <div class="input-group-append">
                     <button id="searchButton" class="btn btn-info" type="button">
                         <i class="fa-solid fa-magnifying-glass"></i>
@@ -86,24 +85,25 @@
                 @{
                     if (Model.Length == 0)
                     {
-                        <h2>There are no Contracts yet...</h2>
+                        <h2>Контрактов пока нет...</h2>
                     }
                 }
 
-                <div class="table-container" style="overflow-y: scroll; height: 58vh; width:100% ">
+                <div class="table-container" style="overflow-y: scroll; height: 70vh; width:100% ">
                     <table id="ContractsTable" class="table">
                         <thead>
                             <tr>
-                                <th style="width: 25%;">Actions</th>
-                                <th style="width: 25%;">ContractNumber</th>
-                                <th style="width: 25%;">Customer</th>
-                                <th style="width: 25%;">PaymentStartDate</th>
-                                <th style="width: 25%;">TotalAmountOfContract</th>
-                                <th style="width: 25%;">AmountOfMonthlyPayment</th>
-                                <th style="width: 25%;">InAdvancePaymentOfContract</th>
-                                <th style="width: 25%;">ScheduledInfo</th>
-                                <th style="width: 25%;">ActualInfo</th>
-                                <th style="width: 25%;">DeptAmout</th>
+                                <th style="width: 25%;">Действия</th>
+                                <th style="width: 25%;">Клиент</th>
+                                <th style="width: 25%;">Телефон клиента</th>
+                                <th style="width: 25%;">Общая сумма</th>
+                                <th style="width: 25%;">Запланированный платеж</th>
+                                <th style="width: 25%;">Выплаченная сумма</th>
+                                <th style="width: 25%;">Долг</th>
+                                <th style="width: 25%;">Дата начала платежа</th>
+                                <th style="width: 25%;">Предоплата</th>
+                                <th style="width: 25%;">Ежемесячно оплата</th>
+                                <th style="width: 25%;">Контракт №</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -112,18 +112,37 @@
                                 <tr>
                                     <td class="action-links">
                                         <div style="display:flex; gap:5px">
-                                            <a href="@Url.Action("ViewContract", "Contract", new { id = Contract.Id })" class="btn btn-secondary">Details</a>
+                                            <a href="@Url.Action("ViewContract", "Contract", new { id = Contract.Id })" class="btn btn-secondary"><i class="fas fa-info-circle"></i> Подробно</a>
                                         </div>
                                     </td>
-                                    <td>@Contract.ContractNumber</td>
-                                    <td>@Contract.Customer.FirstName +" "+@Contract.Customer.LastName</td>
-                                    <td>@Contract.PaymentStartDate.ToString("yyyy-MM-dd")</td>
+                                    <td>@Contract.Customer.LastName @Contract.Customer.FirstName</td>
+                                    <td>@Contract.Customer.PhoneNumberOne  @Contract.Customer.PhoneNumberTwo</td>
                                     <td class="amount-cell">@Contract.TotalAmountOfContract</td>
-                                    <td class="amount-cell">@Contract.AmountOfMonthlyPayment</td>
-                                    <td class="amount-cell">@Contract.InAdvancePaymentOfContract</td>
-                                    <td class="amount-cell">@Contract.ScheduledInfo.Values.Sum()</td>
+                                    <td class="amount-cell">
+                                        @{
+                                            DateTime currentDate = DateTime.Now;
+                                            int currentMonth = currentDate.Month;
+                                            int currentYear = currentDate.Year;
+
+                                            decimal sumForCurrentMonth = 0;
+
+                                            foreach (var entry in Contract.ScheduledInfo)
+                                            {
+                                                if (entry.Key.Month == currentMonth && entry.Key.Year == currentYear)
+                                                {
+                                                    sumForCurrentMonth += entry.Value;
+                                                }
+                                            }
+
+                                            @sumForCurrentMonth
+                                        }
+                                    </td>
                                     <td class="amount-cell">@Contract.ActualInfo.Values.Sum()</td>
                                     <td class="amount-cell">@Contract.DeptAmout</td>
+                                    <td>@Contract.PaymentStartDate.ToString("yyyy-MM-dd")</td>
+                                    <td class="amount-cell">@Contract.InAdvancePaymentOfContract</td>
+                                    <td class="amount-cell">@Contract.AmountOfMonthlyPayment</td>
+                                    <td>@Contract.ContractNumber</td>
                                 </tr>
                             }
                         </tbody>
@@ -199,6 +218,7 @@
         var searchScheduledInfo = document.getElementById('searchScheduledInfo').value.toLowerCase();
         var searchActualInfo = document.getElementById('searchActualInfo').value.toLowerCase();
         var searchDeptAmout = document.getElementById('searchDeptAmout').value.toLowerCase();
+        var searchDeptAmout = document.getElementById('searchCustomerPhoneNumber').value.toLowerCase();
 
         var rows = document.getElementById('ContractsTable').getElementsByTagName('tbody')[0].getElementsByTagName('tr');
 

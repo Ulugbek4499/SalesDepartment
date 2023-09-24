@@ -34,7 +34,7 @@ namespace SalesDepartment.Application.UseCases.Reports
 
                 DateTime paymentDate = contract.PaymentStartDate;
 
-                for (int i = 0; i < contract.NumberOfMonths; i++)
+                for (int i = 1; i < contract.NumberOfMonths; i++)
                 {
                     decimal paymentAmount = contract.InAdvancePaymentOfContract + (i * contract.AmountOfMonthlyPayment);
 
@@ -45,7 +45,7 @@ namespace SalesDepartment.Application.UseCases.Reports
 
                 DateTime calculationDate = request.Time;
                 var sumOfPayments = contract.Payments.Sum(x => x.Amount);
-                var scheduledPayment = paymentSchedule.FirstOrDefault(x => x.Key.Month == calculationDate.Month);
+                var scheduledPayment = paymentSchedule.FirstOrDefault(x => x.Key.Month == calculationDate.Month && x.Key.Year == calculationDate.Year);
                 decimal deptAmount = 0;
 
                 if (scheduledPayment.Key != default(DateTime))
