@@ -44,7 +44,7 @@
                         <option value="">Выбрать Номер контракта</option>
                         @foreach (var contract in Contracts)
                         {
-                            <option value="@contract.Id" data-contract-number="@contract.ContractNumber">@contract.ContractNumber / @contract.Customer.LastName @contract.Customer.FirstName @contract.Customer.MiddleName</option>
+                            <option value="@contract.Id" data-contract-number="@contract.ContractNumber">@contract.ContractNumber / @contract.Customer.LastName @contract.Customer.FirstName @contract.Customer.MiddleName / @contract.Customer.PhoneNumberOne</option>
                         }
                     </select>
                 </div>
@@ -87,11 +87,12 @@
                     return data;
                 }
 
-                // Modify the search term to match numbers only
-                var term = $.trim(params.term).replace(/[^0-9]/g, '');
+                // Remove special characters and convert to lowercase for comparison
+                var term = $.trim(params.term).toLowerCase();
+                var text = data.text.toLowerCase();
 
-                // Check if the data text contains the modified term
-                if (data.text.indexOf(term) > -1) {
+                // Check if the data text contains the term
+                if (text.indexOf(term) > -1) {
                     return data;
                 }
 
