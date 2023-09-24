@@ -32,15 +32,12 @@
             <div style="display:flex; gap:5px">
                 <select id="sortColumn" class="form-control">
                     <option value="Customer">Клиент</option>
-                    <option value="CustomerPhoneNumber">Телефон клиента</option>
                     <option value="TotalAmountOfContract">Общая сумма</option>
                     <option value="ScheduledInfo">Запланированный платеж</option>
                     <option value="ActualInfo">Выплаченная сумма</option>
                     <option value="DeptAmout">Долг</option>
-                    <option value="PaymentStartDate">Дата начала платежа</option>
-                    <option value="InAdvancePaymentOfContract">Предоплата</option>
                     <option value="AmountOfMonthlyPayment">Ежемесячно оплата</option>
-                    <option value="ContractNumber">Контракт №</option>
+                    <option value="PaymentStartDate">Дата начала платежа</option>
                 </select>
                 <select id="sortOrder" class="form-control">
                     <option value="asc">Восходящий</option>
@@ -58,13 +55,7 @@
         <div class="col">
             <div class="input-group mb-1 mt-3" style="display:flex; justify-content:space-between; gap:5px;">
                 <input id="searchCustomer" type="text" class="form-control" placeholder="Клиент">
-                <input id="searchCustomerPhoneNumber" type="text" class="form-control" placeholder="Телефон клиента">
-                <input id="searchTotalAmountOfContract" type="text" class="form-control" placeholder="Общая сумма">
-                <input id="searchScheduledInfo" type="text" class="form-control" placeholder="Запланированный платеж">
-                <input id="searchActualInfo" type="text" class="form-control" placeholder="Выплаченная сумма">
                 <input id="searchDeptAmout" type="text" class="form-control" placeholder="Долг">
-                <input id="searchPaymentStartDate" type="date" class="form-control" placeholder="Дата начала платежа">
-                <input id="searchInAdvancePaymentOfContract" type="text" class="form-control" placeholder="Предоплата">
                 <input id="searchAmountOfMonthlyPayment" type="text" class="form-control" placeholder="Ежемесячно оплата">
                 <input id="searchContractNumber" type="text" class="form-control" placeholder="Контракт №">
                 <div class="input-group-append">
@@ -94,16 +85,16 @@
                         <thead>
                             <tr>
                                 <th style="width: 15%;">Действия</th>
-                                <th style="width: 20%;">Клиент</th>
-                                <th style="width: 20%;">Телефон клиента</th>
-                                <th style="width: 20%;">Общая сумма</th>
-                                <th style="width: 20%;">Запланированный платеж</th>
-                                <th style="width: 20%;">Выплаченная сумма</th>
-                                <th style="width: 20%;">Долг</th>
-                                <th style="width: 20%;">Дата начала платежа</th>
-                                <th style="width: 20%;">Предоплата</th>
-                                <th style="width: 20%;">Ежемесячно оплата</th>
-                                <th style="width: 20%;">Контракт №</th>
+                                <th data-column="Customer" style="width: 20%;">Клиент</th>
+                                <th data-column="CustomerPhoneNumber" style="width: 20%;">Телефон клиента</th>
+                                <th data-column="TotalAmountOfContract" style="width: 20%;">Общая сумма</th>
+                                <th data-column="ScheduledInfo" style="width: 20%;">Запланированный платеж</th>
+                                <th data-column="ActualInfo" style="width: 20%;">Выплаченная сумма</th>
+                                <th data-column="DeptAmout" style="width: 20%;">Долг</th>
+                                <th data-column="PaymentStartDate" style="width: 20%;">Дата начала платежа</th>
+                                <th data-column="InAdvancePaymentOfContract" style="width: 20%;">Предоплата</th>
+                                <th data-column ="AmountOfMonthlyPayment" style="width: 20%;">Ежемесячно оплата</th>
+                                <th data-column="ContractNumber" style="width: 20%;">Контракт №</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -115,10 +106,10 @@
                                             <a href="@Url.Action("ViewContract", "Contract", new { id = Contract.Id })" class="btn btn-secondary"><i class="fas fa-info-circle"></i> Подробно</a>
                                         </div>
                                     </td>
-                                    <td>@Contract.Customer.LastName @Contract.Customer.FirstName</td>
-                                    <td>@Contract.Customer.PhoneNumberOne  @Contract.Customer.PhoneNumberTwo</td>
-                                    <td class="amount-cell">@Contract.TotalAmountOfContract</td>
-                                    <td class="amount-cell">
+                                    <td data-column="Customer">@Contract.Customer.LastName @Contract.Customer.FirstName</td>
+                                    <td data-column="CustomerPhoneNumber">@Contract.Customer.PhoneNumberOne  @Contract.Customer.PhoneNumberTwo</td>
+                                    <td data-column="TotalAmountOfContract" class="amount-cell">@Contract.TotalAmountOfContract</td>
+                                    <td data-column="ScheduledInfo" class="amount-cell">
                                         @{
                                             DateTime currentDate = DateTime.Now;
                                             int currentMonth = currentDate.Month;
@@ -137,12 +128,12 @@
                                             @sumForCurrentMonth
                                         }
                                     </td>
-                                    <td class="amount-cell">@Contract.ActualInfo.Values.Sum()</td>
-                                    <td class="amount-cell">@Contract.DeptAmout</td>
-                                    <td>@Contract.PaymentStartDate.ToString("yyyy-MM-dd")</td>
-                                    <td class="amount-cell">@Contract.InAdvancePaymentOfContract</td>
-                                    <td class="amount-cell">@Contract.AmountOfMonthlyPayment</td>
-                                    <td>@Contract.ContractNumber</td>
+                                    <td data-column="ActualInfo" class="amount-cell">@Contract.ActualInfo.Values.Sum()</td>
+                                    <td data-column="DeptAmout" class="amount-cell">@Contract.DeptAmout</td>
+                                    <td data-column="PaymentStartDate">@Contract.PaymentStartDate.ToString("yyyy-MM-dd")</td>
+                                    <td data-column="InAdvancePaymentOfContract" class="amount-cell">@Contract.InAdvancePaymentOfContract</td>
+                                    <td data-column="AmountOfMonthlyPayment" class="amount-cell">@Contract.AmountOfMonthlyPayment</td>
+                                    <td data-column="ContractNumber">@Contract.ContractNumber</td>
                                 </tr>
                             }
                         </tbody>
@@ -174,19 +165,30 @@
         }
     });
 
+
     document.getElementById('sortButton').addEventListener('click', function () {
         var column = document.getElementById('sortColumn').value;
         var sortOrder = document.getElementById('sortOrder').value;
         var rows = Array.from(document.getElementById('ContractsTable').getElementsByTagName('tbody')[0].getElementsByTagName('tr'));
 
         rows.sort(function (a, b) {
-            var cellA = a.cells[columnIndex(column)].textContent.toLowerCase();
-            var cellB = b.cells[columnIndex(column)].textContent.toLowerCase();
+            var cellA = a.querySelector('td[data-column="' + column + '"]').textContent.toLowerCase();
+            var cellB = b.querySelector('td[data-column="' + column + '"]').textContent.toLowerCase();
+
+            if (column === "Amount" || column === "PaymentNumber") {
+                cellA = parseFloat(cellA.replace(',', '.')) || 0;
+                cellB = parseFloat(cellB.replace(',', '.')) || 0;
+            }
+
+            if (column === "PaymentDate") {
+                cellA = new Date(cellA);
+                cellB = new Date(cellB);
+            }
 
             if (sortOrder === 'asc') {
-                return cellA.localeCompare(cellB);
+                return cellA < cellB ? -1 : cellA > cellB ? 1 : 0;
             } else {
-                return cellB.localeCompare(cellA);
+                return cellB < cellA ? -1 : cellB > cellA ? 1 : 0;
             }
         });
 
@@ -194,131 +196,5 @@
         for (var i = 0; i < rows.length; i++) {
             tbody.appendChild(rows[i]);
         }
-    });
-
-    function columnIndex(columnName) {
-        var headers = document.getElementById('ContractsTable').getElementsByTagName('thead')[0].getElementsByTagName('th');
-        for (var i = 0; i < headers.length; i++) {
-            if (headers[i].textContent.trim() === columnName) {
-                return i;
-            }
-        }
-        return -1;
-    }
-</script>
-
-<script>
-    document.getElementById('searchButton').addEventListener('click', function () {
-        var searchContractNumber = document.getElementById('searchContractNumber').value.toLowerCase();
-        var searchCustomer = document.getElementById('searchCustomer').value;
-        var searchPaymentStartDate = document.getElementById('searchPaymentStartDate').value;
-        var searchTotalAmountOfContract = document.getElementById('searchTotalAmountOfContract').value.toLowerCase();
-        var searchAmountOfMonthlyPayment = document.getElementById('searchAmountOfMonthlyPayment').value.toLowerCase();
-        var searchInAdvancePaymentOfContract = document.getElementById('searchInAdvancePaymentOfContract').value.toLowerCase();
-        var searchScheduledInfo = document.getElementById('searchScheduledInfo').value.toLowerCase();
-        var searchActualInfo = document.getElementById('searchActualInfo').value.toLowerCase();
-        var searchDeptAmout = document.getElementById('searchDeptAmout').value.toLowerCase();
-        var searchDeptAmout = document.getElementById('searchCustomerPhoneNumber').value.toLowerCase();
-
-        var rows = document.getElementById('ContractsTable').getElementsByTagName('tbody')[0].getElementsByTagName('tr');
-
-        for (var i = 0; i < rows.length; i++) {
-            var cells = rows[i].getElementsByTagName('td');
-            var contractStartDate = new Date(cells[2].innerText);
-
-            var match = true; // Assume it's a match initially
-
-            if (searchContractNumber && !cells[1].innerText.toLowerCase().includes(searchContractNumber)) {
-                match = false;
-            }
-            if (searchStartDate || searchEndDate) {
-                var startDate = new Date(searchStartDate);
-                var endDate = new Date(searchEndDate);
-                if (!isNaN(startDate) && !isNaN(endDate)) {
-                    if (contractStartDate < startDate || contractStartDate > endDate) {
-                        match = false;
-                    }
-                } else if (!isNaN(startDate) && isNaN(endDate)) {
-                    if (!isSameDay(contractStartDate, startDate)) {
-                        match = false;
-                    }
-                }
-            }
-            if (searchTotalAmountOfContract && !cells[3].innerText.toLowerCase().includes(searchTotalAmountOfContract)) {
-                match = false;
-            }
-            if (searchHomeId && !cells[5].innerText.toLowerCase().includes(searchHomeId)) {
-                match = false;
-            }
-            if (searchCustomerId && !cells[6].innerText.toLowerCase().includes(searchCustomerId)) {
-                match = false;
-            }
-            if (searchFounderId && !cells[7].innerText.toLowerCase().includes(searchFounderId)) {
-                match = false;
-            }
-
-            rows[i].style.display = match ? '' : 'none';
-        }
-    });
-
-    function isSameDay(date1, date2) {
-        return date1.getDate() === date2.getDate() &&
-            date1.getMonth() === date2.getMonth() &&
-            date1.getFullYear() === date2.getFullYear();
-    }
-</script>
-
-<script>
-    document.getElementById('refreshButton').addEventListener('click', function () {
-        // Clear the search input field
-        document.getElementById('searchInput').value = '';
-
-        // Reset the sorting to default values
-        document.getElementById('sortColumn').value = 'Block';
-        document.getElementById('sortOrder').value = 'asc';
-
-        // Reset the extended search fields
-        document.getElementById('searchContractNumber').value = '';
-        document.getElementById('searchContractStartDate').value = '';
-        document.getElementById('searchTotalAmountOfContract').value = '';
-        document.getElementById('searchContractEndDate').value = '';
-        document.getElementById('searchHomeId').value = '';
-        document.getElementById('searchCustomerId').value = '';
-        document.getElementById('searchFounderId').value = '';
-
-        // Show all rows in the table
-        var rows = document.getElementById('ContractsTable').getElementsByTagName('tbody')[0].getElementsByTagName('tr');
-        for (var i = 0; i < rows.length; i++) {
-            rows[i].style.display = '';
-        }
-    });
-</script>
-
-<script>
-    document.getElementById('toggleExtendedSearch').addEventListener('click', function () {
-        var extendedSearchContainer = document.getElementById('extendedSearchContainer');
-        if (extendedSearchContainer.style.display === 'none' || extendedSearchContainer.style.display === '') {
-            extendedSearchContainer.style.display = 'block';
-        } else {
-            extendedSearchContainer.style.display = 'none';
-        }
-    });
-</script>
-
-<script>
-    // Function to format the amount cells
-    function formatAmountCells() {
-        var amountCells = document.querySelectorAll('.amount-cell');
-        amountCells.forEach(function (cell) {
-            var amount = parseFloat(cell.textContent);
-            if (!isNaN(amount)) {
-                cell.textContent = amount.toLocaleString(undefined, { minimumFractionDigits: 2 });
-            }
-        });
-    }
-
-    // Call the function when the document is ready
-    document.addEventListener('DOMContentLoaded', function () {
-        formatAmountCells();
     });
 </script>

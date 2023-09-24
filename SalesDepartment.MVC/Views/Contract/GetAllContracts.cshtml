@@ -245,6 +245,7 @@
 
 <script>
     document.getElementById('refreshButton').addEventListener('click', function () {
+        console.log('Refresh button clicked');
         // Clear the search input field
         document.getElementById('searchInput').value = '';
 
@@ -266,6 +267,7 @@
         for (var i = 0; i < rows.length; i++) {
             rows[i].style.display = '';
         }
+
     });
 </script>
 
