@@ -52,7 +52,7 @@
                 </select>
                 <select id="sortOrder" class="form-control">
                     <option value="asc">Восходящий</option>
-                    <option value="desc">Descending</option>
+                    <option value="desc">Нисходящий</option>
                 </select>
                 <button id="sortButton" class="btn btn-info"><i class="fa-solid fa-arrow-up-a-z"></i> </button>
                 <button id="toggleExtendedSearch" class="btn btn-info"><i class="fa-solid fa-filter"></i> </button>
@@ -164,19 +164,20 @@
             var cellA = a.querySelector('td[data-column="' + column + '"]').textContent.toLowerCase();
             var cellB = b.querySelector('td[data-column="' + column + '"]').textContent.toLowerCase();
 
-            // Define an array of column names that should be treated as numeric
-            var numericColumns = ["Amount", "PaymentNumber" ];
-
-            if (numericColumns.includes(column)) {
-                // Parse the cell text as a float for numeric columns
+            if (column === "Amount" || column === "PaymentNumber") {
                 cellA = parseFloat(cellA.replace(',', '.')) || 0;
                 cellB = parseFloat(cellB.replace(',', '.')) || 0;
             }
 
+            if (column === "PaymentDate") {
+                cellA = new Date(cellA);
+                cellB = new Date(cellB);
+            }
+
             if (sortOrder === 'asc') {
-                return cellA - cellB; // Numeric comparison for ascending order
+                return cellA < cellB ? -1 : cellA > cellB ? 1 : 0;
             } else {
-                return cellB - cellA; // Numeric comparison for descending order
+                return cellB < cellA ? -1 : cellB > cellA ? 1 : 0;
             }
         });
 
@@ -186,7 +187,6 @@
         }
     });
 
-   
 </script>
 
 <script>
