@@ -62,7 +62,6 @@
     <div class="row">
         <div class="col">
             <div class="input-group mb-1 mt-3" style="display:flex; justify-content:space-between; gap:5px;">
-                <!-- Add input fields for each column you want to search -->
                 <input id="searchBlock" type="text" class="form-control" placeholder="Здания">
                 <input id="searchEntrance" type="text" class="form-control" placeholder="Подъезд №">
                 <input id="searchFloor" type="text" class="form-control" placeholder="Этаже">
@@ -174,10 +173,19 @@
             var cellA = a.querySelector('td[data-column="' + column + '"]').textContent.toLowerCase();
             var cellB = b.querySelector('td[data-column="' + column + '"]').textContent.toLowerCase();
 
+            // Define an array of column names that should be treated as numeric
+            var numericColumns = ["Area", "Entrance", "Floor", "ApartmentNumber", "NumberOfRooms"];
+
+            if (numericColumns.includes(column)) {
+                // Parse the cell text as a float for numeric columns
+                cellA = parseFloat(cellA.replace(',', '.')) || 0;
+                cellB = parseFloat(cellB.replace(',', '.')) || 0;
+            }
+
             if (sortOrder === 'asc') {
-                return cellA.localeCompare(cellB);
+                return cellA - cellB; // Numeric comparison for ascending order
             } else {
-                return cellB.localeCompare(cellA);
+                return cellB - cellA; // Numeric comparison for descending order
             }
         });
 
