@@ -98,11 +98,11 @@
                         <thead>
                             <tr>
                                 <th style="width: 25%;">Действия</th>
-                                <th style="width: 10%;">Платежа №</th>
-                                <th style="width: 15%;">Дата платежа</th>
-                                <th style="width: 15%;">Сумма</th>
-                                <th style="width: 15%;">Контракт №</th>
-                                <th style="width: 15%;">Тип платежей</th>
+                                <th data-column="PaymentNumber" style="width: 10%;">Платежа №</th>
+                                <th data-column="PaymentDate" style="width: 15%;">Дата платежа</th>
+                                <th data-column="Amount" style="width: 15%;">Сумма</th>
+                                <th data-column="ContractId" style="width: 15%;">Контракт №</th>
+                                <th data-column="PaymentTypeId" style="width: 15%;">Тип платежей</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -119,11 +119,11 @@
                                             <a href="@Url.Action("DeletePayment", new { id = Payment.Id })" class="btn btn-danger"><i class="fas fa-trash-can"></i></a>
                                         </div>
                                     </td>
-                                    <td>@Payment.PaymentNumber</td>
-                                    <td>@Payment.PaymentDate.ToString("yyyy-MM-dd")</td>
-                                    <td class="amount-cell">@Payment.Amount</td>
-                                    <td>@Payment.Contract.ContractNumber</td>
-                                    <td>@Payment.PaymentType.Name</td>
+                                    <td data-column="PaymentNumber">@Payment.PaymentNumber</td>
+                                    <td data-column="PaymentDate">@Payment.PaymentDate.ToString("yyyy-MM-dd")</td>
+                                    <td data-column="Amount" class="amount-cell">@Payment.Amount</td>
+                                    <td data-column="ContractId">@Payment.Contract.ContractNumber</td>
+                                    <td data-column="PaymentTypeId">@Payment.PaymentType.Name</td>
                                 </tr>
                             }
                         </tbody>
@@ -161,13 +161,22 @@
         var rows = Array.from(document.getElementById('PaymentsTable').getElementsByTagName('tbody')[0].getElementsByTagName('tr'));
 
         rows.sort(function (a, b) {
-            var cellA = a.querySelector('td:nth-child(' + (columnIndex(column) + 1) + ')').textContent.toLowerCase();
-            var cellB = b.querySelector('td:nth-child(' + (columnIndex(column) + 1) + ')').textContent.toLowerCase();
+            var cellA = a.querySelector('td[data-column="' + column + '"]').textContent.toLowerCase();
+            var cellB = b.querySelector('td[data-column="' + column + '"]').textContent.toLowerCase();
+
+            // Define an array of column names that should be treated as numeric
+            var numericColumns = ["Amount", "PaymentNumber" ];
+
+            if (numericColumns.includes(column)) {
+                // Parse the cell text as a float for numeric columns
+                cellA = parseFloat(cellA.replace(',', '.')) || 0;
+                cellB = parseFloat(cellB.replace(',', '.')) || 0;
+            }
 
             if (sortOrder === 'asc') {
-                return cellA.localeCompare(cellB);
+                return cellA - cellB; // Numeric comparison for ascending order
             } else {
-                return cellB.localeCompare(cellA);
+                return cellB - cellA; // Numeric comparison for descending order
             }
         });
 
@@ -177,15 +186,7 @@
         }
     });
 
-    function columnIndex(columnName) {
-        var headers = document.getElementById('PaymentsTable').getElementsByTagName('thead')[0].getElementsByTagName('th');
-        for (var i = 0; i < headers.length; i++) {
-            if (headers[i].textContent.trim() === columnName) {
-                return i;
-            }
-        }
-        return -1;
-    }
+   
 </script>
 
 <script>
