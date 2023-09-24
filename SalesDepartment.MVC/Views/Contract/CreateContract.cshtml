@@ -62,15 +62,22 @@
                 <div class="form-group mt-3">
                     <label for="HomeId">Квартира:</label>
                     <select class="form-control" id="HomeId" name="HomeId" required>
-                        <option value="">
-                            Выбрать квартиру
-                        </option>
+                        <option value="">Выбрать квартиру (Здания/Подъезд №/Этаже/Квартира №/Площадь)</option>
                         @foreach (var home in Homes)
                         {
-                            <option value="@home.Id">@home.ApartmentNumber</option>
+                            @if (home.ContractId == null || home.ContractId == 0)
+                            {
+                                <option value="@home.Id">@home.Block / @home.Entrance / @home.Floor / @home.ApartmentNumber / @home.Area</option>
+                            }
                         }
                     </select>
                 </div>
+                <script>
+                    $(document).ready(function () {
+                        $('#HomeId').select2(); // Initialize Select2
+                    });
+                </script>
+
 
                 <div class="form-group mt-3">
                     <label for="CustomerId">Клиент:</label>
@@ -78,10 +85,16 @@
                         <option value="">Выбрать Клиент</option>
                         @foreach (var customer in Customers)
                         {
-                            <option value="@customer.Id">@customer.FirstName</option>
+                            <option value="@customer.Id">@customer.LastName @customer.FirstName @customer.MiddleName / @customer.PhoneNumberOne / @customer.PhoneNumberTwo</option>
                         }
                     </select>
                 </div>
+                <script>
+                    $(document).ready(function () {
+                        $('#CustomerId').select2(); // Initialize Select2
+                    });
+                </script>
+
 
                 <div class="form-group mt-3">
                     <label for="FounderId">Основатель:</label>
@@ -89,7 +102,7 @@
                         <option value="">Выбрать Основатель</option>
                         @foreach (var founder in Founders)
                         {
-                            <option value="@founder.Id">@founder.FirstName</option>
+                            <option value="@founder.Id">@founder.LastName @founder.FirstName @founder.MiddleName</option>
                         }
                     </select>
                 </div>
@@ -101,3 +114,60 @@
         </div>
     </div>
 </form>
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        // Initialize Select2 with custom options
+        $('#HomeId').select2({
+            placeholder: "Введите квартиру",
+            allowClear: true,
+            matcher: function (params, data) {
+                // If there's no search term, return all options
+                if ($.trim(params.term) === '') {
+                    return data;
+                }
+
+                // Remove special characters and convert to lowercase for comparison
+                var term = $.trim(params.term).toLowerCase();
+                var text = data.text.toLowerCase();
+
+                // Check if the data text contains the term
+                if (text.indexOf(term) > -1) {
+                    return data;
+                }
+
+                return null;
+            }
+        });
+    });
+</script>
+
+<script>
+    $(document).ready(function () {
+        // Initialize Select2 with custom options
+        $('#CustomerId').select2({
+            placeholder: "Введите Клиенту",
+            allowClear: true,
+            matcher: function (params, data) {
+                // If there's no search term, return all options
+                if ($.trim(params.term) === '') {
+                    return data;
+                }
+
+                // Remove special characters and convert to lowercase for comparison
+                var term = $.trim(params.term).toLowerCase();
+                var text = data.text.toLowerCase();
+
+                // Check if the data text contains the term
+                if (text.indexOf(term) > -1) {
+                    return data;
+                }
+
+                return null;
+            }
+        });
+    });
+</script>
