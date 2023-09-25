@@ -59,13 +59,13 @@ namespace SalesDepartment.Application.UseCases.Homes.Reports
                 TableName = "Empdata"
             };
 
-            excelDataTable.Columns.Add("Block", typeof(string));
-            excelDataTable.Columns.Add("Entrance", typeof(int));
-            excelDataTable.Columns.Add("Floor", typeof(int));
-            excelDataTable.Columns.Add("ApartmentNumber", typeof(int));
-            excelDataTable.Columns.Add("NumberOfRooms", typeof(int));
-            excelDataTable.Columns.Add("Area", typeof(decimal));
-            excelDataTable.Columns.Add("ContractNumber", typeof(string));
+            excelDataTable.Columns.Add("Здания", typeof(string));
+            excelDataTable.Columns.Add("Подъезд №", typeof(int));
+            excelDataTable.Columns.Add("Этаж", typeof(int));
+            excelDataTable.Columns.Add("Квартира №", typeof(int));
+            excelDataTable.Columns.Add("Количество комнат", typeof(int));
+            excelDataTable.Columns.Add("Проектной площадью", typeof(decimal));
+            excelDataTable.Columns.Add("Контракт №", typeof(string));
 
             var HomesList = _mapper.Map<List<HomeResponse>>(AllHomes);
 

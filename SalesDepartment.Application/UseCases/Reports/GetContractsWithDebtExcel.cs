@@ -126,20 +126,20 @@ namespace SalesDepartment.Application.UseCases.Reports
                 TableName = "Empdata"
             };
 
-            excelDataTable.Columns.Add("Contract Number", typeof(string));
-            excelDataTable.Columns.Add("Customer FullName", typeof(string));
-            excelDataTable.Columns.Add("Customer Phone Number One", typeof(string));
-            excelDataTable.Columns.Add("Customer Phone Number Two", typeof(string));
-            excelDataTable.Columns.Add("Total Amount Of Contract", typeof(decimal));
-            excelDataTable.Columns.Add("In Advance Payment Of Contract", typeof(decimal));
-            excelDataTable.Columns.Add("Amount Of Monthly Payment", typeof(decimal));
-            excelDataTable.Columns.Add("Scheduled Payment", typeof(decimal));
-            excelDataTable.Columns.Add("Actual Payment", typeof(decimal));
-            excelDataTable.Columns.Add("Dept Amout", typeof(decimal));
-            excelDataTable.Columns.Add("Contract Start Date", typeof(DateTime));
-            excelDataTable.Columns.Add("Payment Start Date", typeof(DateTime));
-            excelDataTable.Columns.Add("Number Of Months", typeof(int));
-            excelDataTable.Columns.Add("Home Info", typeof(string));
+            excelDataTable.Columns.Add("Контракт №", typeof(string));
+            excelDataTable.Columns.Add("Клиент", typeof(string));
+            excelDataTable.Columns.Add("Клиент Номер тел 1", typeof(string));
+            excelDataTable.Columns.Add("Клиент Номер тел 2", typeof(string));
+            excelDataTable.Columns.Add("Сумма контракта", typeof(decimal));
+            excelDataTable.Columns.Add("Предоплата", typeof(decimal));
+            excelDataTable.Columns.Add("Ежемесячно оплата", typeof(decimal));
+            excelDataTable.Columns.Add("Запланированный платеж", typeof(decimal));
+            excelDataTable.Columns.Add("Выплаченная сумма", typeof(decimal));
+            excelDataTable.Columns.Add("Долг", typeof(decimal));
+            excelDataTable.Columns.Add("Дата контракта", typeof(DateTime));
+            excelDataTable.Columns.Add("Дата начала платежа", typeof(DateTime));
+            excelDataTable.Columns.Add("Количество месяцев", typeof(int));
+            excelDataTable.Columns.Add("Квартира", typeof(string));
 
             var ContractsList = _mapper.Map<List<ContractResponse>>(contractResponses);
 

@@ -65,15 +65,15 @@ namespace SalesDepartment.Application.UseCases.Contracts.Reports
                 TableName = "Empdata"
             };
 
-            excelDataTable.Columns.Add("ContractNumber", typeof(string));
-            excelDataTable.Columns.Add("ContractStartDate", typeof(DateTime));
-            excelDataTable.Columns.Add("TotalAmountOfContract", typeof(decimal));
-            excelDataTable.Columns.Add("PaymentStartDate", typeof(DateTime));
-            excelDataTable.Columns.Add("NumberOfMonths", typeof(int));
-            excelDataTable.Columns.Add("InAdvancePaymentOfContract", typeof(decimal));
-            excelDataTable.Columns.Add("Home Number", typeof(string));
-            excelDataTable.Columns.Add("Customer FullName", typeof(string));
-            excelDataTable.Columns.Add("Founder Name", typeof(string));
+            excelDataTable.Columns.Add("Контракт №", typeof(string));
+            excelDataTable.Columns.Add("Дата контракта", typeof(DateTime));
+            excelDataTable.Columns.Add("Сумма контракта", typeof(decimal));
+            excelDataTable.Columns.Add("Дата начала платежа", typeof(DateTime));
+            excelDataTable.Columns.Add("Количество месяцев", typeof(int));
+            excelDataTable.Columns.Add("Предоплата", typeof(decimal));
+            excelDataTable.Columns.Add("Квартира", typeof(string));
+            excelDataTable.Columns.Add("Клиент", typeof(string));
+            excelDataTable.Columns.Add("Основатель", typeof(string));
 
             var ContractsList = _mapper.Map<List<ContractResponse>>(AllContracts);
 

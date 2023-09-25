@@ -57,11 +57,11 @@ namespace SalesDepartment.Application.UseCases.Payments.Reports
                 TableName = "Empdata"
             };
 
-            excelDataTable.Columns.Add("PaymentNumber", typeof(string));
-            excelDataTable.Columns.Add("PaymentDate", typeof(DateTime));
-            excelDataTable.Columns.Add("Amount", typeof(decimal));
-            excelDataTable.Columns.Add("Contract Number", typeof(string));
-            excelDataTable.Columns.Add("Payment Type", typeof(string));
+            excelDataTable.Columns.Add("Платеж №", typeof(string));
+            excelDataTable.Columns.Add("Дата платежа", typeof(DateTime));
+            excelDataTable.Columns.Add("Сумма", typeof(decimal));
+            excelDataTable.Columns.Add("Контракт №", typeof(string));
+            excelDataTable.Columns.Add("Тип платежей", typeof(string));
 
             var PaymentsList = _mapper.Map<List<PaymentResponse>>(AllPayments);
 

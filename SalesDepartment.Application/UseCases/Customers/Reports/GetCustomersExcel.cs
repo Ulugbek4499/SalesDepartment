@@ -61,15 +61,14 @@ namespace SalesDepartment.Application.UseCases.Customers.Reports
                 TableName = "Empdata"
             };
 
-            excelDataTable.Columns.Add("Id", typeof(int));
-            excelDataTable.Columns.Add("FirstName", typeof(string));
-            excelDataTable.Columns.Add("LastName", typeof(string));
-            excelDataTable.Columns.Add("MiddleName", typeof(string));
-            excelDataTable.Columns.Add("Passport", typeof(string));
-            excelDataTable.Columns.Add("PassportIssuedBy", typeof(string));
-            excelDataTable.Columns.Add("Address", typeof(string));
-            excelDataTable.Columns.Add("PhoneNumberOne", typeof(string));
-            excelDataTable.Columns.Add("PhoneNumberTwo", typeof(string));
+            excelDataTable.Columns.Add("Имя", typeof(string));
+            excelDataTable.Columns.Add("Фамилия", typeof(string));
+            excelDataTable.Columns.Add("Очество", typeof(string));
+            excelDataTable.Columns.Add("Паспорт", typeof(string));
+            excelDataTable.Columns.Add("Выдан Паспорт", typeof(string));
+            excelDataTable.Columns.Add("Адрес", typeof(string));
+            excelDataTable.Columns.Add("Номер телефона 1", typeof(string));
+            excelDataTable.Columns.Add("Номер телефона 2", typeof(string));
 
             var CustomersList = _mapper.Map<List<CustomerResponse>>(AllCustomers);
 
@@ -77,7 +76,7 @@ namespace SalesDepartment.Application.UseCases.Customers.Reports
             {
                 CustomersList.ForEach(item =>
                 {
-                    excelDataTable.Rows.Add(item.Id, item.FirstName, item.LastName, item.MiddleName, item.Passport,
+                    excelDataTable.Rows.Add(item.FirstName, item.LastName, item.MiddleName, item.Passport,
                         item.PassportIssuedBy, item.Address, item.PhoneNumberOne, item.PhoneNumberTwo);
                 });
             }
