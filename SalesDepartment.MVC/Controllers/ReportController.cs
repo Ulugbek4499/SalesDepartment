@@ -51,12 +51,10 @@ namespace SalesDepartment.MVC.Controllers
             ContractResponse contract = await Mediator.Send(new GetContractByIdQuery(id));
             var templatePath = @"D:\PDP\SalesDepartment\SalesDepartment.MVC\wwwroot\docs\Grafik.docx";
 
-            decimal SumOfOneMeterSquare = contract.TotalAmountOfContract / contract.Home.Area;
-
             var doc = DocX.Load(templatePath);
 
             doc.ReplaceText("«ДОГОВОР_»", contract.ContractNumber);
-            doc.ReplaceText("«Дата_контракта»", contract.ContractStartDate.ToString());
+            doc.ReplaceText("«Дата_контракта»", contract.ContractStartDate.ToString("dd/MM/yyyy"));
             doc.ReplaceText("«ФИO_Инвестор»", contract.Customer.LastName + " " + contract.Customer.FirstName + " " + contract.Customer.MiddleName);
             doc.ReplaceText("«Паспорт_Серия_Инвестор»", contract.Customer.Passport);
             doc.ReplaceText("«Выдан_Паспорт__Инвестор»", contract.Customer.PassportIssuedBy);
@@ -69,21 +67,20 @@ namespace SalesDepartment.MVC.Controllers
 
             doc.ReplaceText("«Этаже»", contract.Home.Floor.ToString());
             doc.ReplaceText("«Проектной_площадью»", contract.Home.Area.ToString());
-            doc.ReplaceText("«Общая_сумма_контракта»", contract.TotalAmountOfContract.ToString());
-            doc.ReplaceText("«advance_amount»", contract.InAdvancePaymentOfContract.ToString());
-            doc.ReplaceText("«monthly_payment»", contract.AmountOfMonthlyPayment.ToString());
+            doc.ReplaceText("«Общая_сумма_контракта»", contract.TotalAmountOfContract.ToString("N2"));
+            doc.ReplaceText("«advance_amount»", contract.InAdvancePaymentOfContract.ToString("N2"));
+            doc.ReplaceText("«monthly_payment»", contract.AmountOfMonthlyPayment.ToString("N2"));
             doc.ReplaceText("«number_of_month»", contract.NumberOfMonths.ToString());
-            doc.ReplaceText("«Сумма_1_М2»", SumOfOneMeterSquare.ToString());
 
             doc.ReplaceText("«Тел_Ном_»", contract.Customer.PhoneNumberOne);
 
             var paymentTable = doc.AddTable(contract.NumberOfMonths + 1, 4); // +1 for the header row
             paymentTable.Design = TableDesign.TableGrid;
 
-            paymentTable.Rows[0].Cells[0].Paragraphs.First().Append("Number");
-            paymentTable.Rows[0].Cells[1].Paragraphs.First().Append("Payment Days");
-            paymentTable.Rows[0].Cells[2].Paragraphs.First().Append("Monthly Payment");
-            paymentTable.Rows[0].Cells[3].Paragraphs.First().Append("Rest Of The Dept");
+            paymentTable.Rows[0].Cells[0].Paragraphs.First().Append("№");
+            paymentTable.Rows[0].Cells[1].Paragraphs.First().Append("Даты Oплаты");
+            paymentTable.Rows[0].Cells[2].Paragraphs.First().Append("Ежемесячно Oплата");
+            paymentTable.Rows[0].Cells[3].Paragraphs.First().Append("Остаток Долга");
 
             decimal monthlyPayment = (contract.TotalAmountOfContract - contract.InAdvancePaymentOfContract) / contract.NumberOfMonths;
             decimal remainingDebt = contract.TotalAmountOfContract - contract.InAdvancePaymentOfContract;
@@ -94,9 +91,9 @@ namespace SalesDepartment.MVC.Controllers
             {
                 // Fill in the table with the calculated values
                 paymentTable.Rows[month].Cells[0].Paragraphs.First().Append(month.ToString());
-                paymentTable.Rows[month].Cells[1].Paragraphs.First().Append(paymentDate.ToString("dd.MM.yyyy"));
-                paymentTable.Rows[month].Cells[2].Paragraphs.First().Append(monthlyPayment.ToString());
-                paymentTable.Rows[month].Cells[3].Paragraphs.First().Append(remainingDebt.ToString());
+                paymentTable.Rows[month].Cells[1].Paragraphs.First().Append(paymentDate.ToString("dd/MM/yyyy"));
+                paymentTable.Rows[month].Cells[2].Paragraphs.First().Append(monthlyPayment.ToString("N2"));
+                paymentTable.Rows[month].Cells[3].Paragraphs.First().Append(remainingDebt.ToString("N2"));
 
                 // Update payment date and remaining debt for the next iteration
                 paymentDate = paymentDate.AddMonths(1);
