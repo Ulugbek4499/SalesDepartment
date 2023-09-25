@@ -66,52 +66,5 @@ namespace SalesDepartment.MVC.Controllers
 
             return View("ViewFounder", Founder);
         }
-
-        /*       [HttpPost("[action]")]
-               public async ValueTask<IActionResult> CreateFounderFromExcel(IFormFile excelfile)
-               {
-                   var result = await Mediator.Send(new AddFoundersFromExcel(excelfile));
-
-                   return RedirectToAction("GetAllFounders");
-               }*/
-        /*
-                [HttpGet("[action]")]
-                public async ValueTask<IActionResult> CreateFounderFromCSV()
-                {
-                    return View();
-                }*/
-
-        /*        [HttpPost("[action]")]
-                public async ValueTask<IActionResult> CreateFounderFromCSV(IFormFile csvfile)
-                {
-                    var result = await Mediator.Send(new AddFoundersFromCsv(csvfile));
-
-                    return RedirectToAction("GetAllFounders");
-                }*/
-
-        /*
-                [HttpGet("[action]")]
-                public async ValueTask<FileResult> GetAllFoundersExcel(string fileName = "FoundersExcel")
-                {
-                    var result = await Mediator.Send(new GetFoundersExcel { FileName = fileName });
-
-                    return File(result.FileContents, result.Option, result.FileName);
-                }*/
-
-        /*       [HttpGet("[action]")]
-               public async ValueTask<IActionResult> GetAllFoundersCsv(string fileName = "FoundersCsv")
-               {
-                   var result = await Mediator.Send(new GetFoundersCsv { FileName = fileName });
-
-                   return File(result.FileContents, result.Option, result.FileName);
-               }*/
-
-        /*       [HttpGet("[action]")]
-               public async Task<IActionResult> GetAllFoundersPDF(string fileName = "FoundersPDF")
-               {
-                   var result = await Mediator.Send(new GetFounderPDF(FileName: fileName));
-
-                   return File(result.FileContents, result.Options, result.FileName);
-               }*/
     }
 }

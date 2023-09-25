@@ -48,7 +48,7 @@ namespace SalesDepartment.MVC.Controllers
         }
 
         [HttpGet("[action]")]
-        public async ValueTask<FileResult> GetAllHomesExcel(string fileName = "HomesExcel")
+        public async ValueTask<FileResult> GetAllHomesExcel(string fileName = "ВсеКвартиры")
         {
             var result = await Mediator.Send(new GetHomesExcel { FileName = fileName });
 
@@ -84,15 +84,5 @@ namespace SalesDepartment.MVC.Controllers
 
             return View("ViewHome", Home);
         }
-
-        /*     
-               [HttpGet("[action]")]
-               public async Task<IActionResult> GetAllHomesPDF(string fileName = "HomesPDF")
-               {
-                   var result = await Mediator.Send(new GetHomePDF(FileName: fileName));
-
-                   return File(result.FileContents, result.Options, result.FileName);
-               }
-        */
     }
 }

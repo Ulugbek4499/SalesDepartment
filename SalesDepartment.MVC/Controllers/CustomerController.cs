@@ -39,7 +39,7 @@ namespace SalesDepartment.MVC.Controllers
         }
 
         [HttpGet("[action]")]
-        public async ValueTask<FileResult> GetAllCustomersExcel(string fileName = "CustomersExcel")
+        public async ValueTask<FileResult> GetAllCustomersExcel(string fileName = "ВсеКлиенты")
         {
             var result = await Mediator.Send(new GetCustomersExcel { FileName = fileName });
 
@@ -75,52 +75,5 @@ namespace SalesDepartment.MVC.Controllers
 
             return View("ViewCustomer", Customer);
         }
-
-        /*       [HttpPost("[action]")]
-               public async ValueTask<IActionResult> CreateCustomerFromExcel(IFormFile excelfile)
-               {
-                   var result = await Mediator.Send(new AddCustomersFromExcel(excelfile));
-
-                   return RedirectToAction("GetAllCustomers");
-               }*/
-        /*
-                [HttpGet("[action]")]
-                public async ValueTask<IActionResult> CreateCustomerFromCSV()
-                {
-                    return View();
-                }*/
-
-        /*        [HttpPost("[action]")]
-                public async ValueTask<IActionResult> CreateCustomerFromCSV(IFormFile csvfile)
-                {
-                    var result = await Mediator.Send(new AddCustomersFromCsv(csvfile));
-
-                    return RedirectToAction("GetAllCustomers");
-                }*/
-
-        /*
-                [HttpGet("[action]")]
-                public async ValueTask<FileResult> GetAllCustomersExcel(string fileName = "CustomersExcel")
-                {
-                    var result = await Mediator.Send(new GetCustomersExcel { FileName = fileName });
-
-                    return File(result.FileContents, result.Option, result.FileName);
-                }*/
-
-        /*       [HttpGet("[action]")]
-               public async ValueTask<IActionResult> GetAllCustomersCsv(string fileName = "CustomersCsv")
-               {
-                   var result = await Mediator.Send(new GetCustomersCsv { FileName = fileName });
-
-                   return File(result.FileContents, result.Option, result.FileName);
-               }*/
-
-        /*       [HttpGet("[action]")]
-               public async Task<IActionResult> GetAllCustomersPDF(string fileName = "CustomersPDF")
-               {
-                   var result = await Mediator.Send(new GetCustomerPDF(FileName: fileName));
-
-                   return File(result.FileContents, result.Options, result.FileName);
-               }*/
     }
 }

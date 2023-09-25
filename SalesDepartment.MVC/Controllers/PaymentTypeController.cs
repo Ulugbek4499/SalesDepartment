@@ -66,52 +66,5 @@ namespace SalesDepartment.MVC.Controllers
 
             return View("ViewPaymentType", PaymentType);
         }
-
-        /*       [HttpPost("[action]")]
-               public async ValueTask<IActionResult> CreatePaymentTypeFromExcel(IFormFile excelfile)
-               {
-                   var result = await Mediator.Send(new AddPaymentTypesFromExcel(excelfile));
-
-                   return RedirectToAction("GetAllPaymentTypes");
-               }*/
-        /*
-                [HttpGet("[action]")]
-                public async ValueTask<IActionResult> CreatePaymentTypeFromCSV()
-                {
-                    return View();
-                }*/
-
-        /*        [HttpPost("[action]")]
-                public async ValueTask<IActionResult> CreatePaymentTypeFromCSV(IFormFile csvfile)
-                {
-                    var result = await Mediator.Send(new AddPaymentTypesFromCsv(csvfile));
-
-                    return RedirectToAction("GetAllPaymentTypes");
-                }*/
-
-        /*
-                [HttpGet("[action]")]
-                public async ValueTask<FileResult> GetAllPaymentTypesExcel(string fileName = "PaymentTypesExcel")
-                {
-                    var result = await Mediator.Send(new GetPaymentTypesExcel { FileName = fileName });
-
-                    return File(result.FileContents, result.Option, result.FileName);
-                }*/
-
-        /*       [HttpGet("[action]")]
-               public async ValueTask<IActionResult> GetAllPaymentTypesCsv(string fileName = "PaymentTypesCsv")
-               {
-                   var result = await Mediator.Send(new GetPaymentTypesCsv { FileName = fileName });
-
-                   return File(result.FileContents, result.Option, result.FileName);
-               }*/
-
-        /*       [HttpGet("[action]")]
-               public async Task<IActionResult> GetAllPaymentTypesPDF(string fileName = "PaymentTypesPDF")
-               {
-                   var result = await Mediator.Send(new GetPaymentTypePDF(FileName: fileName));
-
-                   return File(result.FileContents, result.Options, result.FileName);
-               }*/
     }
 }

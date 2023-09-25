@@ -37,7 +37,7 @@ namespace SalesDepartment.MVC.Controllers
         }
 
         [HttpGet("[action]")]
-        public async ValueTask<FileResult> GetContractsWithDebtExcel(string fileName = "ContractWithDebtExcel")
+        public async ValueTask<FileResult> GetContractsWithDebtExcel(string fileName = "Контракты_с_Долгом")
         {
             var result = await Mediator.Send(new GetContractsWithDebtExcel { FileName = fileName });
 

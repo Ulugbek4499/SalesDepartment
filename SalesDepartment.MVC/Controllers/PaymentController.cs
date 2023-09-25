@@ -62,7 +62,7 @@ public class PaymentController : ApiBaseController
     }
 
     [HttpGet("[action]")]
-    public async ValueTask<FileResult> GetAllPaymentsExcel(string fileName = "PaymentsExcel")
+    public async ValueTask<FileResult> GetAllPaymentsExcel(string fileName = "ВсеПлатежи")
     {
         var result = await Mediator.Send(new GetPaymentsExcel { FileName = fileName });
 

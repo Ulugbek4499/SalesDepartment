@@ -57,7 +57,7 @@ public class ContractController : ApiBaseController
     }
 
     [HttpGet("[action]")]
-    public async ValueTask<FileResult> GetAllContractsExcel(string fileName = "ContractExcel")
+    public async ValueTask<FileResult> GetAllContractsExcel(string fileName = "ВсеКонтракты")
     {
         var result = await Mediator.Send(new GetContractsExcel { FileName = fileName });
 
