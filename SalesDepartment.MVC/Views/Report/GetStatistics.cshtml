@@ -109,6 +109,8 @@
             <div class="col-md-6">
                 <h4>Все контракты</h4>
                 <p>@Model.AllContracts</p>
+                <h4>Все контракты в текущем году</h4>
+                <p>@Model.AllContractsNumberInCurrentYear</p>
                 <h4>Все контракты в текущем месяце</h4>
                 <p>@Model.AllContractsInCurrentMonth</p>
                 <h4>Все контракты за последние 7 дней</h4>
@@ -119,6 +121,8 @@
             <div class="col-md-6">
                 <h4>Общая сумма всех контрактов</h4>
                 <p>@string.Format("{0:N2}", Model.TotalAmountOfAllContracts)</p>
+                <h4>Общая сумма всех контрактов в текущем году</h4>
+                <p>@string.Format("{0:N2}", Model.TotalAmountOfAllContractsInCurrentYear)</p>
                 <h4>Общая сумма всех контрактов в текущем месяце</h4>
                 <p>@string.Format("{0:N2}", Model.TotalAmountOfAllContractsInCurrentMonth)</p>
                 <h4>Общая сумма всех контрактов за последние 7 дней</h4>
