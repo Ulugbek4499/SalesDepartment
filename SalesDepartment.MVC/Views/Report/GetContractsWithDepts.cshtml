@@ -165,19 +165,20 @@
         }
     });
 
-
     document.getElementById('sortButton').addEventListener('click', function () {
         var column = document.getElementById('sortColumn').value;
         var sortOrder = document.getElementById('sortOrder').value;
         var rows = Array.from(document.getElementById('ContractsTable').getElementsByTagName('tbody')[0].getElementsByTagName('tr'));
 
         rows.sort(function (a, b) {
-            var cellA = a.querySelector('td[data-column="' + column + '"]').textContent.toLowerCase();
-            var cellB = b.querySelector('td[data-column="' + column + '"]').textContent.toLowerCase();
+            var cellA = a.querySelector('td[data-column="' + column + '"]').textContent.trim();
+            var cellB = b.querySelector('td[data-column="' + column + '"]').textContent.trim();
 
-            if (column === "TotalAmountOfContract" || column === "PaymentNumber" || column === "ActualInfo" || column === "DeptAmout" || column === "AmountOfMonthlyPayment" || column === "ScheduledInfo") {
-                cellA = parseFloat(cellA.replace(',', '.')) || 0;
-                cellB = parseFloat(cellB.replace(',', '.')) || 0;
+            // Handle the "TotalAmountOfContract" column
+            if (column === "TotalAmountOfContract" || column === "ScheduledInfo" || column === "ActualInfo" || column === "DeptAmout" || column === "AmountOfMonthlyPayment" || column === "InAdvancePaymentOfContract") {
+                // Parse values as floats for correct numeric sorting
+                cellA = parseFloat(cellA.replace(/[^0-9.]+/g, '')) || 0;
+                cellB = parseFloat(cellB.replace(/[^0-9.]+/g, '')) || 0;
             }
 
             if (column === "PaymentStartDate") {
@@ -186,9 +187,9 @@
             }
 
             if (sortOrder === 'asc') {
-                return cellA < cellB ? -1 : cellA > cellB ? 1 : 0;
+                return cellA - cellB; // Compare numeric values directly
             } else {
-                return cellB < cellA ? -1 : cellB > cellA ? 1 : 0;
+                return cellB - cellA; // Compare numeric values directly
             }
         });
 
@@ -197,4 +198,6 @@
             tbody.appendChild(rows[i]);
         }
     });
+
+
 </script>
