@@ -43,19 +43,19 @@
                                 </tr>
                                 <tr>
                                     <th>Дата начала контракта</th>
-                                    <td>@Model.ContractStartDate</td>
+                                    <td>@Model.ContractStartDate.ToString("yyyy-MM-dd")</td>
                                 </tr>
                                 <tr>
                                     <th>Общая сумма контракта</th>
-                                    <td>@Model.TotalAmountOfContract</td>
+                                    <td>@Model.TotalAmountOfContract.ToString("N2")</td>
                                 </tr>
                                 <tr>
                                     <th>Предоплата</th>
-                                    <td>@Model.InAdvancePaymentOfContract</td>
+                                    <td>@Model.InAdvancePaymentOfContract.ToString("N2")</td>
                                 </tr>
                                 <tr>
                                     <th>Ежемесячно оплата</th>
-                                    <td>@Model.AmountOfMonthlyPayment</td>
+                                    <td>@Model.AmountOfMonthlyPayment.ToString("N2")</td>
                                 </tr>
                                 <tr>
                                     <th>Количество месяцев</th>
@@ -63,7 +63,7 @@
                                 </tr>
                                 <tr>
                                     <th>Дата начала платежа</th>
-                                    <td>@Model.PaymentStartDate</td>
+                                    <td>@Model.PaymentStartDate.ToString("yyyy-MM-dd")</td>
                                 </tr>
                                 <tr>
                                     <th>Имя основателя</th>
@@ -113,7 +113,9 @@
                     </div>
                     <div class="col-lg-6">
                         <div class="custom-cards">
-                            <h4 class="text-center">Apartment Information</h4>
+                            <h4 class="text-center">
+                                Информация о квартире
+                            </h4>
                             <table class="table table-bordered">
                                 <tr>
                                     <th>Здания</th>
