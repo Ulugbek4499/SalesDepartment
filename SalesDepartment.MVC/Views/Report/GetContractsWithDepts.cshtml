@@ -198,6 +198,69 @@
             tbody.appendChild(rows[i]);
         }
     });
+</script>
 
+<script>
+    document.getElementById('refreshButton').addEventListener('click', function () {
+        // Clear the search input field
+        document.getElementById('searchInput').value = '';
 
+        // Reset the sorting to default values
+        document.getElementById('sortColumn').value = 'Block';
+        document.getElementById('sortOrder').value = 'asc';
+
+        // Reset the extended search fields
+        document.getElementById('searchCustomer').value = '';
+        document.getElementById('searchDeptAmout').value = '';
+        document.getElementById('searchAmountOfMonthlyPayment').value = '';
+        document.getElementById('searchContractNumber').value = '';
+
+        // Show all rows in the table
+        var rows = document.getElementById('ContractsTable').getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+        for (var i = 0; i < rows.length; i++) {
+            rows[i].style.display = '';
+        }
+    });
+</script>
+
+<script>
+    document.getElementById('searchButton').addEventListener('click', function () {
+        var searchCustomer = document.getElementById('searchCustomer').value.toLowerCase();
+        var searchDeptAmout = document.getElementById('searchDeptAmout').value.toLowerCase();
+        var searchAmountOfMonthlyPayment = document.getElementById('searchAmountOfMonthlyPayment').value.toLowerCase();
+        var searchContractNumber = document.getElementById('searchContractNumber').value.toLowerCase();
+
+        var rows = document.getElementById('ContractsTable').getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+
+        for (var i = 0; i < rows.length; i++) {
+            var cells = rows[i].getElementsByTagName('td');
+            var match = true; // Assume it's a match initially
+
+            if (searchCustomer && !cells[1].innerText.toLowerCase().includes(searchCustomer)) {
+                match = false;
+            }
+            if (searchDeptAmout && !cells[6].innerText.toLowerCase().includes(searchDeptAmout)) {
+                match = false;
+            }
+            if (searchAmountOfMonthlyPayment && !cells[9].innerText.toLowerCase().includes(searchAmountOfMonthlyPayment)) {
+                match = false;
+            }
+            if (searchContractNumber && !cells[10].innerText.toLowerCase().includes(searchContractNumber)) {
+                match = false;
+            }
+
+            rows[i].style.display = match ? '' : 'none';
+        }
+    });
+</script>
+
+<script>
+    document.getElementById('toggleExtendedSearch').addEventListener('click', function () {
+        var extendedSearchContainer = document.getElementById('extendedSearchContainer');
+        if (extendedSearchContainer.style.display === 'none' || extendedSearchContainer.style.display === '') {
+            extendedSearchContainer.style.display = 'block';
+        } else {
+            extendedSearchContainer.style.display = 'none';
+        }
+    });
 </script>
