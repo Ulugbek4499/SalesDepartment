@@ -23,7 +23,7 @@ namespace SalesDepartment.MVC.Controllers
         [HttpGet("[action]")]
         public async ValueTask<IActionResult> GetContractsBetweenDates(DateTime fromDate, DateTime toDate, string fileName = "ContractExcel")
         {
-            var result = await Mediator.Send(new ContractsByDayExcel { CreatedFromDate = fromDate, ToDate = toDate, FileName = fileName}) ;
+            var result = await Mediator.Send(new ContractsWithDept { CreatedFromDate = fromDate, ToDate = toDate, FileName = fileName}) ;
 
             return File(result.FileContents, result.Option, result.FileName);
         }
@@ -34,6 +34,14 @@ namespace SalesDepartment.MVC.Controllers
             var contractsWithDepts = await Mediator.Send(new GetContractsWithDepts(Time));
 
             return View(contractsWithDepts);
+        }
+
+        [HttpGet("[action]")]
+        public async ValueTask<FileResult> GetContractsWithDebtExcel(string fileName = "ContractWithDebtExcel")
+        {
+            var result = await Mediator.Send(new GetContractsWithDebtExcel { FileName = fileName });
+
+            return File(result.FileContents, result.Option, result.FileName);
         }
 
         [HttpGet("[action]")]

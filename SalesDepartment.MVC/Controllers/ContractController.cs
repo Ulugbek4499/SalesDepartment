@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Globalization;
+using Microsoft.AspNetCore.Mvc;
 using SalesDepartment.Application.UseCases.Contracts.Commands.CreateContract;
 using SalesDepartment.Application.UseCases.Contracts.Commands.DeleteContract;
 using SalesDepartment.Application.UseCases.Contracts.Commands.UpdateContract;
@@ -109,14 +110,14 @@ public class ContractController : ApiBaseController
         ContractResponse contract = await Mediator.Send(new GetContractByIdQuery(id));
         var templatePath = @"D:\PDP\SalesDepartment\SalesDepartment.MVC\wwwroot\docs\ДОГОВОР.docx";
 
-        string TotalAmountInWords = DecimalToRussianWords(contract.TotalAmountOfContract);
-        decimal SumOfOneMeterSquare = contract.TotalAmountOfContract / contract.Home.Area;
-        string SumOfOneMeterSquareInWords = DecimalToRussianWords(SumOfOneMeterSquare);
+        string TotalAmountInWords = PropLat(contract.TotalAmountOfContract);
+        decimal SumOfOneMeterSquare = Math.Floor(contract.TotalAmountOfContract / contract.Home.Area);
+        string SumOfOneMeterSquareInWords = PropLat(SumOfOneMeterSquare);
 
         var doc = DocX.Load(templatePath);
 
         doc.ReplaceText("«ДОГОВОР_»", contract.ContractNumber);
-        doc.ReplaceText("«Дата_контракта»", contract.ContractStartDate.ToString());
+        doc.ReplaceText("«Дата_контракта»", contract.ContractStartDate.ToString("dd/MM/yyyy"));
         doc.ReplaceText("«ФИO_Инвестор»", contract.Customer.LastName + " " + contract.Customer.FirstName + " " + contract.Customer.MiddleName);
         doc.ReplaceText("«Паспорт_Серия_Инвестор»", contract.Customer.Passport);
         doc.ReplaceText("«Выдан_Паспорт__Инвестор»", contract.Customer.PassportIssuedBy);
@@ -129,9 +130,9 @@ public class ContractController : ApiBaseController
 
         doc.ReplaceText("«Этаже»", contract.Home.Floor.ToString());
         doc.ReplaceText("«Проектной_площадью»", contract.Home.Area.ToString());
-        doc.ReplaceText("«Общая_сумма_контракта»", contract.TotalAmountOfContract.ToString());
+        doc.ReplaceText("«Общая_сумма_контракта»", contract.TotalAmountOfContract.ToString("N2"));
         doc.ReplaceText("«Сумма_контракта_прописью»", TotalAmountInWords);
-        doc.ReplaceText("«Сумма_1_М2»", SumOfOneMeterSquare.ToString());
+        doc.ReplaceText("«Сумма_1_М2»", SumOfOneMeterSquare.ToString("N2"));
 
         doc.ReplaceText("«Сумма_1_М2_прописью»", SumOfOneMeterSquareInWords);
         doc.ReplaceText("«Тел_Ном_»", contract.Customer.PhoneNumberOne);
@@ -144,125 +145,59 @@ public class ContractController : ApiBaseController
         return File(fileBytes, "application/vnd.openxmlformats-officedocument.wordprocessingml.document", newFilename);
     }
 
-    
-    private static readonly string[] RussianUnits =
-     {
-        "", "тысяча", "миллион", "миллиард", "триллион", "квадриллион", "квинтиллион", "секстиллион", "септиллион", "октиллион", "нониллион", "дециллион"
-    };
-
-    private static readonly string[] RussianTeens =
+    public static string PropLat(decimal c)
     {
-        "", "одиннадцать", "двенадцать", "тринадцать", "четырнадцать", "пятнадцать", "шестнадцать", "семнадцать", "восемнадцать", "девятнадцать"
-    };
+        string[] ed = { "", "один ", "два ", "три ", "четыре ", "пять ", "шесть ", "семь ", "восемь ", "девять " };
+        string[] des = { "", "десять ", "двадцать ", "тридцать ", "сорок ", "пятьдесят ", "шестьдесят ", "семьдесят ", "восемьдесят ", "девяносто " };
+        string[] razr = { "миллиардов ", "миллионов ", "тысяч ", "" };
 
-    private static readonly string[] RussianTens =
-    {
-        "", "десять", "двадцать", "тридцать", "сорок", "пятьдесят", "шестьдесят", "семьдесят", "восемьдесят", "девяносто"
-    };
+        string st, qp, m = "";
 
-    private static readonly string[] RussianHundreds =
-    {
-        "", "сто", "двести", "триста", "четыреста", "пятьсот", "шестьсот", "семьсот", "восемьсот", "девятьсот"
-    };
-
-    public static string DecimalToRussianWords(decimal number)
-    {
-        string integralWords = ConvertIntegralPartToRussianWords(Math.Floor(number));
-        string fractionalWords = ConvertFractionalPartToRussianWords(number - Math.Floor(number));
-
-        string result = integralWords;
-
-        if (!string.IsNullOrEmpty(fractionalWords))
+        if (c > 999999999999 || c < 0)
         {
-            result += " целых " + fractionalWords;
+            return "";
         }
 
-        return char.ToUpper(result[0]) + result.Substring(1);
-    }
+        st = c.ToString("000000000000.00", CultureInfo.InvariantCulture);
+        qp = c.ToString(" 0.00", CultureInfo.InvariantCulture);
 
-    private static string ConvertIntegralPartToRussianWords(decimal integralPart)
-    {
-        if (integralPart == 0)
+        if (Convert.ToDouble(st) == 0)
         {
-            return "ноль";
+            m = "ноль ";
         }
 
-        string words = "";
-        int unitIndex = 0;
-
-        while (integralPart > 0)
+        for (int i = 0; i < 12; i += 3)
         {
-            decimal threeDigits = integralPart % 1000;
-            integralPart /= 1000;
+            int hundreds = int.Parse(st[i].ToString());
+            int tens = int.Parse(st[i + 1].ToString());
+            int ones = int.Parse(st[i + 2].ToString());
 
-            if (threeDigits > 0)
+            if (hundreds > 0)
             {
-                string threeDigitsWords = ConvertThreeDigitsToRussianWords(threeDigits);
-                words = threeDigitsWords + " " + RussianUnits[unitIndex] + " " + words;
+                m += ed[hundreds] + "сто ";
             }
 
-            unitIndex++;
-        }
-
-        return words.Trim();
-    }
-
-    private static string ConvertThreeDigitsToRussianWords(decimal threeDigits)
-    {
-        int hundreds = (int)(threeDigits / 100);
-        int tens = (int)((threeDigits % 100) / 10);
-        int ones = (int)(threeDigits % 10);
-
-        string words = "";
-
-        if (hundreds > 0)
-        {
-            words += RussianHundreds[hundreds] + " ";
-        }
-
-        if (tens > 1)
-        {
-            words += RussianTens[tens] + " ";
-            if (ones > 0)
+            if (tens > 1)
             {
-                words += RussianUnits[ones] + " ";
+                m += des[tens];
+                m += ed[ones];
             }
-        }
-        else if (tens == 1)
-        {
-            int teenIndex = tens * 10 + ones;
-            words += RussianTeens[teenIndex] + " ";
-        }
-        else if (ones > 0)
-        {
-            words += RussianUnits[ones] + " ";
-        }
-
-        return words.Trim();
-    }
-
-    private static string ConvertFractionalPartToRussianWords(decimal fractionalPart)
-    {
-        const int maxFractionalDigits = 2; // Assuming you want to handle up to two fractional digits
-
-        // Convert the fractional part to words, assuming it's a reasonable fraction
-        string words = "";
-        decimal fraction = fractionalPart;
-
-        for (int i = 0; i < maxFractionalDigits; i++)
-        {
-            fraction *= 10;
-            int digit = (int)Math.Floor(fraction);
-
-            if (digit > 0)
+            else if (tens == 1)
             {
-                words += ConvertThreeDigitsToRussianWords(digit) + " ";
+                m += des[tens + ones];
+            }
+            else if (ones > 0)
+            {
+                m += ed[ones];
             }
 
-            fraction -= digit;
+            if (hundreds + tens + ones > 0)
+            {
+                m += razr[i / 3];
+            }
         }
 
-        return words.Trim();
+        return char.ToUpper(m[0]) + m.Substring(1) + "сум ";
     }
 }
 

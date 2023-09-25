@@ -9,14 +9,14 @@ using SalesDepartment.Application.UseCases.Contracts.Response;
 
 namespace SalesDepartment.Application.UseCases.Reports;
 
-public class ContractsByDayExcel : IRequest<ExcelReportResponse>
+public class ContractsWithDept : IRequest<ExcelReportResponse>
 {
     public string FileName { get; set; }
     public DateTime CreatedFromDate { get; set; }
     public DateTime ToDate { get; set; }
 }
 
-public class ContractsByDayExcelHandler : IRequestHandler<ContractsByDayExcel, ExcelReportResponse>
+public class ContractsByDayExcelHandler : IRequestHandler<ContractsWithDept, ExcelReportResponse>
 {
     private readonly IApplicationDbContext _context;
     private readonly IMapper _mapper;
@@ -27,7 +27,7 @@ public class ContractsByDayExcelHandler : IRequestHandler<ContractsByDayExcel, E
         _mapper = mapper;
     }
 
-    public async Task<ExcelReportResponse> Handle(ContractsByDayExcel request, CancellationToken cancellationToken)
+    public async Task<ExcelReportResponse> Handle(ContractsWithDept request, CancellationToken cancellationToken)
     {
         using (var workbook = new XLWorkbook())
         {
