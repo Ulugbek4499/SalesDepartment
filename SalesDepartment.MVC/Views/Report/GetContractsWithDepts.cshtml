@@ -186,6 +186,15 @@
                 cellB = new Date(cellB);
             }
 
+            if (column === "Customer") {
+                // Compare string values using localeCompare
+                if (sortOrder === 'asc') {
+                    return cellA.localeCompare(cellB);
+                } else {
+                    return cellB.localeCompare(cellA);
+                }
+            }
+
             if (sortOrder === 'asc') {
                 return cellA - cellB; // Compare numeric values directly
             } else {
