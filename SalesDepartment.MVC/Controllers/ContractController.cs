@@ -197,7 +197,7 @@ public class ContractController : ApiBaseController
             }
         }
 
-        return char.ToUpper(m[0]) + m.Substring(1) + "сум ";
+        return char.ToUpper(m[0]) + m.Substring(1);
     }
 }
 
