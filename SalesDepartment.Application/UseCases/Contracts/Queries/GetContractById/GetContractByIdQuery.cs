@@ -1,11 +1,7 @@
-﻿using System.Diagnostics.Contracts;
-using AutoMapper;
+﻿using AutoMapper;
 using MediatR;
-using SalesDepartment.Application.Common.Exceptions;
 using SalesDepartment.Application.Common.Interfaces;
 using SalesDepartment.Application.UseCases.Contracts.Response;
-using SalesDepartment.Domain.Entities;
-using Telegram.Bot.Types;
 
 namespace SalesDepartment.Application.UseCases.Contracts.Queries.GetContractById
 {

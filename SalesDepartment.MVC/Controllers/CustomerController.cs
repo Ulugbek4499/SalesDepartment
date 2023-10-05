@@ -5,6 +5,7 @@ using SalesDepartment.Application.UseCases.Customers.Commands.UpdateCustomer;
 using SalesDepartment.Application.UseCases.Customers.Queries.GetAllCustomers;
 using SalesDepartment.Application.UseCases.Customers.Queries.GetCustomerById;
 using SalesDepartment.Application.UseCases.Customers.Reports;
+using SalesDepartment.Application.UseCases.Homes.Reports;
 
 namespace SalesDepartment.MVC.Controllers
 {
@@ -28,6 +29,14 @@ namespace SalesDepartment.MVC.Controllers
         public async ValueTask<IActionResult> CreateCustomerFromExcel()
         {
             return View();
+        }
+
+        [HttpPost("[action]")]
+        public async ValueTask<IActionResult> CreateCustomerFromExcel(IFormFile excelfile)
+        {
+            var result = await Mediator.Send(new AddCustomersFromExcel(excelfile));
+
+            return RedirectToAction("GetAllCustomers");
         }
 
         [HttpGet("[action]")]

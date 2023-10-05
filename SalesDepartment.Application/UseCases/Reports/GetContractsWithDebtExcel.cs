@@ -3,7 +3,6 @@ using AutoMapper;
 using ClosedXML.Excel;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using Org.BouncyCastle.Asn1.Ocsp;
 using SalesDepartment.Application.Common.Interfaces;
 using SalesDepartment.Application.Common.Models;
 using SalesDepartment.Application.UseCases.Contracts.Response;
