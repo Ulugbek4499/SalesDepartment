@@ -18,6 +18,14 @@ namespace SalesDepartment.MVC.Controllers;
 
 public class PaymentController : ApiBaseController
 {
+
+    private readonly IWebHostEnvironment _hostingEnvironment;
+
+    public PaymentController(IWebHostEnvironment webHostEnvironment)
+    {
+        _hostingEnvironment = webHostEnvironment;
+    }
+
     [HttpGet("[action]")]
     public async ValueTask<IActionResult> CreatePayment()
     {
@@ -110,9 +118,15 @@ public class PaymentController : ApiBaseController
     public async Task<IActionResult> PaymentInDocxAsync(int id)
     {
         PaymentResponse payment = await Mediator.Send(new GetPaymentByIdQuery(id));
-        var templatePath = @"D:\PDP\SalesDepartment\SalesDepartment.MVC\wwwroot\docs\Kvitansiya.docx";
+        string templateFileName = "Kvitansiya.docx"; // Assuming the template file is in the wwwroot/docs folder
 
         string amountInWords = PropLat(payment.Amount);
+
+        // Get the wwwroot path using IWebHostEnvironment
+        string webRootPath = _hostingEnvironment.WebRootPath;
+
+        // Construct the full path to the template file
+        string templatePath = Path.Combine(webRootPath, "docs", templateFileName);
 
         var doc = DocX.Load(templatePath);
 

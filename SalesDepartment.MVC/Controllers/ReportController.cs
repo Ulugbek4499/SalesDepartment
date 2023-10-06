@@ -12,6 +12,13 @@ namespace SalesDepartment.MVC.Controllers
     public class ReportController:ApiBaseController
     {
 
+        private readonly IWebHostEnvironment _hostingEnvironment;
+
+        public ReportController(IWebHostEnvironment hostingEnvironment)
+        {
+            _hostingEnvironment = hostingEnvironment;
+        }
+
         [HttpGet("[action]")]
         public async ValueTask<IActionResult> GetStatistics()
         {
@@ -49,7 +56,13 @@ namespace SalesDepartment.MVC.Controllers
         {
 
             ContractResponse contract = await Mediator.Send(new GetContractByIdQuery(id));
-            var templatePath = @"D:\PDP\SalesDepartment\SalesDepartment.MVC\wwwroot\docs\Grafik.docx";
+            string templateFileName = "Grafik.docx"; // Assuming the template file is in the wwwroot/docs folder
+
+            // Get the wwwroot path using IWebHostEnvironment
+            string webRootPath = _hostingEnvironment.WebRootPath;
+
+            // Construct the full path to the template file
+            string templatePath = Path.Combine(webRootPath, "docs", templateFileName);
 
             var doc = DocX.Load(templatePath);
 
@@ -108,6 +121,7 @@ namespace SalesDepartment.MVC.Controllers
 
             var fileBytes = System.IO.File.ReadAllBytes(newFilename);
             return File(fileBytes, "application/vnd.openxmlformats-officedocument.wordprocessingml.document", newFilename);
+
         }
     }
 }

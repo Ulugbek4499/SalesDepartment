@@ -19,6 +19,13 @@ namespace SalesDepartment.MVC.Controllers;
 
 public class ContractController : ApiBaseController
 {
+    private readonly IWebHostEnvironment _webHostEnvironment;
+
+    public ContractController(IWebHostEnvironment webHostEnvironment)
+    {
+        _webHostEnvironment = webHostEnvironment;
+    }
+
     [HttpGet("[action]")]
     public async ValueTask<IActionResult> CreateContract()
     {
@@ -108,11 +115,17 @@ public class ContractController : ApiBaseController
     {
 
         ContractResponse contract = await Mediator.Send(new GetContractByIdQuery(id));
-        var templatePath = @"D:\PDP\SalesDepartment\SalesDepartment.MVC\wwwroot\docs\ДОГОВОР.docx";
+        string templateFileName = "ДОГОВОР.docx"; // Assuming the template file is in the wwwroot/docs folder
 
         string TotalAmountInWords = PropLat(contract.TotalAmountOfContract);
         decimal SumOfOneMeterSquare = Math.Floor(contract.TotalAmountOfContract / contract.Home.Area);
         string SumOfOneMeterSquareInWords = PropLat(SumOfOneMeterSquare);
+
+        // Get the wwwroot path using IWebHostEnvironment
+        string webRootPath = _webHostEnvironment.WebRootPath;
+
+        // Construct the full path to the template file
+        string templatePath = Path.Combine(webRootPath, "docs", templateFileName);
 
         var doc = DocX.Load(templatePath);
 
@@ -137,11 +150,12 @@ public class ContractController : ApiBaseController
         doc.ReplaceText("«Сумма_1_М2_прописью»", SumOfOneMeterSquareInWords);
         doc.ReplaceText("«Тел_Ном_»", contract.Customer.PhoneNumberOne);
 
-        var newFilename = $"Договор_{contract.Customer.LastName + "_" + contract.Customer.FirstName}.docx";
+        string newFilename = $"Договор_{contract.Customer.LastName + "_" + contract.Customer.FirstName}.docx";
+        string newFilePath = Path.Combine(webRootPath, "docs", newFilename);
 
-        doc.SaveAs(newFilename);
+        doc.SaveAs(newFilePath);
 
-        var fileBytes = System.IO.File.ReadAllBytes(newFilename);
+        var fileBytes = System.IO.File.ReadAllBytes(newFilePath);
         return File(fileBytes, "application/vnd.openxmlformats-officedocument.wordprocessingml.document", newFilename);
     }
 
