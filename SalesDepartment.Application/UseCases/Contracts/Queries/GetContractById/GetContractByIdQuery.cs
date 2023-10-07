@@ -32,7 +32,8 @@ namespace SalesDepartment.Application.UseCases.Contracts.Queries.GetContractById
 
             for (int i = 1; i <=contract.NumberOfMonths; i++)
             {
-                decimal paymentAmount = contract.InAdvancePaymentOfContract + (i * contract.AmountOfMonthlyPayment);
+                decimal paymentAmount = contract.InAdvancePaymentOfContract + 
+                    (i * contract.AmountOfMonthlyPayment);
 
                 paymentSchedule.Add(paymentDate, paymentAmount);
 

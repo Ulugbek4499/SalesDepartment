@@ -119,9 +119,10 @@
 
                                             foreach (var entry in Contract.ScheduledInfo)
                                             {
-                                                if (entry.Key.Month <= currentMonth && entry.Key.Year <= currentYear)
+                                                if ( entry.Key.Month <= currentMonth 
+                                                    && entry.Key.Year <= currentYear)
                                                 {
-                                                    sumForCurrentMonth += entry.Value;
+                                                    sumForCurrentMonth = entry.Value;
                                                 }
                                             }
 

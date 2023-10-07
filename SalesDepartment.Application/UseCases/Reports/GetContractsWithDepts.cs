@@ -25,39 +25,50 @@ namespace SalesDepartment.Application.UseCases.Reports
 
             var contractResponses = new List<ContractResponse>();
 
-            foreach (var contract in contracts)
+            foreach (var entity in contracts)
             {
+                var contract = _context.Contracts.Find(entity.Id);
+
                 Dictionary<DateTime, decimal> actualPaymentSchedule = contract.Payments
-                    .ToDictionary(payment => payment.PaymentDate, payment => payment.Amount);
+                             .ToDictionary(payment => payment.PaymentDate, payment => payment.Amount);
+
 
                 Dictionary<DateTime, decimal> paymentSchedule = new Dictionary<DateTime, decimal>();
 
                 DateTime paymentDate = contract.PaymentStartDate;
 
-                for (int i = 1; i < contract.NumberOfMonths; i++)
+                for (int i = 1; i <= contract.NumberOfMonths; i++)
                 {
-                    decimal paymentAmount = contract.InAdvancePaymentOfContract + (i * contract.AmountOfMonthlyPayment);
+                    decimal paymentAmount = contract.InAdvancePaymentOfContract +
+                        (i * contract.AmountOfMonthlyPayment);
 
                     paymentSchedule.Add(paymentDate, paymentAmount);
 
                     paymentDate = paymentDate.AddMonths(1);
                 }
 
-                DateTime calculationDate = request.Time;
+                DateTime calculationDate = DateTime.Now;
                 var sumOfPayments = contract.Payments.Sum(x => x.Amount);
-                var scheduledPayment = paymentSchedule.FirstOrDefault(x => x.Key.Month == calculationDate.Month && x.Key.Year == calculationDate.Year);
+
+                decimal sumForCurrentMonth=0;
+
+                foreach (var entry in paymentSchedule)
+                {
+                    if (entry.Key.Month <= calculationDate.Month
+                        && entry.Key.Year <= calculationDate.Year)
+                    {
+                        sumForCurrentMonth = entry.Value;
+                    }
+                }
+
                 decimal deptAmount = 0;
 
-                if (scheduledPayment.Key != default(DateTime))
-                {
-                    decimal scheduledPaymentAmount = scheduledPayment.Value;
+                deptAmount = sumForCurrentMonth - sumOfPayments;
 
-                    deptAmount = scheduledPaymentAmount - sumOfPayments;
-                }
 
                 ContractResponse contractResponse = new ContractResponse()
                 {
-                    Id = contract.Id,
+                    Id = entity.Id,
                     ContractNumber = contract.ContractNumber,
                     ContractStartDate = contract.ContractStartDate,
                     PaymentStartDate = contract.PaymentStartDate,
