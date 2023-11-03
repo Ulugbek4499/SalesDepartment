@@ -28,6 +28,6 @@ namespace SalesDepartment.Application.UseCases.Contracts.Response
         public decimal? DeptAmout { get; set; }
         public Dictionary<DateTime, decimal>? ScheduledInfo { get; set; }
         public Dictionary<DateTime, decimal>? ActualInfo { get; set; }
-        public Dictionary<string, decimal>? ScheduledInfo2 { get; set; }
+      /*  public Dictionary<string, decimal>? ScheduledInfo2 { get; set; }*/
     }
 }
