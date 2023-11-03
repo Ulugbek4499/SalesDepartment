@@ -3,6 +3,9 @@
 }
 
 @model SalesDepartment.Application.UseCases.Contracts.Response.ContractResponse[]
+@using System.Globalization
+@using static System.Globalization.DateTimeStyles
+
 
 <h3 class="text-center">Статус оплаты контрактов</h3>
 <div class="row">
@@ -33,7 +36,7 @@
                 <select id="sortColumn" class="form-control">
                     <option value="Customer">Клиент</option>
                     <option value="TotalAmountOfContract">Общая сумма</option>
-                    <option value="ScheduledInfo">Запланированный платеж</option>
+                    <option value="ScheduledInfo2">Запланированный платеж</option>
                     <option value="ActualInfo">Выплаченная сумма</option>
                     <option value="DeptAmout">Долг</option>
                     <option value="AmountOfMonthlyPayment">Ежемесячно оплата</option>
@@ -88,7 +91,7 @@
                                 <th data-column="Customer" style="width: 20%;">Клиент</th>
                                 <th data-column="CustomerPhoneNumber" style="width: 20%;">Телефон клиента</th>
                                 <th data-column="TotalAmountOfContract" style="width: 20%;">Общая сумма</th>
-                                <th data-column="ScheduledInfo" style="width: 20%;">Запланированный платеж</th>
+                                <th data-column="ScheduledInfo2" style="width: 20%;">Запланированный платеж</th>
                                 <th data-column="ActualInfo" style="width: 20%;">Выплаченная сумма</th>
                                 <th data-column="DeptAmout" style="width: 20%;">Долг</th>
                                 <th data-column="PaymentStartDate" style="width: 20%;">Дата начала платежа</th>
@@ -109,7 +112,7 @@
                                     <td data-column="Customer">@Contract.Customer.LastName @Contract.Customer.FirstName</td>
                                     <td data-column="CustomerPhoneNumber">@Contract.Customer.PhoneNumberOne  @Contract.Customer.PhoneNumberTwo</td>
                                     <td data-column="TotalAmountOfContract" class="amount-cell">@string.Format("{0:N2}", Contract.TotalAmountOfContract)</td>
-                                    <td data-column="ScheduledInfo" class="amount-cell">
+                                    <td data-column="ScheduledInfo2" class="amount-cell">
                                         @{
                                             DateTime currentDate = DateTime.Now;
                                             int currentMonth = currentDate.Month;
@@ -117,18 +120,22 @@
 
                                             decimal sumForCurrentMonth = 0;
 
-                                            foreach (var entry in Contract.ScheduledInfo)
+                                            foreach (var entry in Contract.ScheduledInfo2)
                                             {
-                                                if ( entry.Key.Month <= currentMonth 
-                                                    && entry.Key.Year <= currentYear)
+                                                // Convert the string key to a DateTime for comparison
+                                                if (DateTime.TryParseExact(entry.Key, "yyyy-MM", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime entryDate))
                                                 {
-                                                    sumForCurrentMonth = entry.Value;
+                                                    if (entryDate.Month <= currentMonth && entryDate.Year <= currentYear)
+                                                    {
+                                                        sumForCurrentMonth = entry.Value;
+                                                    }
                                                 }
                                             }
 
                                             @string.Format("{0:N2}", sumForCurrentMonth)
                                         }
                                     </td>
+
                                     <td data-column="ActualInfo" class="amount-cell">@string.Format("{0:N2}", Contract.ActualInfo.Values.Sum())</td>
                                     <td data-column="DeptAmout" class="amount-cell">@string.Format("{0:N2}", Contract.DeptAmout)</td>
                                     <td data-column="PaymentStartDate">@Contract.PaymentStartDate.ToString("yyyy-MM-dd")</td>
@@ -176,7 +183,7 @@
             var cellB = b.querySelector('td[data-column="' + column + '"]').textContent.trim();
 
             // Handle the "TotalAmountOfContract" column
-            if (column === "TotalAmountOfContract" || column === "ScheduledInfo" || column === "ActualInfo" || column === "DeptAmout" || column === "AmountOfMonthlyPayment" || column === "InAdvancePaymentOfContract") {
+            if (column === "TotalAmountOfContract" || column === "ScheduledInfo2" || column === "ActualInfo" || column === "DeptAmout" || column === "AmountOfMonthlyPayment" || column === "InAdvancePaymentOfContract") {
                 // Parse values as floats for correct numeric sorting
                 cellA = parseFloat(cellA.replace(/[^0-9.]+/g, '')) || 0;
                 cellB = parseFloat(cellB.replace(/[^0-9.]+/g, '')) || 0;
